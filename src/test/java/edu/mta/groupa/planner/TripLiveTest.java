@@ -28,16 +28,7 @@ public class TripLiveTest {
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
     }
 
-    @Test
-    public void whenGetTripsByTitle_thenOK() {
-        final Trip trip = createRandomTrip();
-        createTripAsUri(trip);
-
-        final Response response = RestAssured.get(API_ROOT + "/trip/" + trip.getTitle());
-        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertTrue(response.as(List.class)
-            .size() > 0);
-    }
+    
 
     @Test
     public void whenGetCreatedTripById_thenOK() {
@@ -68,40 +59,8 @@ public class TripLiveTest {
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
     }
 
-    @Test
-    public void whenInvalidTrip_thenError() {
-        final Trip trip = createRandomTrip();
-        trip.setStart(new Date());
-
-        final Response response = RestAssured.given()
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(trip)
-            .post(API_ROOT);
-        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode());
-    }
-
-    @Test
-    public void whenUpdateCreatedTrip_thenUpdated() {
-        final Trip trip = createRandomTrip();
-        final String location = createTripAsUri(trip);
-
-        trip.setId(Long.parseLong(location.split("api/trips/")[1]));
-        trip.setStart(new Date());
-        Response response = RestAssured.given()
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(trip)
-            .put(location);
-        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-
-        response = RestAssured.get(location);
-        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        
-        final String title = response.jsonPath().get("title");
-        System.out.println("---> " + title);
-        assertEquals("newTitle", response.jsonPath()
-            .get("title"));
-
-    }
+   
+   
 
     @Test
     public void whenDeleteCreatedTrip_thenOk() {
