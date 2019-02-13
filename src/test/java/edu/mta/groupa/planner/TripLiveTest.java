@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import edu.mta.groupa.planner.model.Accomodation;
+import edu.mta.groupa.planner.model.Accommodation;
 import edu.mta.groupa.planner.model.Trip;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -81,7 +81,7 @@ public class TripLiveTest {
         trip.setTitle(randomAlphabetic(10));
         trip.setStart(new Date());
         
-        Accomodation a = new Accomodation();
+        Accommodation a = new Accommodation();
         
         trip.getDestinations().add("New York City");
         trip.getDestinations().add("Moncton");

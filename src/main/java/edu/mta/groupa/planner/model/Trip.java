@@ -22,33 +22,79 @@ import javax.persistence.OneToMany;
 @Entity
 public class Trip {
 
+	
+	/**
+	 * The id is the unique row id for the entry used internally by JPA
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	/**
+	 * The title is the string that the user will give to his trip
+	 */
 	@Column(nullable = false, unique = true)
 	private String title;
 
+	/**
+	 * start is the start date of the trip
+	 */
 	@Column(nullable = false)
 	private Date start;
 	
+	/**
+	 * end is the end date of the trip
+	 */
 	@Column(nullable = true)
 	private Date end;
 	
+	/**
+	 * notes are strings that the user can add to a trip if he needs
+	 * to add notes.
+	 */
 	@Column
 	private String notes;
 	
+	/**
+	 * destinations is a List of destinations that will contain the 
+	 * destinations that the user will input for his trip.
+	 */
 	@ElementCollection
 	private List<String> destinations = new ArrayList<String>();
 	
+	/**
+	 * reservations is a List of reservations that the user input for his trip
+	 */
 	@OneToMany
-    private List<Reservation> discounts = new ArrayList<Reservation>();
+    private List<Reservation> reservations = new ArrayList<Reservation>();
 	
+	/**
+	 * accommodations is a List of accommodations that the user input for his trip
+	 */
 	@OneToMany
-    private List<Accomodation> accomodations = new ArrayList<Accomodation>();
+    private List<Accommodation> accomodations = new ArrayList<Accommodation>();
 	
+	/**
+	 * itineraries is the List of the daily itinerary of the user.
+	 */
 	@OneToMany
     private List<Itinerary> itineraries = new ArrayList<Itinerary>();
+	
+	/**
+	 * getTotalPrice calculates the total prices of all accommodations and 
+	 * reservations for this trip.
+	 * @return the total price of all accommodations and reservations.
+	 */
+	public double getTotalPrice(){
+		double total = 0;
+		for (Accommodation a: this.accomodations){
+			total += a.getPrice();
+		}
+		for(Reservation r: this.reservations){
+			total += r.getPrice();
+		}
+		return total;
+	}
 	
 	public long getId() {
 		return id;
@@ -97,7 +143,7 @@ public class Trip {
 	public void setDestinations(List<String> destinations) {
 		this.destinations = destinations;
 	}
-
+	
 	
 	
 }
