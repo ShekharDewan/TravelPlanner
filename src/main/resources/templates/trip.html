@@ -28,10 +28,20 @@
       <br><br>
       <h1 class="header center orange-text" th:text="${trip.title}" ></h1>
       <div class="row center">
-        <h5 th:text="${trip.description}" class="header col s12 light truncate"></h5>
+        <h5 th:text="${trip.description}" class="header col s12 light"></h5>
       </div>
      
       <br><br>
+      
+      <h4 class="header">Itineraries</h4>
+      <br>
+      <ul class="collapsible popout">
+	    <li th:each="itinerary : ${trip.itineraries}">
+	      <div class="collapsible-header"><i class="material-icons">whatshot</i><span th:text="${itinerary.date}"></span></div>
+	      <div class="collapsible-body"><p th:text="${itinerary.notes}"></p></div>
+	    </li>
+	   
+	  </ul>
 
     </div>
   </div>

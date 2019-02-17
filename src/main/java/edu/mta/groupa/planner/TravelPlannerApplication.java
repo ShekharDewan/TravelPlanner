@@ -1,19 +1,21 @@
 package edu.mta.groupa.planner;
 
+import java.util.Date;
+
 //import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
-
-import java.util.Date;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.MediaType;
 
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
+
 import edu.mta.groupa.planner.model.Accommodation;
+import edu.mta.groupa.planner.model.Itinerary;
 import edu.mta.groupa.planner.model.Trip;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -54,15 +56,22 @@ public class TravelPlannerApplication {
 	}
 	
 	private static Trip createRandomTrip() {
+		
+		final Lorem lorem = LoremIpsum.getInstance();
+		
         final Trip trip = new Trip();
         trip.setTitle(RandomStringUtils.randomAlphabetic(10));
-        trip.setDescription(RandomStringUtils.randomAlphabetic(125));
+        trip.setDescription(lorem.getWords(25));
         trip.setStart(new Date());
-        
-        Accommodation a = new Accommodation();
-        
+                
         trip.getDestinations().add("New York City");
         trip.getDestinations().add("Moncton");
+        
+        // add itineraries
+        
+        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
+        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
+        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
         
         return trip;
     }

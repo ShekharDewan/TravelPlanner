@@ -19,7 +19,7 @@ public class MainController {
     private TripRepository tripRepository;
 
     @GetMapping("/")
-    public String main(Model model) {
+    public String welcomePage(Model model) {
         model.addAttribute("message", message);
         model.addAttribute("trips", tripRepository.findAll() );
         
@@ -27,7 +27,7 @@ public class MainController {
     }
     
     @GetMapping("/trip/{id}")
-    public String main(Model model, @PathVariable("id") long id) {
+    public String tripPage(Model model, @PathVariable("id") long id) {
         model.addAttribute("trip", tripRepository.findById(id).get() );
         return "trip"; //view
     }

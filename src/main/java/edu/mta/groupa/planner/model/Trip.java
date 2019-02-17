@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -83,7 +84,7 @@ public class Trip {
 	/**
 	 * itineraries is the List of the daily itinerary of the user.
 	 */
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
     private List<Itinerary> itineraries = new ArrayList<Itinerary>();
 	
 	/**
