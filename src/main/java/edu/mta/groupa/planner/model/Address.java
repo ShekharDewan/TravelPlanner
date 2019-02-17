@@ -65,4 +65,76 @@ public class Address {
 	@Column
 	private Double longitude;
 
+	public Address(){
+		
+	}
+	
+	public Address(Integer civicNumber, String street, String city, String country, String code, Double latitude,
+			Double longitude) {
+		super();
+		this.civicNumber = civicNumber;
+		this.street = street;
+		this.city = city;
+		this.country = country;
+		this.code = code;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public Integer getCivicNumber() {
+		return civicNumber;
+	}
+
+	public void setCivicNumber(Integer civicNumber) {
+		this.civicNumber = civicNumber;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	
 }

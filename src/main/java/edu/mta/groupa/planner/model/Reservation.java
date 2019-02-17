@@ -2,6 +2,7 @@ package edu.mta.groupa.planner.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,21 +27,21 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 		
-	@ManyToOne(optional=true) 
+	@ManyToOne(optional=true, cascade = {CascadeType.ALL}) 
     @JoinColumn(name="TRIP_ID")
     private Trip trip;
 
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 	
-	@Column(nullable = false, unique = true)
+	@Column
 	private String title;
 	
-	@Column(nullable = false)
+	@Column
 	private Date date;
 	
-	@Column
+	@Column(length=2048)
 	private String notes;
 	
 	@Column
@@ -48,15 +49,23 @@ public class Reservation {
 	
 	@Column
 	private String confirmation;
-
-	public Trip getTrip() {
-		return trip;
+	
+	public Reservation(){
+		super();
 	}
-
-	public void setTrip(Trip trip) {
+	
+	public Reservation(Trip trip, Address address, String title, Date date, String notes, Double price,
+			String confirmation) {
+		super();
 		this.trip = trip;
+		this.address = address;
+		this.title = title;
+		this.date = date;
+		this.notes = notes;
+		this.price = price;
+		this.confirmation = confirmation;
 	}
-
+	
 	public Address getAddress() {
 		return address;
 	}
@@ -103,5 +112,9 @@ public class Reservation {
 
 	public void setConfirmation(String confirmation) {
 		this.confirmation = confirmation;
+	}
+
+	public long getId() {
+		return id;
 	}
 }

@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  <script src='https://maps.google.com/maps/api/js?key=AIzaSyAIhZ4DWSti3Va_4Zy5nxGnyEhaw4AF6ZI'></script>  
+  
 </head>
 <body>
   <nav class="light-blue lighten-1" role="navigation">
@@ -30,20 +33,102 @@
       <div class="row center">
         <h5 th:text="${trip.description}" class="header col s12 light"></h5>
       </div>
-     
-      <br><br>
       
-      <h4 class="header">Itineraries</h4>
-      <br>
-      <ul class="collapsible popout">
-	    <li th:each="itinerary : ${trip.itineraries}">
-	      <div class="collapsible-header"><i class="material-icons">whatshot</i><span th:text="${itinerary.date}"></span></div>
-	      <div class="collapsible-body"><p th:text="${itinerary.notes}"></p></div>
-	    </li>
-	   
-	  </ul>
-
-    </div>
+      <!-- Page Layout here -->
+	  <div class="row">
+	
+	      <div class="col s4">
+	          <h4 class="header">Itineraries</h4>
+		      <br>
+		      <ul class="collapsible">
+			    <li th:each="itinerary : ${trip.itineraries}">
+			      <div class="collapsible-header"><i class="material-icons">whatshot</i><span th:text="${itinerary.date}"></span></div>
+			      <div class="collapsible-body"><p th:text="${itinerary.notes}"></p></div>
+			    </li>
+			  </ul>
+	      </div>
+	      
+	      <div class="col s8">
+	          <h4 class="header">Accomodations</h4>
+		      <br>
+		      <ul class="collapsible">
+			    <li th:each="accomodation : ${trip.accomodations}">
+			      <div class="collapsible-header">
+			      	<i class="material-icons">whatshot</i>
+			      	<span th:text="${accomodation.title}"></span>
+			        <span class="badge" th:text="${#dates.format(accomodation.checkIn, 'MMM dd, yyyy')}">4</span>
+			      </div>
+			      <div class="collapsible-body">
+			      	  
+				      <p th:text="${accomodation.notes}"></p>
+				      check-in: <span th:text="${#dates.format(accomodation.checkIn, 'MMM dd, yyyy')}"/>&nbsp; 
+				      <br>check-out: <span th:text="${#dates.format(accomodation.checkOut, 'MMM dd, yyyy')}"/><br>
+				      <h6 th:text="@{'$' +  ${accomodation.price}}"></h6>
+				      <br>
+				      <address>
+				        <span th:text="${accomodation.address.civicNumber}"/>&nbsp;<span th:text="${accomodation.address.street}"/><br>
+						<span th:text="${accomodation.address.city}"/>,&nbsp;<span th:text="${accomodation.address.country}"/><br>
+						<span th:text="${accomodation.address.code}"/><br>
+						coordinates:&nbsp;<span th:text="${accomodation.address.latitude}"/>,&nbsp;<span th:text="${accomodation.address.longitude}"/><br>
+						<div style="width:100%;height:300px;" th:id="@{'accomodation-map-' + ${accomodation.id}}"></div>
+						<script th:inline="javascript">
+						/*<![CDATA[*/
+						     var map;
+					      	 function initAccomMap[[${accomodation.id}]]() {
+						        map = new google.maps.Map(document.getElementById('accomodation-map-[[${accomodation.id}]]'), {
+						          center: {lat: [[${accomodation.address.latitude}]], lng: [[${accomodation.address.longitude}]]},
+						          zoom: 18
+						        });
+						     }
+						     initAccomMap[[${accomodation.id}]]();
+						/*]]>*/
+						</script>
+					  </address>
+					  
+				  </div>
+			    </li>
+			  </ul>
+			  
+			  <h4 class="header">Reservations</h4>
+		      <br>
+		      <ul class="collapsible">
+			    <li th:each="reservation : ${trip.reservations}">
+			      <div class="collapsible-header">
+			      	<i class="material-icons">whatshot</i><span th:text="${reservation.title}"></span>
+			      	<span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
+			      
+			      </div>
+			      <div class="collapsible-body">
+			      	  <p th:text="${reservation.notes}"></p>
+			      	  Confirmation: <span th:text="${reservation.confirmation}"></span>
+			      	  <h6 th:text="@{'$' +  ${reservation.price}}"></h6>
+				      <address>
+					        <span th:text="${reservation.address.civicNumber}"/>&nbsp;<span th:text="${reservation.address.street}"/><br>
+							<span th:text="${reservation.address.city}"/>,&nbsp;<span th:text="${reservation.address.country}"/><br>
+							<span th:text="${reservation.address.code}"/><br>
+							coordinates:&nbsp;<span th:text="${reservation.address.latitude}"/>,&nbsp;<span th:text="${reservation.address.longitude}"/><br>
+							<div style="width:100%;height:300px;" th:id="@{'map-' + ${reservation.id}}"></div>
+							<script th:inline="javascript">
+							/*<![CDATA[*/
+							     var map;
+						      	 function initMap[[${reservation.id}]]() {
+							        map = new google.maps.Map(document.getElementById('map-[[${reservation.id}]]'), {
+							          center: {lat: [[${reservation.address.latitude}]], lng: [[${reservation.address.longitude}]]},
+							          zoom: 18
+							        });
+							     }
+							     initMap[[${reservation.id}]]();
+							/*]]>*/
+							</script>
+					  </address>
+				  </div>
+			    </li>
+			  </ul>
+	      </div>
+	
+	  </div>
+      <br><br>
+     </div>
   </div>
 
 
@@ -88,6 +173,6 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="/js/materialize.js"></script>
   <script src="/js/init.js"></script>
-
+  
   </body>
 </html>
