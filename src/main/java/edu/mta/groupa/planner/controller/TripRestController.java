@@ -37,7 +37,7 @@ import edu.mta.groupa.planner.repository.TripRepository;
  */
 @RestController
 @RequestMapping("/api/trips")
-public class TripController {
+public class TripRestController {
 
 	@Autowired
 	private TripRepository tripRepository;

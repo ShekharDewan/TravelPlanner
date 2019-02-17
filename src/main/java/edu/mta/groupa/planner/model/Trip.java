@@ -143,6 +143,13 @@ public class Trip {
 	public void setDestinations(List<String> destinations) {
 		this.destinations = destinations;
 	}
+
+	@Override
+	public String toString() {
+		return "Trip [id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", notes=" + notes
+				+ ", destinations=" + destinations + ", reservations=" + reservations + ", accomodations="
+				+ accomodations + ", itineraries=" + itineraries + "]";
+	}
 	
 	
 	
