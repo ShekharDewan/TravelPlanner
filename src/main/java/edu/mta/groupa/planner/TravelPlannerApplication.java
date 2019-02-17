@@ -56,6 +56,7 @@ public class TravelPlannerApplication {
 	private static Trip createRandomTrip() {
         final Trip trip = new Trip();
         trip.setTitle(RandomStringUtils.randomAlphabetic(10));
+        trip.setDescription(RandomStringUtils.randomAlphabetic(125));
         trip.setStart(new Date());
         
         Accommodation a = new Accommodation();

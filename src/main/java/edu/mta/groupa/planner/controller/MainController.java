@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import edu.mta.groupa.planner.repository.TripRepository;
 
 @Controller
-public class WelcomeController {
+public class MainController {
 
     @Value("${welcome.message}")
     private String message;
@@ -25,16 +25,11 @@ public class WelcomeController {
         
         return "welcome"; //view
     }
-
-    // /hello?name=kotlin
-    @GetMapping("/hello")
-    public String mainWithParam(
-            @RequestParam(name = "name", required = false, defaultValue = "") 
-			String name, Model model) {
-
-        model.addAttribute("message", name);
-
-        return "welcome"; //view
+    
+    @GetMapping("/trip/{id}")
+    public String main(Model model, @PathVariable("id") long id) {
+        model.addAttribute("trip", tripRepository.findById(id).get() );
+        return "trip"; //view
     }
 
 }

@@ -35,6 +35,12 @@ public class Trip {
 	 */
 	@Column(nullable = false, unique = true)
 	private String title;
+	
+	/**
+	 * a general description of the trip
+	 */
+	@Column(nullable = true)
+	private String description;
 
 	/**
 	 * start is the start date of the trip
@@ -142,6 +148,38 @@ public class Trip {
 
 	public void setDestinations(List<String> destinations) {
 		this.destinations = destinations;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<Accommodation> getAccomodations() {
+		return accomodations;
+	}
+
+	public void setAccomodations(List<Accommodation> accomodations) {
+		this.accomodations = accomodations;
+	}
+
+	public List<Itinerary> getItineraries() {
+		return itineraries;
+	}
+
+	public void setItineraries(List<Itinerary> itineraries) {
+		this.itineraries = itineraries;
 	}
 
 	@Override

@@ -12,7 +12,7 @@
 </head>
 <body>
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Trip Planner</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Trip Planner</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/trips">Trips</a></li>
       </ul>
@@ -41,11 +41,22 @@
 
   <div class="container">
 	    
-	    <ol>
-	        <li th:each="trip : ${trips}" th:text="${trip}">
-	        </li>
-	    </ol>
-  
+	 <h3 class="header">Trips</h3>
+	 <div class="section">
+	 	
+	    <ul class="collection">
+	        	        
+	        <li class="collection-item avatar" th:each="trip : ${trips}">
+		      <i class="material-icons circle green">insert_chart</i>
+		      <a class="title" th:text="${trip.title}" th:href="@{/trip/} + ${trip.id}">
+		      </a>
+		      <p class="truncate" th:text="${trip.description}"/>
+		      <br>
+		      <a th:href="@{/trip/} + ${trip.id}" class="secondary-content"><i class="material-icons">grade</i></a>
+		    </li>
+	    </ul>
+	 </div>
+	
     <div class="section">
 
       <!--   Icon Section   -->

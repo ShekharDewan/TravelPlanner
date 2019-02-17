@@ -24,3 +24,5 @@
 /.nb-gradle/
 /build/
 /bin/
+
+/target/
