@@ -42,7 +42,7 @@
 		      <br>
 		      <ul class="collapsible">
 			    <li th:each="itinerary : ${trip.itineraries}">
-			      <div class="collapsible-header"><i class="material-icons">whatshot</i><span th:text="${itinerary.date}"></span></div>
+			      <div class="collapsible-header"><i class="material-icons">perm_contact_calendar</i><span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span></div>
 			      <div class="collapsible-body"><p th:text="${itinerary.notes}"></p></div>
 			    </li>
 			  </ul>
@@ -54,7 +54,7 @@
 		      <ul class="collapsible">
 			    <li th:each="accomodation : ${trip.accomodations}">
 			      <div class="collapsible-header">
-			      	<i class="material-icons">whatshot</i>
+			      	<i class="material-icons">hotel</i>
 			      	<span th:text="${accomodation.title}"></span>
 			        <span class="badge" th:text="${#dates.format(accomodation.checkIn, 'MMM dd, yyyy')}">4</span>
 			      </div>
@@ -88,6 +88,8 @@
 				  </div>
 			    </li>
 			  </ul>
+			  
+			  <br>
 			  
 			  <h4 class="header">Reservations</h4>
 		      <br>
