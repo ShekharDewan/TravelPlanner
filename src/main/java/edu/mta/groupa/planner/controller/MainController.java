@@ -149,6 +149,15 @@ public class MainController {
         return "trip"; //view
     }
     
+ // reloading breaks css?
+    @GetMapping("/delete/{id}")
+    public String deleteTrip(@PathVariable("id") long id, Model model) {
+    	tripRepository.deleteById(id);
+    	
+        return welcomePage(model);
+    }
+
+    
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
     	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

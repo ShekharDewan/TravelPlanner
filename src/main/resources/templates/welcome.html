@@ -47,13 +47,14 @@
 		 	
 		    <ul class="collection">
 		        	        
-		        <li class="collection-item avatar" th:each="trip : ${trips}">
+		        <li class="collection-item avatar" th:each="trip : ${trips}" id="triplist">
 			      <i class="material-icons circle green">insert_chart</i>
-			      <a class="title" th:text="${trip.title}" th:href="@{/trip/} + ${trip.id}">
-			      </a>
+			      <a th:href="@{/trip/} + ${trip.id}"> 
+			      <span th:text="${trip.title}"></span>
 			      <p class="" th:text="${trip.description}"/>
 			      <br>
-			      <a th:href="@{/trip/} + ${trip.id}" class="secondary-content"><i class="material-icons">grade</i></a>
+			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content"><i class="small material-icons">delete</i></a>
+			      </a> 
 			    </li>
 		    </ul>
 		 </div>

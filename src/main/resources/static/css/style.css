@@ -22,3 +22,18 @@
 .title a {
   margin-left: 20px;
 }
+#triplist a {
+  display: block;
+  color: black;
+}
+
+#triplist a i {
+  color: grey;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
+#triplist:hover {
+  background-color: rgb(96, 209, 224);
+}
