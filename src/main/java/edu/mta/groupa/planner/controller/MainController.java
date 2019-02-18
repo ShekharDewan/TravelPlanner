@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -149,12 +150,11 @@ public class MainController {
         return "trip"; //view
     }
     
- // reloading breaks css?
     @GetMapping("/delete/{id}")
-    public String deleteTrip(@PathVariable("id") long id, Model model) {
+    public String deleteTrip(@PathVariable("id") long id) {
     	tripRepository.deleteById(id);
-    	
-        return welcomePage(model);
+    	// redirect back to root url
+        return "redirect:/";
     }
 
     

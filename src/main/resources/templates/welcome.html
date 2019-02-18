@@ -53,8 +53,8 @@
 			      <span th:text="${trip.title}"></span>
 			      <p class="" th:text="${trip.description}"/>
 			      <br>
-			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content"><i class="small material-icons">delete</i></a>
-			      </a> 
+			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content" method="delete"><i class="small material-icons">delete</i></a>
+			      </a>
 			    </li>
 		    </ul>
 		 </div>
