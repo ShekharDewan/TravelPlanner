@@ -3,7 +3,6 @@ package edu.mta.groupa.planner.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import edu.mta.groupa.planner.model.Accommodation;
+import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.repository.TripRepository;
 
@@ -69,6 +70,32 @@ public class MainController {
         tripRepository.save(oldTrip);
         model.addAttribute("trip", tripRepository.findById(id).get()); 
         return "trip";
+    }
+    
+    @GetMapping("/trip/{id}/accommodation/add")
+    public String showAccomodationForm(@PathVariable("id") long id, Model model) {
+ 
+    	Accommodation accommodation = new Accommodation();
+    	accommodation.setAddress(new Address());
+    	Trip trip = tripRepository.findById(id).get();
+    	//accommodation.setTrip(trip);
+        model.addAttribute("accommodation", accommodation);
+        model.addAttribute("trip", trip);
+        return "add-accommodation";
+    }
+    
+    @PostMapping("/trip/{id}/accommodation/add")
+    public String addAccomodation(Model model, @PathVariable("id") long id, @Valid Accommodation accomodation, BindingResult result) {
+    	if (result.hasErrors()) {
+            return "edit-trip";
+        }
+    	
+    	Trip trip = tripRepository.findById(id).get();
+    	trip.getAccomodations().add(accomodation);
+    	tripRepository.save(trip);
+    	model.addAttribute("trip", trip );
+                
+        return "trip"; //view
     }
     
     @InitBinder

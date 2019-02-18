@@ -9,6 +9,7 @@
     $('.fixed-action-btn').floatingActionButton();
     $('.datepicker').datepicker({format: 'dd/mm/yyyy'});    
     $('.modal').modal();
+    $('select').formSelect();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space

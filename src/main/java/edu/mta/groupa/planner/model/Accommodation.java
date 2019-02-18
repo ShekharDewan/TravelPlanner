@@ -119,5 +119,39 @@ public class Accommodation {
 	public Address getAddress() {
 		return address;
 	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setCheckIn(Date checkIn) {
+		this.checkIn = checkIn;
+	}
+
+	public void setCheckOut(Date checkOut) {
+		this.checkOut = checkOut;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	
 	
 }
