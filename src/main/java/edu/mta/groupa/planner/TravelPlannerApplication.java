@@ -76,8 +76,8 @@ public class TravelPlannerApplication {
         
         // random address
         Address address = new Address(42, "Gallifrey Street", "New Tokyo", "Japan", "90210", 42.373399,-71.115985);
-        
-        // add accomodations
+                
+        // add accommodations
         trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
         trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
         trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));

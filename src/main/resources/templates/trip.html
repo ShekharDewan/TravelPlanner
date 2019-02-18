@@ -29,27 +29,63 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center orange-text" th:text="${trip.title}" ></h1>
+      <h1 class="header center orange-text" th:text="${trip.title}" >
+      </h1>
+      
       <div class="row center">
         <h5 th:text="${trip.description}" class="header col s12 light"></h5>
       </div>
       
+      <!-- Fixed action button -->
+      <div class="fixed-action-btn">
+		  <a class="btn-floating btn-large red">
+		    <i class="large material-icons">mode_edit</i>
+		  </a>
+		  <ul>
+		    <li><a data-target="modal1" class="btn-floating red modal-trigger"><i class="material-icons">perm_contact_calendar</i></a></li>
+		    <li><a class="btn-floating green"><i class="material-icons">hotel</i></a></li>
+		    <li><a class="btn-floating blue"><i class="material-icons">whatshot</i></a></li>
+		  </ul>
+	  </div>
+	  
+	  <!-- Modal Structure -->
+	  <div id="modal1" class="modal">
+	    <div class="modal-content">
+	      <h4>Modal Header</h4>
+	      <p>A bunch of text</p>
+	    </div>
+	    <div class="modal-footer">
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+	    </div>
+	  </div>
+
       <!-- Page Layout here -->
 	  <div class="row">
 	
 	      <div class="col s4">
-	          <h4 class="header">Itineraries</h4>
+	          <h4 class="header">
+		          <span data-target="modal1" class="btn-floating red"><i class="material-icons">perm_contact_calendar</i></span>
+		          Itineraries
+	          </h4>
 		      <br>
 		      <ul class="collapsible">
 			    <li th:each="itinerary : ${trip.itineraries}">
-			      <div class="collapsible-header"><i class="material-icons">perm_contact_calendar</i><span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span></div>
-			      <div class="collapsible-body"><p th:text="${itinerary.notes}"></p></div>
+			      <div class="collapsible-header">
+			      	<i class="material-icons">perm_contact_calendar</i>
+			      	<span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
+			      </div>
+			      <div class="collapsible-body">
+			      	<p th:text="${itinerary.notes}"></p>
+			      </div>
 			    </li>
 			  </ul>
 	      </div>
 	      
 	      <div class="col s8">
-	          <h4 class="header">Accomodations</h4>
+	          <h4 class="header">
+		          <span data-target="modal1" class="btn-floating green"><i class="material-icons">hotel</i></span>
+		          Accomodations
+	          </h4>
 		      <br>
 		      <ul class="collapsible">
 			    <li th:each="accomodation : ${trip.accomodations}">
@@ -91,7 +127,10 @@
 			  
 			  <br>
 			  
-			  <h4 class="header">Reservations</h4>
+			  <h4 class="header">
+		          <span data-target="modal1" class="btn-floating blue"><i class="material-icons">whatshot</i></span>
+		          Reservations
+	          </h4>
 		      <br>
 		      <ul class="collapsible">
 			    <li th:each="reservation : ${trip.reservations}">
