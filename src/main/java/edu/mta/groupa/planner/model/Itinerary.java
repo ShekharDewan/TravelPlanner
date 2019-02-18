@@ -75,5 +75,9 @@ public class Itinerary {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	public long getId() {
+		return id;
+	}
 
 }

@@ -56,6 +56,9 @@
                             <div class="collapsible-header">
                                 <i class="material-icons">perm_contact_calendar</i>
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
+                                <span><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
+                                method="delete"><i class="small material-icons">delete</i></a>
+                                </span>
                             </div>
                             <div class="collapsible-body">
                                 <p th:text="${itinerary.notes}"></p>
@@ -73,36 +76,39 @@
                     </h4>
                     <br>
                     <ul class="collapsible">
-                        <li th:each="accomodation : ${trip.accomodations}">
+                        <li th:each="accommodation : ${trip.accommodations}">
                             <div class="collapsible-header">
                                 <i class="material-icons">hotel</i>
-                                <span th:text="${accomodation.title}"></span>
-                                <span class="badge" th:text="${#dates.format(accomodation.checkIn, 'MMM dd, yyyy')}">4</span>
+                                <span th:text="${accommodation.title}"></span>
+                                <span class="badge" th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}">4</span>
+                                <span><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content"
+                                method="delete"><i class="small material-icons">delete</i></a>
+                                </span>
                             </div>
                             <div class="collapsible-body">
 
-                                <p th:text="${accomodation.notes}"></p>
-                                check-in: <span th:text="${#dates.format(accomodation.checkIn, 'MMM dd, yyyy')}" />&nbsp;
-                                <br>check-out: <span th:text="${#dates.format(accomodation.checkOut, 'MMM dd, yyyy')}" /><br>
-                                <h6 th:text="@{'$' +  ${accomodation.price}}"></h6>
+                                <p th:text="${accommodation.notes}"></p>
+                                check-in: <span th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}" />&nbsp;
+                                <br>check-out: <span th:text="${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}" /><br>
+                                <h6 th:text="@{'$' +  ${accommodation.price}}"></h6>
                                 <br>
                                 <address>
-                                    <span th:text="${accomodation.address.civicNumber}" />&nbsp;<span th:text="${accomodation.address.street}" /><br>
-                                    <span th:text="${accomodation.address.city}" />,&nbsp;<span th:text="${accomodation.address.country}" /><br>
-                                    <span th:text="${accomodation.address.code}" /><br>
-                                    coordinates:&nbsp;<span th:text="${accomodation.address.latitude}" />,&nbsp;<span
-                                        th:text="${accomodation.address.longitude}" /><br>
-                                    <div style="width:100%;height:300px;" th:id="@{'accomodation-map-' + ${accomodation.id}}"></div>
+                                    <span th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
+                                    <span th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
+                                    <span th:text="${accommodation.address.code}" /><br>
+                                    coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
+                                        th:text="${accommodation.address.longitude}" /><br>
+                                    <div style="width:100%;height:300px;" th:id="@{'accommodation-map-' + ${accommodation.id}}"></div>
                                     <script th:inline="javascript">
                                         /*<![CDATA[*/
                                         var map;
-                                        function initAccomMap[[${ accomodation.id }]]() {
-                                            map = new google.maps.Map(document.getElementById('accomodation-map-[[${accomodation.id}]]'), {
-                                                center: { lat: [[${ accomodation.address.latitude }]], lng: [[${ accomodation.address.longitude }]] },
+                                        function initAccomMap[[${ accommodation.id }]]() {
+                                            map = new google.maps.Map(document.getElementById('accommodation-map-[[${accommodation.id}]]'), {
+                                                center: { lat: [[${ accommodation.address.latitude }]], lng: [[${ accommodation.address.longitude }]] },
                                                 zoom: 18
                                             });
                                         }
-                                        initAccomMap[[${ accomodation.id }]]();
+                                        initAccomMap[[${ accommodation.id }]]();
 						                /*]]>*/
                                     </script>
                                 </address>
@@ -125,6 +131,9 @@
                             <div class="collapsible-header">
                                 <i class="material-icons">whatshot</i><span th:text="${reservation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
+                                <span><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content"
+                                method="delete"><i class="small material-icons">delete</i></a>
+                                </span>
 
                             </div>
                             <div class="collapsible-body">

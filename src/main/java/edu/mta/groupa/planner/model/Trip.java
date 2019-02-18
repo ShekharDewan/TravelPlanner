@@ -79,7 +79,7 @@ public class Trip {
 	 * accommodations is a List of accommodations that the user input for his trip
 	 */
 	@OneToMany(cascade = {CascadeType.ALL})
-    private List<Accommodation> accomodations = new ArrayList<Accommodation>();
+    private List<Accommodation> accommodations = new ArrayList<Accommodation>();
 	
 	/**
 	 * itineraries is the List of the daily itinerary of the user.
@@ -167,12 +167,12 @@ public class Trip {
 		this.reservations = reservations;
 	}
 
-	public List<Accommodation> getAccomodations() {
-		return accomodations;
+	public List<Accommodation> getAccommodations() {
+		return accommodations;
 	}
 
-	public void setAccomodations(List<Accommodation> accomodations) {
-		this.accomodations = accomodations;
+	public void setAccomodations(List<Accommodation> accommodations) {
+		this.accommodations = accommodations;
 	}
 
 	public List<Itinerary> getItineraries() {
@@ -186,8 +186,8 @@ public class Trip {
 	@Override
 	public String toString() {
 		return "Trip [id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", notes=" + notes
-				+ ", destinations=" + destinations + ", reservations=" + reservations + ", accomodations="
-				+ accomodations + ", itineraries=" + itineraries + "]";
+				+ ", destinations=" + destinations + ", reservations=" + reservations + ", accommodations="
+				+ accommodations + ", itineraries=" + itineraries + "]";
 	}
 	
 	
