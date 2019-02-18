@@ -33,7 +33,7 @@ public class MainController {
     @GetMapping("/")
     public String welcomePage(Model model) {
         model.addAttribute("message", message);
-        model.addAttribute("trips", tripRepository.findAll() );
+        model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc() );
         
         return "welcome"; //view
     }

@@ -15,5 +15,6 @@ import edu.mta.groupa.planner.model.Trip;
  *
  */
 public interface TripRepository extends CrudRepository<Trip, Long> {
+	List<Trip> findAllByOrderByStartAsc();
 	List<Trip> findByTitle(String title);
 }
