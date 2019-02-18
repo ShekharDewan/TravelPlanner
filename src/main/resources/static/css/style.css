@@ -12,3 +12,13 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+.title {
+    text-align: center;
+}
+.title h1 {
+    display: inline-block;
+}
+
+.title a {
+  margin-left: 20px;
+}
