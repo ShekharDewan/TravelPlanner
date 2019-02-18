@@ -23,6 +23,9 @@ import javax.persistence.OneToOne;
 @Entity
 public class Reservation {
 	
+	/**
+	 * The id is the unique row id for the entry used internally by JPA
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

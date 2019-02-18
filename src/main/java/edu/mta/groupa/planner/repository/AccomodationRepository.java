@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import edu.mta.groupa.planner.model.Accomodation;
+import edu.mta.groupa.planner.model.Accommodation;
 
-public interface AccomodationRepository extends CrudRepository<Accomodation, Long> {
-	List<Accomodation> findByTitle(String title);
+public interface AccomodationRepository extends CrudRepository<Accommodation, Long> {
+	List<Accommodation> findByTitle(String title);
 }

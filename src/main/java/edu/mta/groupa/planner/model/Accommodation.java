@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
- * The Accomodation object is an entity that generically maps to a database via
+ * The Accommodation object is an entity that generically maps to a database via
  * JPA. It has a many to one relationship with the Trip entity.
  * 
  * @author Maryse
