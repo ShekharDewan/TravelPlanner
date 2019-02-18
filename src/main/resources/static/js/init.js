@@ -7,7 +7,7 @@
     $('.collapsible').collapsible();
     // initialize the floating action button
     $('.fixed-action-btn').floatingActionButton();
-    
+    $('.datepicker').datepicker();    
     $('.modal').modal();
 
   }); // end of document ready
