@@ -40,22 +40,25 @@
 
 
   <div class="container">
-	    
-	 <h3 class="header">Trips</h3>
-	 <div class="section">
-	 	
-	    <ul class="collection">
-	        	        
-	        <li class="collection-item avatar" th:each="trip : ${trips}">
-		      <i class="material-icons circle green">insert_chart</i>
-		      <a class="title" th:text="${trip.title}" th:href="@{/trip/} + ${trip.id}">
-		      </a>
-		      <p class="truncate" th:text="${trip.description}"/>
-		      <br>
-		      <a th:href="@{/trip/} + ${trip.id}" class="secondary-content"><i class="material-icons">grade</i></a>
-		    </li>
-	    </ul>
-	 </div>
+	 <div class="row">
+        <div class="col s10 offset-s1">   
+		 <h3 class="header">Trips</h3>
+		 <div class="section">
+		 	
+		    <ul class="collection">
+		        	        
+		        <li class="collection-item avatar" th:each="trip : ${trips}">
+			      <i class="material-icons circle green">insert_chart</i>
+			      <a class="title" th:text="${trip.title}" th:href="@{/trip/} + ${trip.id}">
+			      </a>
+			      <p class="" th:text="${trip.description}"/>
+			      <br>
+			      <a th:href="@{/trip/} + ${trip.id}" class="secondary-content"><i class="material-icons">grade</i></a>
+			    </li>
+		    </ul>
+		 </div>
+		</div>
+	</div>
 	
     <div class="section">
 

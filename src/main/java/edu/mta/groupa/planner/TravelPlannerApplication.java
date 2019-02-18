@@ -15,7 +15,9 @@ import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 
 import edu.mta.groupa.planner.model.Accommodation;
+import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Itinerary;
+import edu.mta.groupa.planner.model.Reservation;
 import edu.mta.groupa.planner.model.Trip;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -68,10 +70,25 @@ public class TravelPlannerApplication {
         trip.getDestinations().add("Moncton");
         
         // add itineraries
+        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
+        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
+        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
         
-        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
-        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
-        trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
+        // random address
+        Address address = new Address(42, "Gallifrey Street", "New Tokyo", "Japan", "90210", 42.373399,-71.115985);
+                
+        // add accommodations
+        trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
+        trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
+        trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
+        trip.getAccomodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
+
+        // add reservations
+        trip.getReservations().add(new Reservation(trip, address, lorem.getWords(1), new Date(), lorem.getWords(50), 79.99, lorem.getWords(1)));
+        trip.getReservations().add(new Reservation(trip, address, lorem.getWords(1), new Date(), lorem.getWords(50), 79.99, lorem.getWords(1)));
+        trip.getReservations().add(new Reservation(trip, address, lorem.getWords(1), new Date(), lorem.getWords(50), 79.99, lorem.getWords(1)));
+        trip.getReservations().add(new Reservation(trip, address, lorem.getWords(1), new Date(), lorem.getWords(50), 79.99, lorem.getWords(1)));
+        trip.getReservations().add(new Reservation(trip, address, lorem.getWords(1), new Date(), lorem.getWords(50), 79.99, lorem.getWords(1)));
         
         return trip;
     }

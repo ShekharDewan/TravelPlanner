@@ -72,13 +72,13 @@ public class Trip {
 	/**
 	 * reservations is a List of reservations that the user input for his trip
 	 */
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
     private List<Reservation> reservations = new ArrayList<Reservation>();
 	
 	/**
 	 * accommodations is a List of accommodations that the user input for his trip
 	 */
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
     private List<Accommodation> accomodations = new ArrayList<Accommodation>();
 	
 	/**
@@ -91,8 +91,8 @@ public class Trip {
 	 * getTotalPrice calculates the total prices of all accommodations and 
 	 * reservations for this trip.
 	 * @return the total price of all accommodations and reservations.
-	 */
-	public double getTotalPrice(){
+	
+	public double calculateTotalPrice(){
 		double total = 0;
 		for (Accommodation a: this.accomodations){
 			total += a.getPrice();
@@ -101,7 +101,7 @@ public class Trip {
 			total += r.getPrice();
 		}
 		return total;
-	}
+	} */
 	
 	public long getId() {
 		return id;
