@@ -58,6 +58,7 @@
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
                                 <span><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
                                 </span>
                             </div>
                             <div class="collapsible-body">
@@ -83,6 +84,7 @@
                                 <span class="badge" th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}">4</span>
                                 <span><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/accommodation/edit/} + ${accommodation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
                                 </span>
                             </div>
                             <div class="collapsible-body">
@@ -133,6 +135,7 @@
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
                                 <span><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/reservation/edit/} + ${reservation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
                                 </span>
 
                             </div>

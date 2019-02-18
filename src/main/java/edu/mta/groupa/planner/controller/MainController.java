@@ -64,7 +64,6 @@ public class MainController {
     public String updateTrip(@PathVariable("id") long id, @Valid Trip trip, 
       BindingResult result, Model model) {
         if (result.hasErrors()) {
-            trip.setId(id);
             return "edit-trip";
         }
         Trip oldTrip = tripRepository.findById(id).get();
@@ -86,7 +85,6 @@ public class MainController {
     	Accommodation accommodation = new Accommodation();
     	accommodation.setAddress(new Address());
     	Trip trip = tripRepository.findById(id).get();
-    	//accommodation.setTrip(trip);
         model.addAttribute("accommodation", accommodation);
         model.addAttribute("trip", trip);
         return "add-accommodation";
@@ -195,95 +193,96 @@ public class MainController {
         return "trip";
     }
 
-@GetMapping("/trip/{id}/itinerary/edit")
-public String showItineraryEditForm(@PathVariable("id") long id, 
-		@PathVariable("itineraryID") long itineraryID, Model model) {
-	Trip trip = tripRepository.findById(id).get();
-	//trip.getItineraries().
-	//Itinerary itinerary = 
-	//model.addAttribute("itinerary", itinerary);
-	return "edit-itinerary";
-}
-
-@PostMapping("/trip/{id}/itinerary/update")
-public String updateItinerary(@PathVariable("id") long id, @Valid Trip trip, 
-  BindingResult result, Model model) {
-    if (result.hasErrors()) {
-        trip.setId(id);
-        return "edit-itinerary";
+    @GetMapping("/trip/{id}/itinerary/edit/{itineraryID}")
+    public String showItineraryEditForm(@PathVariable("id") long id, 
+    		@PathVariable("itineraryID") long itineraryID, Model model) {
+    	Trip trip = tripRepository.findById(id).get();
+    	Itinerary itinerary = eManager.find(Itinerary.class, itineraryID); 
+    	model.addAttribute("itinerary", itinerary);
+    	model.addAttribute("trip", trip);
+    	return "edit-itinerary";
     }
-    Trip oldTrip = tripRepository.findById(id).get();
 
-    oldTrip.setNotes(trip.getNotes());
-    oldTrip.setStart(trip.getStart());
-    oldTrip.setEnd(trip.getEnd());
-    oldTrip.setTitle(trip.getTitle());
-    oldTrip.setDescription(trip.getDescription());
-    
-    tripRepository.save(oldTrip);
-    model.addAttribute("trip", tripRepository.findById(id).get()); 
-    return "trip";
-}
+    @PostMapping("/trip/{id}/itinerary/update/{itineraryID}")
+    public String updateItinerary(@PathVariable("id") long id, 
+    		@PathVariable("itineraryID") long itineraryID, @Valid Itinerary itinerary, 
+      BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "edit-itinerary";
+        }
+        Trip trip = tripRepository.findById(id).get();
+        Itinerary oldItinerary = eManager.find(Itinerary.class, itineraryID); 
+        oldItinerary.setNotes(itinerary.getNotes());
+        oldItinerary.setDate(itinerary.getDate());
+        
+        tripRepository.save(trip);
+        model.addAttribute("trip", tripRepository.findById(id).get()); 
+        return "trip";
+    }
 
-@GetMapping("/trip/{id}/reservation/edit")
-public String showReservationEditForm(@PathVariable("id") long id, 
-		@PathVariable("reservation") Reservation reservation, Model model) {
-	Trip trip = tripRepository.findById(id).get();
-	//trip.getReservations()
-	//Itinerary itinerary = 
-	//model.addAttribute("itinerary", itinerary);
-	return "edit-reservation";
-}
+    @GetMapping("/trip/{id}/reservation/edit/{reservationID}")
+    public String showReservationEditForm(@PathVariable("id") long id, 
+    		@PathVariable("reservationID") long reservationID, Model model) {
+    	Trip trip = tripRepository.findById(id).get();
+    	Reservation reservation = eManager.find(Reservation.class, reservationID); 
+    	model.addAttribute("reservation", reservation);
+    	model.addAttribute("trip", trip);
+    	return "edit-reservation";
+    }
 
-@PostMapping("/trip/{id}/reservation/update")
-public String updateReservation(@PathVariable("id") long id, @Valid Trip trip, 
-		BindingResult result, Model model) {
-	if (result.hasErrors()) {
-		trip.setId(id);
-		return "edit-trip";
-	}
-	Trip oldTrip = tripRepository.findById(id).get();
+    @PostMapping("/trip/{id}/reservation/update/{reservationID}")
+    public String updateReservation(@PathVariable("id") long id, 
+    		@PathVariable("reservationID") long reservationID, @Valid Reservation reservation, 
+      BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "edit-reservation";
+        }
+        Trip trip = tripRepository.findById(id).get();
+        Reservation oldReservation = eManager.find(Reservation.class, reservationID); 
+        
+        oldReservation.setTitle(reservation.getTitle());
+        oldReservation.setAddress(reservation.getAddress());
+        oldReservation.setPrice(reservation.getPrice());
+        oldReservation.setConfirmation(reservation.getConfirmation());
+        oldReservation.setNotes(reservation.getNotes());
+        oldReservation.setDate(reservation.getDate());
+        
+        tripRepository.save(trip);
+        model.addAttribute("trip", tripRepository.findById(id).get()); 
+        return "trip";
+    }
 
-	oldTrip.setNotes(trip.getNotes());
-	oldTrip.setStart(trip.getStart());
-	oldTrip.setEnd(trip.getEnd());
-	oldTrip.setTitle(trip.getTitle());
-	oldTrip.setDescription(trip.getDescription());
+    @GetMapping("/trip/{id}/accommodation/edit/{accommodationID}")
+    public String showAccommodationEditForm(@PathVariable("id") long id, 
+    		@PathVariable("accommodationID") long accommodationID, Model model) {
+    	Trip trip = tripRepository.findById(id).get();
+    	Accommodation accommodation = eManager.find(Accommodation.class, accommodationID); 
+    	model.addAttribute("accommodation", accommodation);
+    	model.addAttribute("trip", trip);
+    	return "edit-accommodation";
+    }
 
-	tripRepository.save(oldTrip);
-	model.addAttribute("trip", tripRepository.findById(id).get()); 
-	return "trip";
-}
-
-@GetMapping("/trip/{id}/accommodation/edit")
-public String showAccommodationEditForm(@PathVariable("id") long id, 
-		@PathVariable("itineraryID") long itineraryID, Model model) {
-	Trip trip = tripRepository.findById(id).get();
-	//trip.getItineraries().
-	//Itinerary itinerary = 
-	//model.addAttribute("itinerary", itinerary);
-	return "edit-itinerary";
-}
-
-@PostMapping("/trip/{id}/accommodation/update")
-public String updateAccommodation(@PathVariable("id") long id, @Valid Trip trip, 
-		BindingResult result, Model model) {
-	if (result.hasErrors()) {
-		trip.setId(id);
-		return "edit-trip";
-	}
-	Trip oldTrip = tripRepository.findById(id).get();
-
-	oldTrip.setNotes(trip.getNotes());
-	oldTrip.setStart(trip.getStart());
-	oldTrip.setEnd(trip.getEnd());
-	oldTrip.setTitle(trip.getTitle());
-	oldTrip.setDescription(trip.getDescription());
-
-	tripRepository.save(oldTrip);
-	model.addAttribute("trip", tripRepository.findById(id).get()); 
-	return "trip";
-}
+    @PostMapping("/trip/{id}/accommodation/update/{accommodationID}")
+    public String updateAccommodation(@PathVariable("id") long id,
+    		@PathVariable("accommodationID") long accommodationID, @Valid Accommodation accommodation, 
+    		BindingResult result, Model model) {
+    	if (result.hasErrors()) {
+    		return "edit-accommodation";
+    	}
+    	Trip trip = tripRepository.findById(id).get();
+        Accommodation oldAccommodation = eManager.find(Accommodation.class, accommodationID); 
+        
+        oldAccommodation.setNotes(accommodation.getNotes());
+        oldAccommodation.setAddress(accommodation.getAddress());
+        oldAccommodation.setCheckIn(accommodation.getCheckIn());
+        oldAccommodation.setCheckOut(accommodation.getCheckOut());
+        oldAccommodation.setPrice(accommodation.getPrice());
+        oldAccommodation.setTitle(accommodation.getTitle());
+        
+        tripRepository.save(trip);
+        model.addAttribute("trip", tripRepository.findById(id).get()); 
+    	return "trip";
+    }
     
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
@@ -291,6 +290,8 @@ public String updateAccommodation(@PathVariable("id") long id, @Valid Trip trip,
     	dateFormat.setLenient(false);
     	binder.registerCustomEditor(Date.class, "start", new CustomDateEditor(dateFormat, true));
     	binder.registerCustomEditor(Date.class, "end", new CustomDateEditor(dateFormat, true));
+    	binder.registerCustomEditor(Date.class, "date", new CustomDateEditor(dateFormat, true));
+    	binder.registerCustomEditor(Date.class, "checkIn", new CustomDateEditor(dateFormat, true));
+    	binder.registerCustomEditor(Date.class, "checkOut", new CustomDateEditor(dateFormat, true));
     }
-
 }
