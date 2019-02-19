@@ -33,7 +33,17 @@
             <br><br>
             <div class="title">
                 <h1 class="header center orange-text" th:text="${trip.title}"></h1>
-                <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="waves-effect waves-light btn-small">Edit</a>
+                <span id="titlecontainer">
+                <span class="remain">
+                  <script th:inline="javascript">
+                  	/*<![CDATA[*/
+                  	var begin = /*[[${trip.start}]]*/ 'default';
+                  	/*]]>*/      
+                  </script>
+                  <script type="text/javascript" th:src="@{/jsp/daysuntil.js}"></script>
+                  </span>
+                <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="waves-effect waves-light btn-small" id="editbutton">Edit</a>
+                </span>
             </div>
             <div class="row center">
                 <h5 th:text="${trip.description}" class="header col s12 light"></h5>
@@ -56,10 +66,12 @@
                             <div class="collapsible-header">
                                 <i class="material-icons">perm_contact_calendar</i>
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
-                                <span><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
+                                <span class="icons"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
-                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
-                                </span>
+                                <span class="editicon">
+                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content">
+                                <i class="small material-icons">create</i></a>
+                                </span></span>
                             </div>
                             <div class="collapsible-body">
                                 <p th:text="${itinerary.notes}"></p>
@@ -82,10 +94,11 @@
                                 <i class="material-icons">hotel</i>
                                 <span th:text="${accommodation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}">4</span>
-                                <span><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content"
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
+                                <span class="editicon">
                                 <a th:href="@{/trip/} + ${trip.id} + @{/accommodation/edit/} + ${accommodation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
-                                </span>
+                                </span></span>
                             </div>
                             <div class="collapsible-body">
 
@@ -133,10 +146,11 @@
                             <div class="collapsible-header">
                                 <i class="material-icons">whatshot</i><span th:text="${reservation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
-                                <span><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content"
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
+                                <span class="editicon">
                                 <a th:href="@{/trip/} + ${trip.id} + @{/reservation/edit/} + ${reservation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
-                                </span>
+                                </span></span>
 
                             </div>
                             <div class="collapsible-body">

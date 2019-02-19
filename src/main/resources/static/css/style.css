@@ -33,7 +33,46 @@
   top: -10px;
   right: -10px;
 }
+#titlecontainer {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
 
 #triplist:hover {
   background-color: rgb(96, 209, 224);
+}
+
+.icons {
+  position: relative;
+  right: -115px;
+}
+
+.iconsright {
+  position: relative;
+  left: 28px;
+}
+
+.iconsright .editicon {
+  position: absolute;
+  right: 30px;
+}
+
+.icons .editicon {
+  position: absolute;
+  right: 30px;
+}
+
+#editbutton, .remain {
+  position: absolute;
+  top: 0px;
+  right: -80px;
+}
+#editbutton {
+  top: 5px;
+}
+
+.remain {
+  z-index: 20;
+  top: -50px;
 }
