@@ -283,6 +283,12 @@ public class MainController {
     	return "trip";
     }
     
+    @GetMapping("/trip/{id}/print")
+    public String getPrintable(@PathVariable("id") long id, Model model) {
+    	model.addAttribute("trip", tripRepository.findById(id).get() );
+        return "print-trip";
+    }
+    
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
     	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

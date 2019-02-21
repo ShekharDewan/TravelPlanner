@@ -51,6 +51,7 @@
             </div>
 
             <!-- Page Layout here -->
+
             <div class="row">
 
                 <div class="col s4">
@@ -186,7 +187,8 @@
             <br><br>
         </div>
     </div>
-
+    
+    <a th:href="@{/trip/} + ${trip.id} + '/print'" id="stickylink"><i class="material-icons">print</i></a>
 
     <footer class="page-footer orange">
         <div class="container">
