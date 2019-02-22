@@ -59,7 +59,7 @@
                     <h4 class="header">
                         <span data-target="modal1" class="btn-floating red"><i class="material-icons">perm_contact_calendar</i></span>
                         Itineraries
-                        <a class="btn-floating btn-medium waves-effect waves-light red right" th:href="@{'/trip/' + ${trip.id} + '/itinerary/add' }"><i
+                        <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Itinerary" th:href="@{'/trip/' + ${trip.id} + '/itinerary/add' }"><i
                                 class="material-icons">add</i></a>
                     </h4>
                     <br>
@@ -86,8 +86,12 @@
                     <h4 class="header">
                         <span data-target="modal1" class="btn-floating green"><i class="material-icons">hotel</i></span>
                         Accommodations
-                        <a class="btn-floating btn-medium waves-effect waves-light red right" th:href="@{'/trip/' + ${trip.id} + '/accommodation/add' }"><i
+                        <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Accommodation" th:href="@{'/trip/' + ${trip.id} + '/accommodation/add' }"><i
                                 class="material-icons">add</i></a>
+                                
+                                               
+                                
+                                
                     </h4>
                     <br>
                     <ul class="collapsible">
@@ -139,7 +143,7 @@
                     <h4 class="header">
                         <span data-target="modal1" class="btn-floating blue"><i class="material-icons">whatshot</i></span>
                         Reservations
-                        <a class="btn-floating btn-medium waves-effect waves-light red right" th:href="@{'/trip/' + ${trip.id} + '/reservation/add' }"><i
+                        <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Reservation" th:href="@{'/trip/' + ${trip.id} + '/reservation/add' }"><i
                                 class="material-icons">add</i></a>
                     </h4>
                     <br>
