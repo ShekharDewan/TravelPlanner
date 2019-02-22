@@ -27,6 +27,17 @@ public class Itinerary {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	public Itinerary() {
+		super();
+	}
+
+	public Itinerary(Trip trip, Date date, String notes) {
+		super();
+		this.trip = trip;
+		this.date = date;
+		this.notes = notes;
+	}
 		
 	/**
 	 * The itinerary has a many to one relationship with a trip.
@@ -49,16 +60,7 @@ public class Itinerary {
 	@Column(length=2048)
 	private String notes;
 	
-	public Itinerary() {
-		super();
-	}
-
-	public Itinerary(Trip trip, Date date, String notes) {
-		super();
-		this.trip = trip;
-		this.date = date;
-		this.notes = notes;
-	}
+	
 
 	public Date getDate() {
 		return date;

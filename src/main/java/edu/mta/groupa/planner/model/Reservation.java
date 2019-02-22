@@ -23,35 +23,14 @@ import javax.persistence.OneToOne;
 @Entity
 public class Reservation {
 	
+	
+	
 	/**
 	 * The id is the unique row id for the entry used internally by JPA
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-		
-	@ManyToOne(optional=true, cascade = {CascadeType.ALL}) 
-    @JoinColumn(name="TRIP_ID")
-    private Trip trip;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "ADDRESS_ID")
-	private Address address;
-	
-	@Column
-	private String title;
-	
-	@Column
-	private Date date;
-	
-	@Column(length=2048)
-	private String notes;
-	
-	@Column
-	private Double price;
-	
-	@Column
-	private String confirmation;
 	
 	public Reservation(){
 		super();
@@ -68,6 +47,60 @@ public class Reservation {
 		this.price = price;
 		this.confirmation = confirmation;
 	}
+		
+	/**
+	 * Reservation has a many-to-one relationship with a trip.
+	 * There can be many reservations for one trip.
+	 */
+	@ManyToOne(optional=true, cascade = {CascadeType.ALL}) 
+    @JoinColumn(name="TRIP_ID")
+    private Trip trip;
+
+	
+	/**
+	 * The address has a one-to-one relationship with the reservation
+	 */
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "ADDRESS_ID")
+	private Address address;
+	
+	/**
+	 * The title is a string containing the title of the reservation 
+	 */
+	@Column
+	private String title;
+	
+	/**
+	 * The date is a Date type that contains the date of the reservation
+	 */
+	@Column
+	private Date date;
+	
+	/**
+	 * The notes is a String that contains the notes about the reservation
+	 */
+	@Column(length=2048)
+	private String notes;
+	
+	/**
+	 * The price is a Double type that contains the price of the reservation
+	 */
+	@Column
+	private Double price;
+	
+	/**
+	 * confirmation is a String that contains the confirmation number of the reservation
+	 */
+	@Column
+	private String confirmation;
+	
+	/**
+	 * type is a String that has the type of reservation that is booked.
+	 */
+	@Column
+	private String type;
+	
 	
 	public Address getAddress() {
 		return address;
@@ -95,6 +128,15 @@ public class Reservation {
 
 	public String getNotes() {
 		return notes;
+	}
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setNotes(String notes) {

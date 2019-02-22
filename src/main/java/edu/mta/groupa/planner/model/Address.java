@@ -22,6 +22,22 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	public Address(){
+		
+	}
+	
+	public Address(Integer civicNumber, String street, String city, String country, String code, Double latitude,
+			Double longitude) {
+		super();
+		this.civicNumber = civicNumber;
+		this.street = street;
+		this.city = city;
+		this.country = country;
+		this.code = code;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	/**
 	 * civicNumber is the civic number of the address
@@ -65,21 +81,7 @@ public class Address {
 	@Column
 	private Double longitude;
 
-	public Address(){
-		
-	}
 	
-	public Address(Integer civicNumber, String street, String city, String country, String code, Double latitude,
-			Double longitude) {
-		super();
-		this.civicNumber = civicNumber;
-		this.street = street;
-		this.city = city;
-		this.country = country;
-		this.code = code;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
 
 	public Integer getCivicNumber() {
 		return civicNumber;

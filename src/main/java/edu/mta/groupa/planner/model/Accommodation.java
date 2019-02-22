@@ -29,6 +29,21 @@ public class Accommodation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	public Accommodation(){
+	}
+	
+	public Accommodation(Trip trip, Address address, String title, Date checkIn, Date checkOut, String notes,
+			Double price) {
+		super();
+		this.trip = trip;
+		this.address = address;
+		this.title = title;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.notes = notes;
+		this.price = price;
+	}
 
 	/**
 	 * This has a many to one relationship with a Trip. 
@@ -77,20 +92,7 @@ public class Accommodation {
 	@Column
 	private Double price;
 	
-	public Accommodation(){
-	}
 	
-	public Accommodation(Trip trip, Address address, String title, Date checkIn, Date checkOut, String notes,
-			Double price) {
-		super();
-		this.trip = trip;
-		this.address = address;
-		this.title = title;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.notes = notes;
-		this.price = price;
-	}
 	
 	public long getId() {
 		return id;
