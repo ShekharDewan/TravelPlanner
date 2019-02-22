@@ -76,3 +76,9 @@
   z-index: 20;
   top: -50px;
 }
+
+#stickylink {
+  position: sticky;
+  bottom: 0px;
+  float: right;
+}
