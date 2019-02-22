@@ -17,6 +17,9 @@
 </head>
 <body>
 <h4 th:text="${trip.title}"></h4>
+<span class="printbtn">
+<a onclick="window.print();" class="waves-effect waves-light btn-large"><i class="material-icons left">print</i>Print</a>
+</span>
 
 <h5>Accommodations</h5>
 <table border="0" th:each="accommodation : ${trip.accommodations}">
