@@ -42,8 +42,9 @@
                   </script>
                   <script type="text/javascript" th:src="@{/jsp/daysuntil.js}"></script>
                   </span>
-                <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="waves-effect waves-light btn-small" id="editbutton">Edit</a>
                 </span>
+                <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="btn-floating blue tooltipped" data-position="bottom" data-tooltip="Edit Trip"><i class="material-icons">edit</i></a>
+                
             </div>
             <div class="row center">
                 <h5 th:text="${trip.description}" class="header col s12 light"></h5>

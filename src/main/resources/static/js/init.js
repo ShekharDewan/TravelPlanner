@@ -10,6 +10,7 @@
     $('.datepicker').datepicker({format: 'dd/mm/yyyy'});    
     $('.modal').modal();
     $('select').formSelect();
+    $('.tooltipped').tooltip();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
