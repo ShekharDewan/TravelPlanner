@@ -159,6 +159,26 @@ public class MainController {
         return "redirect:/";
     }
     
+    @GetMapping("/add")
+    public String showItineraryForm(Model model) {
+    	Trip trip = new Trip();
+        model.addAttribute("trip", trip);
+        return "add-trip";
+    }
+    
+    @PostMapping("/add/{id}")
+    public String addTrip(Model model, @PathVariable("id") long id, @Valid Trip trip, BindingResult result) {
+    	if (result.hasErrors()) {
+            return "add-trip";
+        }
+    	
+    	tripRepository.save(trip);
+    	model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc());
+    	model.addAttribute("message", message);
+                
+        return "redirect:/"; 
+    }
+    
     @GetMapping("/trip/{id}/reservation/delete/{reservationID}")
     public String deleteReservation(@PathVariable("id") long id, 
     		@PathVariable("reservationID") long reservationID, Model model) {
