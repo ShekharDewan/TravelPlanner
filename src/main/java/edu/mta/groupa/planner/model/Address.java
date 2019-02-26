@@ -27,12 +27,13 @@ public class Address {
 		
 	}
 	
-	public Address(Integer civicNumber, String street, String city, String country, String code, Double latitude,
+	public Address(Integer civicNumber, String street, String city, String province, String country, String code, Double latitude,
 			Double longitude) {
 		super();
 		this.civicNumber = civicNumber;
 		this.street = street;
 		this.city = city;
+		this.province = province;
 		this.country = country;
 		this.code = code;
 		this.latitude = latitude;
@@ -56,6 +57,12 @@ public class Address {
 	 */
 	@Column
 	private String city;
+	
+	/**
+	 * province is the name of the province of the address
+	 */
+	@Column
+	private String province;
 
 	/**
 	 * country is the name of the country in the address

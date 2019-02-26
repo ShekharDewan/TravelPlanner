@@ -69,6 +69,16 @@ public class TravelPlannerApplication {
         trip.setStart(format.parse("2019-07-01"));
         trip.setEnd(format.parse("2019-07-15"));
         
+        //add itineraries
+        trip.getItineraries().add(new Itinerary(trip, format.parse("2019-07-01"), "Happy to start my trip!"));
+        trip.getItineraries().add(new Itinerary(trip, format.parse("2019-07-02"), "Hiking up Sulfur Mountain"));
+        Address addressBanff = new Address(405, "Spray Ave", "Banff", "AB","Canada", "T1L 1J4", 51.1643,
+    			-115.5618);
+        Address addressJasper = new Address(1, "Old Lodge Rd", "Jasper","AB", "Canada", "T0E 1E0", 52.8861,-118.0572
+    			);
+     // add accommodations
+        trip.getAccommodations().add(new Accommodation(trip, addressBanff, "Banff", format.parse("2019-07-01"), format.parse("2019-07-08"), "Banff Springs Hotel", 99.99));
+        trip.getAccommodations().add(new Accommodation(trip, addressJasper, "Jasper", format.parse("2019-07-08"), format.parse("2019-07-15"), "Jasper Park Lodge", 99.99));
         final Response response = RestAssured.given()
 	            .contentType(MediaType.APPLICATION_JSON_VALUE)
 	            .body(trip)
@@ -99,7 +109,7 @@ public class TravelPlannerApplication {
         trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
         
         // random address
-        Address address = new Address(42, "Gallifrey Street", "New Tokyo", "Japan", "90210", 42.373399,-71.115985);
+        Address address = new Address(42, "Gallifrey Street", "New Tokyo","Shinuku", "Japan", "90210", 42.373399,-71.115985);
                 
         // add accommodations
         trip.getAccommodations().add(new Accommodation(trip, address, lorem.getWords(1), new Date(), new Date(), lorem.getParagraphs(2, 4), 42.99));
