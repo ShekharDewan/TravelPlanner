@@ -1,5 +1,7 @@
 package edu.mta.groupa.planner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
@@ -37,14 +39,16 @@ public class TravelPlannerApplication {
 	
 	private static final String API_ROOT = "http://localhost:8080/api/trips";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		SpringApplication.run(TravelPlannerApplication.class, args);
 		
 		// create a few random trips
-		createTrips(5);
-	}
+		createRandomTrips(2);
+
+		createTrip();
+			}
 	
-	private static void createTrips(final int numberOfTrips){
+	private static void createRandomTrips(final int numberOfTrips) throws ParseException{
 		
 		for(int i = 0; i < numberOfTrips; i++){
 			final Trip trip = createRandomTrip();
@@ -57,15 +61,35 @@ public class TravelPlannerApplication {
 		}
 	}
 	
-	private static Trip createRandomTrip() {
+	private static void createTrip() throws ParseException {
+		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Trip trip = new Trip();
+		trip.setTitle("Canadian Rockies");
+        trip.setDescription("Canadian Rockies: one of the most beautiful places in the world");
+        trip.setStart(format.parse("2019-07-01"));
+        trip.setEnd(format.parse("2019-07-15"));
+        
+        final Response response = RestAssured.given()
+	            .contentType(MediaType.APPLICATION_JSON_VALUE)
+	            .body(trip)
+	            .post(API_ROOT);
+		
+	}
+	
+	private static Trip createRandomTrip() throws ParseException {
+		
+		
 		
 		final Lorem lorem = LoremIpsum.getInstance();
 		
         final Trip trip = new Trip();
+                       
         trip.setTitle(RandomStringUtils.randomAlphabetic(10));
         trip.setDescription(lorem.getWords(25));
         trip.setStart(new Date());
-                
+        
+        
+        
         trip.getDestinations().add("New York City");
         trip.getDestinations().add("Moncton");
         
