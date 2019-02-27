@@ -100,8 +100,8 @@ public class TravelPlannerApplication {
         
         
         
-        trip.getDestinations().add("New York City");
-        trip.getDestinations().add("Moncton");
+        trip.setDestinations("New York City");
+        trip.setDestinations("Moncton");
         
         // add itineraries
         trip.getItineraries().add(new Itinerary(trip, new Date(), lorem.getParagraphs(2, 4)));
