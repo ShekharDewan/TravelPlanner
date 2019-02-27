@@ -66,8 +66,8 @@ public class Trip {
 	 * destinations is a List of destinations that will contain the 
 	 * destinations that the user will input for his trip.
 	 */
-	@ElementCollection
-	private List<String> destinations = new ArrayList<String>();
+	@Column
+	private String destinations;
 	
 	/**
 	 * reservations is a List of reservations that the user input for his trip
@@ -143,11 +143,11 @@ public class Trip {
 		this.notes = notes;
 	}
 
-	public List<String> getDestinations() {
+	public String getDestinations() {
 		return destinations;
 	}
 
-	public void setDestinations(List<String> destinations) {
+	public void setDestinations(String destinations) {
 		this.destinations = destinations;
 	}
 	
