@@ -83,8 +83,8 @@ public class TripLiveTest {
         
         Accommodation a = new Accommodation();
         
-        trip.getDestinations().add("New York City");
-        trip.getDestinations().add("Moncton");
+        trip.setDestinations("New York City");
+        trip.setDestinations("Moncton");
         
         return trip;
     }
