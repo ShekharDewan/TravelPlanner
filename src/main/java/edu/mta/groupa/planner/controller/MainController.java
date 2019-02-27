@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,7 +25,9 @@ import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Itinerary;
 import edu.mta.groupa.planner.model.Reservation;
 import edu.mta.groupa.planner.model.Trip;
+import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.TripRepository;
+import edu.mta.groupa.planner.repository.UserRepository;
 
 @Controller
 public class MainController {
@@ -35,6 +38,9 @@ public class MainController {
     @Autowired
     private TripRepository tripRepository;
     
+    @Autowired
+    private UserRepository userRepository;
+    
     @PersistenceContext
     private EntityManager eManager;
 
@@ -44,6 +50,54 @@ public class MainController {
         model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc() );
         
         return "welcome"; //view
+    }
+    
+    @GetMapping("/login")
+    public String loginPage(Model model) {
+    	User emptyUser = new User();
+    	model.addAttribute("user", emptyUser);
+        return "login"; //view
+    }
+    
+    @GetMapping("/signup")
+    public String signupPage(Model model) {
+    	User user = new User();
+    	model.addAttribute("user", user);
+
+        return "signup"; //view
+    }
+    
+    @PostMapping("/login/submit")
+    public String login(@Valid User user, BindingResult result, Model model) {
+    	if (result.hasErrors()) {
+         	return "redirect:/login";
+        }
+    	User userAttempt = userRepository.findByEmail(user.getEmail());
+    	if (userAttempt == null) {
+    		model.addAttribute("error", "User does not exist.");
+    		return "login";
+    	}
+    	if (!userAttempt.getPassword().equals(user.getPassword())) {
+    		model.addAttribute("error", "Invalid credentials.");
+    		return "login";
+    	}
+    	else {
+    		model.addAttribute("user", userAttempt);
+    		model.addAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(userAttempt.getId()));
+    		return "redirect:/";
+    	}
+    }
+    
+    @PostMapping("/signup/submit")
+    public String signup(@Valid User user, BindingResult result, Model model) {
+    	if (result.hasErrors()) {
+    		return "signup";
+		}    	
+    	 userRepository.save(user);
+    	 model.addAttribute("user", user);
+    	 model.addAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(user.getId()));
+
+    	 return "redirect:/";
     }
     
     @GetMapping("/trip/{id}")
@@ -72,6 +126,7 @@ public class MainController {
         oldTrip.setEnd(trip.getEnd());
         oldTrip.setTitle(trip.getTitle());
         oldTrip.setDescription(trip.getDescription());
+        oldTrip.setDestinations(trip.getDestinations());
         
         tripRepository.save(oldTrip);
         model.addAttribute("trip", tripRepository.findById(id).get()); 
@@ -160,8 +215,9 @@ public class MainController {
     }
     
     @GetMapping("/add")
-    public String showItineraryForm(Model model) {
+    public String showTripForm(Model model, @ModelAttribute("user") User user) {
     	Trip trip = new Trip();
+    	model.addAttribute("user", user);
         model.addAttribute("trip", trip);
         return "add-trip";
     }
@@ -173,7 +229,7 @@ public class MainController {
         }
     	
     	tripRepository.save(trip);
-    	model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc());
+    	model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc()); //need to change to findAllByUserID
     	model.addAttribute("message", message);
                 
         return "redirect:/"; 

@@ -39,13 +39,19 @@
           <label for="title">Title</label>
           <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>  
         </div>
+        
+        <div class="input-field col s12">
+          <input placeholder="Destinations" id="destinations" type="text" class="validate" th:field="*{destinations}">
+          <label for="destinations">Destinations</label>
+          <span th:if="${#fields.hasErrors('destinations')}" th:errors="*{destinations}"></span>  
+        </div>
+        
         <div class="input-field col s6">
           <input placeholder="Start Date" id="start" type="text" class="validate datepicker" th:field="*{start}">
           <label for="start">Start date</label>
           <span th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></span>  
         </div>
-      </div>
-      <div class="row">
+
         <div class="input-field col s6">
           <input placeholder="End Date" id="end" type="text" class="validate datepicker" th:field="*{end}">
           <label for="end">End date</label>

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +30,9 @@ public class Trip {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@Column(nullable = true) //change to false once user login is fully implemented
+	private long userID;
+	
 	/**
 	 * The title is the string that the user will give to his trip
 	 */
@@ -109,6 +111,14 @@ public class Trip {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getUserID() {
+		return userID;
+	}
+
+	public void setUserID(long userID) {
+		this.userID = userID;
 	}
 
 	public String getTitle() {
