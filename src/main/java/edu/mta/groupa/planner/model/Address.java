@@ -27,7 +27,7 @@ public class Address {
 		
 	}
 	
-	public Address(Integer civicNumber, String street, String city, String province, String country, String code, Double latitude,
+	public Address(Integer civicNumber, String street, String city,	 String province, String country, String code, Double latitude,
 			Double longitude) {
 		super();
 		this.civicNumber = civicNumber;
@@ -39,6 +39,8 @@ public class Address {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+
+	
 
 	/**
 	 * civicNumber is the civic number of the address
@@ -144,6 +146,13 @@ public class Address {
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
 	}
 	
 }

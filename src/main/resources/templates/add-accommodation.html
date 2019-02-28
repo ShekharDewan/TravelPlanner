@@ -75,7 +75,7 @@
                     <!-- Address -->
                     <h4>Address</h4>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s2">
                             <input id="civicNumber" type="number" class="validate" th:field="*{address.civicNumber}">
                             <label for="civicNumber">Civic Number</label>
                             <span th:if="${#fields.hasErrors('address.civicNumber')}" th:errors="*{address.civicNumber}"></span>
@@ -89,6 +89,11 @@
                             <input id="city" type="text" class="validate" th:field="*{address.city}">
                             <label for="city">City</label>
                             <span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
+                        </div>
+                        <div class="input-field col s2">
+                            <input id="province" type="text" class="validate" th:field="*{address.province}">
+                            <label for="province">Province</label>
+                            <span th:if="${#fields.hasErrors('address.province')}" th:errors="*{address.province}"></span>
                         </div>
                     </div>
                     <div class="row">
