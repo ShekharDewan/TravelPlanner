@@ -7,10 +7,10 @@
     $('.collapsible').collapsible();
     // initialize the floating action button
     $('.fixed-action-btn').floatingActionButton();
+    $('.dropdown-trigger').dropdown({coverTrigger: false});
     
     $('.datepicker').datepicker({format: 'dd/mm/yyyy',
-    minDate: new Date()
-    }); 
+    minDate: new Date() }); 
     
     $('.modal').modal();
     $('select').formSelect();
