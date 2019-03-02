@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
@@ -39,15 +40,22 @@
                 <form class="col s12" action="#" th:action="@{/trip/} + ${trip.id} + @{/reservation/add}" th:object="${reservation}"
                     method="post">
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="title" type="text" class="validate" th:field="*{title}">
                             <label for="title">Title</label>
                             <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <input id="date" type="text" class="validate datepicker" th:field="*{date}">
                             <label for="date">Date</label>
                             <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+                        </div>
+                        
+                        <div class="input-field col s4">
+                            <label for="time">Time</label>
+                            <input id="reserveTime" type="text" class="timepicker" th:field="*{reserveTime}">
+                            <span th:if="${#fields.hasErrors('reserveTime')}" th:errors="*{reserveTime}"></span>
+                            
                         </div>
                     </div>
                     <div class="row">
@@ -166,6 +174,7 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/js/materialize.js"></script>
     <script src="/js/init.js"></script>
+    
 
 </body>
 

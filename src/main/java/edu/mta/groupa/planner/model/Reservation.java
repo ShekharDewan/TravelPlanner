@@ -78,6 +78,12 @@ public class Reservation {
 	private Date date;
 	
 	/**
+	 * The time is a Date type that contains the time of the reservation
+	 */
+	@Column
+	private String reserveTime;
+	
+	/**
 	 * The notes is a String that contains the notes about the reservation
 	 */
 	@Column(length=2048)
@@ -162,4 +168,14 @@ public class Reservation {
 	public long getId() {
 		return id;
 	}
+
+	public String getReserveTime() {
+		return reserveTime;
+	}
+
+	public void setReserveTime(String reserveTime) {
+		this.reserveTime = reserveTime;
+	}
+	
+	
 }

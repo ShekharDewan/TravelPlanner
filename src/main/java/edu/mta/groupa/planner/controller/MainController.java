@@ -268,10 +268,11 @@ public class MainController {
         }
     	
     	tripRepository.save(trip);
+    	model.addAttribute("trip", trip);
     	model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc()); //need to change to findAllByUserID
     	model.addAttribute("message", message);
                 
-        return "redirect:/"; 
+        return "redirect:/trip/" + id;
     }
     
     @GetMapping("/trip/{id}/reservation/delete/{reservationID}")
@@ -407,6 +408,7 @@ public class MainController {
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
     	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss a");
     	dateFormat.setLenient(false);
     	binder.registerCustomEditor(Date.class, "start", new CustomDateEditor(dateFormat, true));
     	binder.registerCustomEditor(Date.class, "end", new CustomDateEditor(dateFormat, true));
