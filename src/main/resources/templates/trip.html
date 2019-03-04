@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Starter Template - Materialize</title>
+    <title>Bourgeois Travels</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -128,7 +128,7 @@
                                         function initAccomMap[[${ accommodation.id }]]() {
                                             map = new google.maps.Map(document.getElementById('accommodation-map-[[${accommodation.id}]]'), {
                                                 center: { lat: [[${ accommodation.address.latitude }]], lng: [[${ accommodation.address.longitude }]] },
-                                                zoom: 18
+                                                zoom: 15
                                             });
                                         }
                                         initAccomMap[[${ accommodation.id }]]();
@@ -179,7 +179,7 @@
                                         function initMap[[${ reservation.id }]]() {
                                             map = new google.maps.Map(document.getElementById('map-[[${reservation.id}]]'), {
                                                 center: { lat: [[${ reservation.address.latitude }]], lng: [[${ reservation.address.longitude }]] },
-                                                zoom: 18
+                                                zoom: 15
                                             });
                                         }
                                         initMap[[${ reservation.id }]]();
