@@ -21,7 +21,7 @@ if (diff < 0) {
   var message = difference + " days past";
 }
 else{
-var message = "in " + difference + " days";
+var message = "In " + difference + " days. ";
 }
 var ele = document.getElementsByClassName("remain");
 var len = ele.length;

@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Starter Template - Materialize</title>
+    <title>Bourgeois Travels</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -39,9 +39,11 @@
                   <script th:inline="javascript">
                   	/*<![CDATA[*/
                   	var begin = /*[[${trip.start}]]*/ 'default';
+                  	var conclude = /*[[${trip.end}]]*/ 'default';
                   	/*]]>*/      
                   </script>
                   <script type="text/javascript" th:src="@{/jsp/daysuntil.js}"></script>
+                  <script type="text/javascript" th:src="@{/jsp/triplength.js}"></script>
                   </span>
                 </span>
                 <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="btn-floating blue tooltipped" data-position="bottom" data-tooltip="Edit Trip"><i class="material-icons">edit</i></a>
@@ -128,7 +130,7 @@
                                         function initAccomMap[[${ accommodation.id }]]() {
                                             map = new google.maps.Map(document.getElementById('accommodation-map-[[${accommodation.id}]]'), {
                                                 center: { lat: [[${ accommodation.address.latitude }]], lng: [[${ accommodation.address.longitude }]] },
-                                                zoom: 18
+                                                zoom: 15
                                             });
                                         }
                                         initAccomMap[[${ accommodation.id }]]();
@@ -179,7 +181,7 @@
                                         function initMap[[${ reservation.id }]]() {
                                             map = new google.maps.Map(document.getElementById('map-[[${reservation.id}]]'), {
                                                 center: { lat: [[${ reservation.address.latitude }]], lng: [[${ reservation.address.longitude }]] },
-                                                zoom: 18
+                                                zoom: 15
                                             });
                                         }
                                         initMap[[${ reservation.id }]]();
