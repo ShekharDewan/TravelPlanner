@@ -39,9 +39,11 @@
                   <script th:inline="javascript">
                   	/*<![CDATA[*/
                   	var begin = /*[[${trip.start}]]*/ 'default';
+                  	var conclude = /*[[${trip.end}]]*/ 'default';
                   	/*]]>*/      
                   </script>
                   <script type="text/javascript" th:src="@{/jsp/daysuntil.js}"></script>
+                  <script type="text/javascript" th:src="@{/jsp/triplength.js}"></script>
                   </span>
                 </span>
                 <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="btn-floating blue tooltipped" data-position="bottom" data-tooltip="Edit Trip"><i class="material-icons">edit</i></a>
