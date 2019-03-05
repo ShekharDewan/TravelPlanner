@@ -39,10 +39,17 @@
                   <script th:inline="javascript">
                   	/*<![CDATA[*/
                   	var begin = /*[[${trip.start}]]*/ 'default';
-                  	var conclude = /*[[${trip.end}]]*/ 'default';
                   	/*]]>*/      
                   </script>
                   <script type="text/javascript" th:src="@{/jsp/daysuntil.js}"></script>
+                  </span>
+                 <span class="duration">
+                  <script th:inline="javascript">
+                  	/*<![CDATA[*/
+                  	var begin = /*[[${trip.start}]]*/ 'default';
+                  	var conclude = /*[[${trip.end}]]*/ 'default';
+                  	/*]]>*/      
+                  </script>
                   <script type="text/javascript" th:src="@{/jsp/triplength.js}"></script>
                   </span>
                 </span>

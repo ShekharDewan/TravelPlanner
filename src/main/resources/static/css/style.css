@@ -63,7 +63,7 @@
   right: 30px;
 }
 
-#editbutton, .remain {
+#editbutton, .remain, .duration {
   position: absolute;
   top: 0px;
   right: -80px;
@@ -75,6 +75,13 @@
 .remain {
   z-index: 20;
   top: -50px;
+}
+
+.duration {
+  z-index: 20;
+  top: -50px;
+  left: 100px;
+  white-space: nowrap;
 }
 
 #stickylink {
