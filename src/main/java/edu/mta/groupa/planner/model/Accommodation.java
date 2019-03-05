@@ -89,7 +89,7 @@ public class Accommodation {
 	/**
 	 * price is the cost of the accommodation
 	 */
-	@Column
+	@Column (precision =2)
 	private Double price;
 	
 	

@@ -50,8 +50,8 @@
                 
             </div>
             <div class="row center">
-                <h5 th:text="${trip.description}" class="header col s12 light"></h5>
-                <p th:text="${trip.destinations}" class="header col s12 light"></p>
+                <h6 th:text="${trip.description}" class="header col s12 light"></h6>
+                 <h6 th:if="${!trip.destinations.isEmpty()}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
                 <p th:text="${trip.notes}" class="header col s12 light"></p>
             </div>
 
@@ -115,7 +115,9 @@
                                 <p th:text="${accommodation.notes}"></p>
                                 check-in: <span th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}" />&nbsp;
                                 <br>check-out: <span th:text="${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}" /><br>
-                                <h6 th:if="${accommodation.price != null}"th:text="@{'$' +  ${accommodation.price}}"></h6>
+                                <h6>$ <span th:if="${accommodation.price != null}" th:text="${#numbers.formatDecimal(accommodation.price, 0, 'COMMA', 2, 'POINT')}">10.00</span></h6>
+                                
+                                
                                 <br>
                                 <address>
                                     <span  th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
