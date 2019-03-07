@@ -128,7 +128,7 @@
                                 <br>
                                 <address>
                                     <span  th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
-                                    <span  th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.province}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
+                                    <span  th:text="${accommodation.address.city}" />&nbsp;<span th:text="${accommodation.address.province}" />&nbsp;<span th:text="${accommodation.address.country}" /><br>
                                     <span th:text="${accommodation.address.code}" /><br>
                                     coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
                                         th:text="${accommodation.address.longitude}" /><br>
@@ -179,8 +179,8 @@
                                 <h6 th:if="${reservation.price != null}" th:text="@{'$' +  ${reservation.price}}"></h6>
                                 <address>
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
-                                    <span th:text="${reservation.address.city}" />,&nbsp;<span th:text="${reservation.address.province}" />,&nbsp;<span th:text="${reservation.address.country}" /><br>
-                                    <span th:text="${reservation.address.code}" /><br>
+                                    <span th:text="${reservation.address.city}"/>&nbsp;<span th:text="${reservation.address.province}" />&nbsp;<span th:text="${reservation.address.country}" /><br>
+                                    <span th:text="${reservation.address.code}" /><br>      
                                     coordinates:&nbsp;<span th:text="${reservation.address.latitude}" />,&nbsp;<span
                                         th:text="${reservation.address.longitude}" /><br>
                                     <div style="width:100%;height:300px;" th:id="@{'map-' + ${reservation.id}}"></div>
