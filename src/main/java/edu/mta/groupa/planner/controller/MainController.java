@@ -271,8 +271,8 @@ public class MainController {
     	model.addAttribute("trip", trip);
     	model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc()); //need to change to findAllByUserID
     	model.addAttribute("message", message);
-                
-        return "redirect:/trip/" + id;
+    	
+        return "redirect:/";
     }
     
     @GetMapping("/trip/{id}/reservation/delete/{reservationID}")
