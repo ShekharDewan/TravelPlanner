@@ -30,7 +30,7 @@
       <h1 class="header center orange-text">Sign Up</h1>
       </div>
  <div class="row">
-    <form class="col s12" action="#" th:action="@{/signup/submit}" th:object="${user}" method="post">
+    <form class="col s12" action="#" th:action="@{/signup}" th:object="${user}" method="post">
       <div class="row">
         <div class="input-field col s6">
           <input placeholder="First Name" id="firstName" type="text" class="validate" th:field="*{firstName}">
