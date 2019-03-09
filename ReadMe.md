@@ -1,7 +1,8 @@
 ## Setup
 
-1. Start up the application using 'edu.mta.groupa.planner.TravelPlannerApplication'
-2. Go to http://localhost:8080/, where you will see the homepage in the browser, with automatically generated example trips.
+1. Use eclipse enterprise edition to run the project (includes Spring framework and ability to natively edit html, css, and js)
+2. Start up the application using 'edu.mta.groupa.planner.TravelPlannerApplication'
+3. Go to http://localhost:8080/, where you will see the homepage in the browser, with automatically generated example trips. 
 
 
 # RoadMap:
