@@ -1,25 +1,22 @@
-
-
 <header>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Bourgeois Travels</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/trips">Trips</a></li>
+        <li><a href="/">Trips</a></li>
         <li><a href="/h2" target="_blank">Database</a></li>
         <li><a class='dropdown-trigger' href='#' data-target='dropdown1' data-beloworigin="true">
           <i id="user_sett" class="material-icons">account_circle</i></a></li>
-        <ul id='dropdown1' class='dropdown-content'> <!-- if/unless user logged in -->
-        
-          <li><a th:href="@{/account/} + ${user.id}">Account</a></li>
-          <li><a href="#!">Logout</a></li>
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a th:href="@{/account}">Account</a></li>
+          <li><a href="/logout">Logout</a></li>
         </ul>
       </ul>
-
+<!-- commented out for now
       <ul id="nav-mobile" class="sidenav">
-      <li><span th:text="${user.firstName}"></span></li>
+      <li><span sec:authentication="firstName"></span></li>
         <li><a href="#">Navbar Link</a></li>
       </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
     </div>
   </nav>
 </header>
