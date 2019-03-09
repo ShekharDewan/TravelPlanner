@@ -1,14 +1,20 @@
 package edu.mta.groupa.planner.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "user")
 public class User{
 
 	
@@ -27,6 +33,9 @@ public class User{
 	
 	@Column(nullable = false)
 	private String password;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+    private Set<Role> roles;
 	
 	public User() {}	
 	
@@ -77,10 +86,18 @@ public class User{
 		this.id = id;
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstname=" + firstName
-				+ ", lastname=" + lastName + "]";
+				+ ", lastname=" + lastName + ", roles=" + roles + "]";
 	}
 	
 }

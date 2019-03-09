@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import edu.mta.groupa.planner.model.Accommodation;
 import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Itinerary;
@@ -29,6 +29,8 @@ import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.TripRepository;
 import edu.mta.groupa.planner.repository.UserRepository;
+
+
 
 @Controller
 public class MainController {
@@ -46,97 +48,16 @@ public class MainController {
     private EntityManager eManager;
 
     @GetMapping("/")
-    public String welcomePage(Model model, @ModelAttribute("user") User user) {
+    public String welcomePage(Model model) {
+    	
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User currentUser = userRepository.findByEmail(email);
+    	
         model.addAttribute("message", message);
-        model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc() );
-        
-        if (user != null) model.addAttribute("user", user);
-        
+        model.addAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(currentUser.getId()));
+
         return "welcome"; //view
-    }
-    
-    @GetMapping("/login")
-    public String loginPage(Model model) {
-    	User emptyUser = new User();
-    	model.addAttribute("user", emptyUser);
-        return "login"; //view
-    }
-    
-    @GetMapping("/signup")
-    public String signupPage(Model model) {
-    	User user = new User();
-    	model.addAttribute("user", user);
-
-        return "signup"; //view
-    }
-    
-    @PostMapping("/login/submit")
-    public String login(@Valid User user, BindingResult result, Model model, RedirectAttributes redir) {
-    	if (result.hasErrors()) {
-         	return "redirect:/login";
-        }
-    	User userAttempt = userRepository.findByEmail(user.getEmail());
-    	if (userAttempt == null) {
-    		model.addAttribute("error", "User does not exist.");
-    		return "login";
-    	}
-    	if (!userAttempt.getPassword().equals(user.getPassword())) {
-    		model.addAttribute("error", "Invalid credentials.");
-    		return "login";
-    	}
-    	else {
-    		//model.addAttribute("user", userAttempt);
-    		//model.addAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(userAttempt.getId()));
-    		redir.addFlashAttribute("user", userAttempt);
-    		redir.addFlashAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(userAttempt.getId()));
-    		return "redirect:/";
-    	}
-    }
-    
-    @PostMapping("/signup/submit")
-    public String signup(@Valid User user, BindingResult result, Model model, RedirectAttributes redir) {
-    	if (result.hasErrors()) {
-    		return "signup";
-		}    	
-    	User existing = userRepository.findByEmail(user.getEmail());
-    	if (existing != null) {
-    		model.addAttribute("error", "User exists.");
-    		return "signup";
-    	}
-    	 userRepository.save(user);
-    	// model.addAttribute("user", user);
-    	// model.addAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(user.getId()));
-    	 
-    	redir.addFlashAttribute("user", user);
- 		redir.addFlashAttribute("trips", tripRepository.findAllByUserIDOrderByStartAsc(user.getId()));
-
-    	 return "redirect:/";
-    }
-    
-    @GetMapping("/account/{userid}")
-    public String showAccount(@PathVariable("userid") long id, Model model) {
- 
-        model.addAttribute("user", userRepository.findById(id).get());
-        return "edit-account";
-    }
-    
-    @PostMapping("/account/{userid}/update")
-    public String updateAccount(@PathVariable("userid") long id, @Valid User user, 
-      BindingResult result, Model model, RedirectAttributes redir) {
-        if (result.hasErrors()) {
-            return "edit-account";
-        }
-        User oldUser = userRepository.findById(id).get();
-
-        oldUser.setEmail(user.getEmail());
-        oldUser.setFirstName(user.getFirstName());
-        oldUser.setLastName(user.getLastName());
-        oldUser.setPassword(user.getPassword());
-        
-        userRepository.save(oldUser);
-       // model.addAttribute("user", oldUser); 
-        redir.addFlashAttribute("user", oldUser);
-        return "redirect:/";
     }
     
     @GetMapping("/trip/{id}")
@@ -267,11 +188,12 @@ public class MainController {
             return "add-trip";
         }
     	
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User currentUser = userRepository.findByEmail(email);
+    	trip.setUserID(currentUser.getId());
     	tripRepository.save(trip);
-    	model.addAttribute("trip", trip);
-    	model.addAttribute("trips", tripRepository.findAllByOrderByStartAsc()); //need to change to findAllByUserID
-    	model.addAttribute("message", message);
-    	
+
         return "redirect:/";
     }
     
