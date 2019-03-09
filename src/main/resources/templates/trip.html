@@ -58,7 +58,7 @@
             </div>
             <div class="row center">
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
-                 <h6 th:if="${!trip.destinations.isEmpty()}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
+                 <h6 th:if="${trip.destinations != null && !trip.destinations.isEmpty() }" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
                 <p th:text="${trip.notes}" class="header col s12 light"></p>
             </div>
 
