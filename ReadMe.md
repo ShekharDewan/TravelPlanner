@@ -30,10 +30,9 @@
 - Test and refine (refactor)
 
 ## Week 6:
+- Security and login (in progress)
+- Further testing and refinement
+
+## Week 7:
 - Additional Features
 - Documentation
-
-## Week 6:
-- 
-- 
->>>>>>> develop
