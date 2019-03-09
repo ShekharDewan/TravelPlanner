@@ -1,6 +1,6 @@
-<<<<<<< marysearseneau-patch-1
+## Setup
 
-1. Start up the application 'edu.mta.groupa.planner.TravelPlannerApplication'
+1. Start up the application using 'edu.mta.groupa.planner.TravelPlannerApplication'
 2. Go to http://localhost:8080/, where you will see the homepage in the browser, with automatically generated example trips.
 
 =======
