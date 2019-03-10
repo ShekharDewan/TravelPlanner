@@ -13,8 +13,7 @@ public class TripValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		Trip.class.equals(clazz);
-		return false;
+		return Trip.class.equals(clazz);
 	}
 
 	@Override
