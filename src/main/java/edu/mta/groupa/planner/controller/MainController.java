@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import edu.mta.groupa.planner.model.Accommodation;
 import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Itinerary;
@@ -29,6 +30,7 @@ import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.TripRepository;
 import edu.mta.groupa.planner.repository.UserRepository;
+import edu.mta.groupa.planner.validator.TripValidator;
 
 
 
@@ -46,6 +48,9 @@ public class MainController {
     
     @PersistenceContext
     private EntityManager eManager;
+    
+    @Autowired
+    private TripValidator tripValidator;
 
     @GetMapping("/")
     public String welcomePage(Model model) {
@@ -76,7 +81,11 @@ public class MainController {
     @PostMapping("/trip/{id}/update")
     public String updateTrip(@PathVariable("id") long id, @Valid Trip trip, 
       BindingResult result, Model model) {
+    	
+    	tripValidator.validate(trip, result);
+    	
         if (result.hasErrors()) {
+        	model.addAttribute(trip);
             return "edit-trip";
         }
         Trip oldTrip = tripRepository.findById(id).get();
@@ -183,8 +192,14 @@ public class MainController {
     }
     
     @PostMapping("/add/{id}")
-    public String addTrip(Model model, @PathVariable("id") long id, @Valid Trip trip, BindingResult result) {
+    public String addTrip(Model model, @PathVariable("id") long id, @Valid Trip trip, 
+    		BindingResult result, @ModelAttribute("user") User user) {
+    	
+    	tripValidator.validate(trip, result);
+    	
     	if (result.hasErrors()) {
+    		model.addAttribute("user", user);
+            model.addAttribute("trip", trip);
             return "add-trip";
         }
     	
