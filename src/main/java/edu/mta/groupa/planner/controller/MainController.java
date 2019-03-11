@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import edu.mta.groupa.planner.model.Accommodation;
 import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Itinerary;
@@ -29,6 +30,7 @@ import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.TripRepository;
 import edu.mta.groupa.planner.repository.UserRepository;
+import edu.mta.groupa.planner.validator.TripValidator;
 
 
 
@@ -46,6 +48,9 @@ public class MainController {
     
     @PersistenceContext
     private EntityManager eManager;
+    
+    @Autowired
+    private TripValidator tripValidator;
 
     @GetMapping("/")
     public String welcomePage(Model model) {
@@ -76,7 +81,11 @@ public class MainController {
     @PostMapping("/trip/{id}/update")
     public String updateTrip(@PathVariable("id") long id, @Valid Trip trip, 
       BindingResult result, Model model) {
+    	
+    	tripValidator.validate(trip, result);
+    	
         if (result.hasErrors()) {
+        	model.addAttribute(trip);
             return "edit-trip";
         }
         Trip oldTrip = tripRepository.findById(id).get();
@@ -107,6 +116,8 @@ public class MainController {
     @PostMapping("/trip/{id}/accommodation/add")
     public String addAccomodation(Model model, @PathVariable("id") long id, @Valid Accommodation accommodation, BindingResult result) {
     	if (result.hasErrors()) {
+    		model.addAttribute("accommodation", accommodation);
+    		model.addAttribute("trip", tripRepository.findById(id));
             return "add-accommodation";
         }
     	
@@ -132,6 +143,8 @@ public class MainController {
     @PostMapping("/trip/{id}/reservation/add")
     public String addReservation(Model model, @PathVariable("id") long id, @Valid Reservation reservation, BindingResult result) {
     	if (result.hasErrors()) {
+    		model.addAttribute("reservation", reservation);
+    		model.addAttribute("trip", tripRepository.findById(id));
             return "add-reservation";
         }
     	
@@ -156,6 +169,8 @@ public class MainController {
     @PostMapping("/trip/{id}/itinerary/add")
     public String addItinerary(Model model, @PathVariable("id") long id, @Valid Itinerary itinerary, BindingResult result) {
     	if (result.hasErrors()) {
+    		model.addAttribute("itinerary", itinerary);
+    		model.addAttribute("trip", tripRepository.findById(id));
             return "add-itinerary";
         }
     	
@@ -183,8 +198,14 @@ public class MainController {
     }
     
     @PostMapping("/add/{id}")
-    public String addTrip(Model model, @PathVariable("id") long id, @Valid Trip trip, BindingResult result) {
+    public String addTrip(Model model, @PathVariable("id") long id, @Valid Trip trip, 
+    		BindingResult result, @ModelAttribute("user") User user) {
+    	
+    	tripValidator.validate(trip, result);
+    	
     	if (result.hasErrors()) {
+    		model.addAttribute("user", user);
+            model.addAttribute("trip", trip);
             return "add-trip";
         }
     	
@@ -245,6 +266,8 @@ public class MainController {
     		@PathVariable("itineraryID") long itineraryID, @Valid Itinerary itinerary, 
       BindingResult result, Model model) {
         if (result.hasErrors()) {
+        	model.addAttribute("itinerary", itinerary);
+    		model.addAttribute("trip", tripRepository.findById(id));
             return "edit-itinerary";
         }
         Trip trip = tripRepository.findById(id).get();
@@ -272,6 +295,8 @@ public class MainController {
     		@PathVariable("reservationID") long reservationID, @Valid Reservation reservation, 
       BindingResult result, Model model) {
         if (result.hasErrors()) {
+        	model.addAttribute("reservation", reservation);
+    		model.addAttribute("trip", tripRepository.findById(id));
             return "edit-reservation";
         }
         Trip trip = tripRepository.findById(id).get();
@@ -304,6 +329,8 @@ public class MainController {
     		@PathVariable("accommodationID") long accommodationID, @Valid Accommodation accommodation, 
     		BindingResult result, Model model) {
     	if (result.hasErrors()) {
+    		model.addAttribute("accommodation", accommodation);
+    		model.addAttribute("trip", tripRepository.findById(id));
     		return "edit-accommodation";
     	}
     	Trip trip = tripRepository.findById(id).get();

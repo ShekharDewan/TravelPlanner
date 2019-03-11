@@ -1,21 +1,8 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Bourgeois Travels</title>
-    
-     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+<head th:replace="import :: head">...</head>
 
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAIhZ4DWSti3Va_4Zy5nxGnyEhaw4AF6ZI"></script>
-    
-    <link type="text/css" rel="stylesheet" th:href="@{/css/print-trip.css}" />
-</head>
 <body>
 <h4 th:text="${trip.title}"></h4>
 
@@ -30,7 +17,7 @@
     <br>
      <address>
                                     <span th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
-                                    <span th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
+                                    <span th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.province}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
                                     <span th:text="${accommodation.address.code}" /><br>
                                     coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
                                         th:text="${accommodation.address.longitude}" /><br>
@@ -62,7 +49,7 @@
     <br>
      <address>
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
-                                    <span th:text="${reservation.address.city}" />,&nbsp;<span th:text="${reservation.address.country}" /><br>
+                                    <span th:text="${reservation.address.city}" />,&nbsp;<span th:text="${reservation.address.province}" />,&nbsp;<span th:text="${reservation.address.country}" /><br>
                                     <span th:text="${reservation.address.code}" /><br>
                                     coordinates:&nbsp;<span th:text="${reservation.address.latitude}" />,&nbsp;<span
                                         th:text="${reservation.address.longitude}" /><br>
@@ -101,109 +88,3 @@
 </html>
 
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Print Trip</title>
-    
-     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-
-    <script src='https://maps.google.com/maps/api/js?key=AIzaSyAIhZ4DWSti3Va_4Zy5nxGnyEhaw4AF6ZI'></script>
-    
-    <link type="text/css" rel="stylesheet" th:href="@{/css/print-trip.css}" />
-</head>
-<body>
-<h4 th:text="${trip.title}"></h4>
-<span class="printbtn">
-<a onclick="window.print();" class="waves-effect waves-light btn-large"><i class="material-icons left">print</i>Print</a>
-</span>
-
-<h5>Accommodations</h5>
-<table border="0" th:each="accommodation : ${trip.accommodations}">
-    <h6 th:text="${accommodation.title}"></h6>
-    <td>
-    <span th:text="'Check-In: ' + ${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}"></span><br/>
-    <span th:text="'Check-Out: ' + ${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}"></span><br/>
-    <span th:text="'Price: $' + ${accommodation.price}"></span><br/>
-    <span th:text="'Notes: ' + ${accommodation.notes}"></span><br/>
-    <br>
-     <address>
-                                    <span th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
-                                    <span th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
-                                    <span th:text="${accommodation.address.code}" /><br>
-                                    coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
-                                        th:text="${accommodation.address.longitude}" /><br>
-                                    <div style="width:400px;height:300px;" th:id="@{'accommodation-map-' + ${accommodation.id}}"></div>
-                                    <script th:inline="javascript">
-                                        /*<![CDATA[*/
-                                        var map;
-                                        function initAccomMap[[${ accommodation.id }]]() {
-                                            map = new google.maps.Map(document.getElementById('accommodation-map-[[${accommodation.id}]]'), {
-                                                center: { lat: [[${ accommodation.address.latitude }]], lng: [[${ accommodation.address.longitude }]] },
-                                                zoom: 18
-                                            });
-                                        }
-                                        initAccomMap[[${ accommodation.id }]]();
-						                /*]]>*/
-                                    </script>
-                                </address>
-    </td>
-</table>
-
-<h5>Reservations</h5>
-<table border="0" th:each="reservation : ${trip.reservations}">
-    <h6 th:text="${reservation.title}"></h6>
-    <td>
-    <span th:text="'Date: ' + ${#dates.format(reservation.date, 'MMM dd, yyyy')}"></span><br/>
-    <span th:text="'Confirmation: ' + ${reservation.confirmation}"></span><br/>
-    <h6 th:text="@{'Price: $' +  ${reservation.price}}"></h6><br/>
-    <span th:text="'Notes: ' + ${reservation.notes}"></span><br/>
-    <br>
-     <address>
-                                    <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
-                                    <span th:text="${reservation.address.city}" />,&nbsp;<span th:text="${reservation.address.country}" /><br>
-                                    <span th:text="${reservation.address.code}" /><br>
-                                    coordinates:&nbsp;<span th:text="${reservation.address.latitude}" />,&nbsp;<span
-                                        th:text="${reservation.address.longitude}" /><br>
-                                    <div style="width:400px;height:300px;" th:id="@{'map-' + ${reservation.id}}"></div>
-                                    <script th:inline="javascript">
-                                        /*<![CDATA[*/
-                                        var map;
-                                        function initMap[[${ reservation.id }]]() {
-                                            map = new google.maps.Map(document.getElementById('map-[[${reservation.id}]]'), {
-                                                center: { lat: [[${ reservation.address.latitude }]], lng: [[${ reservation.address.longitude }]] },
-                                                zoom: 18
-                                            });
-                                        }
-                                        initMap[[${ reservation.id }]]();
-							            /*]]>*/
-                                    </script>
-                                </address>
-    </td>
-</table>
-
-<h5>Itineraries</h5>
-<table border="0" th:each="itinerary : ${trip.itineraries}">
-    <h6 th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></h6>
-    <td>
-    <span th:text="${itinerary.notes}"></span><br/>
-    <br>
-    </td>
-</table>
-
- <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="/js/materialize.js"></script>
-    <script src="/js/init.js"></script>
-
-</body>
-</html>
-
-
-<!-- <br> -->
