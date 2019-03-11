@@ -78,13 +78,8 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
-                            <select th:field="*{address.country}">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="Canada">Canada</option>
-                                <option value="United States">United States</option>
-                                <option value="Denmark">Denmark</option>
-                            </select>
-                            <label>Country</label>
+                            <input id="country" type="text" class="validate" th:field="*{address.country}">
+                            <label for="country">Country</label>
                             <span th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}"></span>
                         </div>
                         <div class="input-field col s4">

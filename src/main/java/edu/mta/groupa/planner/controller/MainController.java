@@ -51,7 +51,7 @@ public class MainController {
     
     @Autowired
     private TripValidator tripValidator;
-
+    
     @GetMapping("/")
     public String welcomePage(Model model) {
     	
@@ -142,6 +142,7 @@ public class MainController {
     
     @PostMapping("/trip/{id}/reservation/add")
     public String addReservation(Model model, @PathVariable("id") long id, @Valid Reservation reservation, BindingResult result) {
+    	
     	if (result.hasErrors()) {
     		model.addAttribute("reservation", reservation);
     		model.addAttribute("trip", tripRepository.findById(id));
@@ -149,9 +150,20 @@ public class MainController {
         }
     	
     	Trip trip = tripRepository.findById(id).get();
-    	trip.getReservations().add(reservation);
-    	tripRepository.save(trip);
     	model.addAttribute("trip", trip );
+    	
+		if(reservation.getDate().after(trip.getEnd())) {
+			result.rejectValue("date", "message.tripEnd");
+			return "add-reservation";
+		}
+		if(reservation.getDate().before(trip.getStart())) {
+			result.rejectValue("date", "message.tripStart");
+			return "add-reservation";
+		}
+    	
+		trip.getReservations().add(reservation);
+    	tripRepository.save(trip);
+    	
                 
         return "trip"; //view
     }

@@ -9,8 +9,6 @@ import edu.mta.groupa.planner.model.Trip;
 @Component
 public class TripValidator implements Validator {
 
-
-
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Trip.class.equals(clazz);
@@ -24,4 +22,7 @@ public class TripValidator implements Validator {
             errors.rejectValue("end", "message.badEnd");
         }
 	}
+	
+	
+
 }

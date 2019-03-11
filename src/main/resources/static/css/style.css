@@ -45,7 +45,7 @@
 
 .icons {
   position: relative;
-  right: -115px;
+  right: -200px;
 }
 
 .iconsright {
@@ -68,6 +68,7 @@
   top: 0px;
   right: -80px;
 }
+
 #editbutton {
   top: 5px;
 }

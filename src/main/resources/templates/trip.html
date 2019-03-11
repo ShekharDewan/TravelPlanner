@@ -56,7 +56,7 @@
                                 <i class="material-icons">perm_contact_calendar</i>
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
                                 <span class="icons"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
-                                method="delete"><i class="small material-icons">delete</i></a>
+                                method="delete"><i class="small material-icons">delete</i></a></span>
                                 <span class="editicon">
                                 <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content">
                                 <i class="small material-icons">create</i></a>
@@ -162,7 +162,7 @@
                                     <span th:text="${reservation.address.code}" /><br>      
                                     &nbsp;<span th:text="${reservation.address.latitude}" />&nbsp;<span
                                         th:text="${reservation.address.longitude}" /><br>
-                                    <div th:if="${accommodation.address.latitude!=null && accommodation.address.longitude!=null}" style="width:100%;height:300px;" th:id="@{'map-' + ${reservation.id}}"></div>
+                                    <div th:if="${reservation.address.latitude!=null && reservation.address.longitude!=null}" style="width:100%;height:300px;" th:id="@{'map-' + ${reservation.id}}"></div>
                                     <script th:inline="javascript">
                                         /*<![CDATA[*/
                                         var map;
