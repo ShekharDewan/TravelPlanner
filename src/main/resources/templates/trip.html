@@ -34,8 +34,8 @@
             </div>
             <div class="row center">
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
-                 <h6 th:if="${#strings.isEmpty(trip.destinations)}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
-                <p th:text="${trip.notes}" class="header col s12 light"></p>
+                 <h6 th:if="${!#strings.isEmpty(trip.destinations)}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
+                <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="'Notes: ' + ${trip.notes}" class="header col s12 light"></p>
             </div>
 
             <!-- Page Layout here -->
