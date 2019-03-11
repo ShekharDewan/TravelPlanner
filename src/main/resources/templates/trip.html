@@ -58,7 +58,7 @@
             </div>
             <div class="row center">
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
-                 <h6 th:if="${trip.destinations != null && !trip.destinations.isEmpty() }" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
+                 <h6 th:if="${#strings.isEmpty(trip.destinations)}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
                 <p th:text="${trip.notes}" class="header col s12 light"></p>
             </div>
 
@@ -126,7 +126,7 @@
                                 
                                 
                                 <br>
-                                <address>
+                                <address th:if="${accommodation.address != null}">
                                     <span  th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
                                     <span  th:text="${accommodation.address.city}" />&nbsp;<span th:text="${accommodation.address.province}" />&nbsp;<span th:text="${accommodation.address.country}" /><br>
                                     <span th:text="${accommodation.address.code}" /><br>
@@ -180,7 +180,7 @@
                                 Confirmation: <span th:text="${reservation.confirmation}"></span>
                                	<h6 th:text=" ${reservation.reserveTime}"></h6>
                                 <h6 th:if="${reservation.price != null}" th:text="@{'$' +  ${reservation.price}}"></h6>
-                                <address>
+                                <address th:if="${reservation.address != null}">
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
                                     <span th:text="${reservation.address.city}"/>&nbsp;<span th:text="${reservation.address.province}" />&nbsp;<span th:text="${reservation.address.country}" /><br>
                                     <span th:text="${reservation.address.code}" /><br>      

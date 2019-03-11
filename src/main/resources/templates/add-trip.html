@@ -35,7 +35,7 @@
       <form class="col s12" action="#" th:action="@{/add/} + ${trip.id}" th:object="${trip}" method="post">
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Title" id="title" type="text" class="validate" th:field="*{title}">
+          <input placeholder="Title" id="title" type="text" th:required="required" class="validate" th:field="*{title}">
           <label for="title">Title</label>
           <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>  
         </div>
@@ -50,12 +50,12 @@
       </div>
       <div class="row">
       <div class="input-field col s6">
-          <input placeholder="Start Date" id="start" type="text" class="validate datepicker" th:field="*{start}">
+          <input placeholder="Start Date" id="start" type="text" th:required="required" class="validate datepicker" th:field="*{start}">
           <label for="start">Start date</label>
           <span th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></span>  
         </div>
         <div class="input-field col s6">
-          <input placeholder="End Date" id="end" type="text" class="validate datepicker" th:field="*{end}">
+          <input placeholder="End Date" id="end" type="text" th:required="required" class="validate datepicker" th:field="*{end}">
           <label for="end">End date</label>
           <span th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></span>  
         </div>
