@@ -23,7 +23,7 @@
                         <div class="input-field col s6">
                             <input id="date" type="text" class="validate datepicker" th:field="*{date}">
                             <label for="date">Date</label>
-                            <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+                            <span class="errortext" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
                         </div>
                     </div>
 
@@ -31,7 +31,7 @@
                         <div class="input-field col s12">
                             <textarea th:field="*{notes}" id="notes" class="materialize-textarea"></textarea>
                             <label for="notes">Notes</label>
-                            <span th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
+                            <span class="errortext" th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
                         </div>
                     </div>
 
