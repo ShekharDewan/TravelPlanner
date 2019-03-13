@@ -28,13 +28,13 @@
                     </div>
                     <div class="row">
                     <div class="input-field col s4">
-                            <input id="checkIn" type="text" class="validate datepicker" th:field="*{checkIn}">
+                            <input id="checkIn" th:required="required" type="text" class="validate datepicker" th:field="*{checkIn}">
                             <label for="checkIn">Check-in Date</label>
                             <span th:if="${#fields.hasErrors('checkIn')}" th:errors="*{checkIn}"></span>
                         </div>
                         
                         <div class="input-field col s4">
-                            <input id="checkOut" type="text" class="validate datepicker" th:field="*{checkOut}">
+                            <input id="checkOut" th:required="required" type="text" class="validate datepicker" th:field="*{checkOut}">
                             <label for="checkOut">Check-out Date</label>
                             <span th:if="${#fields.hasErrors('checkOut')}" th:errors="*{checkOut}"></span>
                         </div>

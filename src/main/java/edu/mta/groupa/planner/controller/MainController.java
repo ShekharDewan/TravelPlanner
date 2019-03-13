@@ -122,10 +122,33 @@ public class MainController {
         }
     	
     	Trip trip = tripRepository.findById(id).get();
-    	trip.getAccommodations().add(accommodation);
-    	tripRepository.save(trip);
     	model.addAttribute("trip", trip );
-                
+    	
+    	
+		if(accommodation.getCheckOut().after(trip.getEnd())) {
+			result.rejectValue("checkOut", "message.tripEnd");
+			return "add-accommodation";
+		}
+		if(accommodation.getCheckIn().before(trip.getStart())) {
+			result.rejectValue("checkIn", "message.tripStart");
+			return "add-accommodation";
+		}
+		if(accommodation.getCheckIn().after(trip.getEnd())) {
+			result.rejectValue("checkIn", "message.tripEnd");
+			return "add-accommodation";
+		}
+		if(accommodation.getCheckOut().before(trip.getStart())) {
+			result.rejectValue("checkOut", "message.tripStart");
+			return "add-accommodation";
+		}
+		if(accommodation.getCheckIn().after(accommodation.getCheckOut())){
+			result.rejectValue("checkOut", "message.checkIn");
+			return "add-accommodation";
+		}
+
+		trip.getAccommodations().add(accommodation);
+    	tripRepository.save(trip);
+    	      
         return "trip"; //view
     }
     
@@ -190,6 +213,16 @@ public class MainController {
     	trip.getItineraries().add(itinerary);
     	tripRepository.save(trip);
     	model.addAttribute("trip", trip );
+    	
+
+		if(itinerary.getDate().after(trip.getEnd())) {
+			result.rejectValue("date", "message.tripEnd");
+			return "add-itinerary";
+		}
+		if(itinerary.getDate().before(trip.getStart())) {
+			result.rejectValue("date", "message.tripStart");
+			return "add-itinerary";
+		}
                 
         return "trip"; //view
     }
@@ -323,6 +356,16 @@ public class MainController {
         
         tripRepository.save(trip);
         model.addAttribute("trip", tripRepository.findById(id).get()); 
+        
+        if(reservation.getDate().after(trip.getEnd())) {
+			result.rejectValue("date", "message.tripEnd");
+			return "edit-reservation";
+		}
+		if(reservation.getDate().before(trip.getStart())) {
+			result.rejectValue("date", "message.tripStart");
+			return "edit-reservation";
+		}
+        
         return "trip";
     }
 
