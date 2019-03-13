@@ -91,6 +91,10 @@
   float: right;
 }
 
+#stickylink i {
+  font-size: 35px;
+}
+
 #user_sett {
    font-size: 50px;
 }

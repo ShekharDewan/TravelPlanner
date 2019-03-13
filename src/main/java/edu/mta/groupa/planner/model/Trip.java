@@ -1,6 +1,8 @@
 package edu.mta.groupa.planner.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -170,6 +172,13 @@ public class Trip {
 	}
 
 	public List<Reservation> getReservations() {
+		Collections.sort(reservations, new Comparator<Reservation>() {
+
+			@Override
+			public int compare(Reservation res1, Reservation res2) {
+				return res1.getDate().compareTo(res2.getDate());
+			}	
+		});
 		return reservations;
 	}
 
@@ -178,6 +187,13 @@ public class Trip {
 	}
 
 	public List<Accommodation> getAccommodations() {
+		Collections.sort(accommodations, new Comparator<Accommodation>() {
+
+			@Override
+			public int compare(Accommodation accomm1, Accommodation accomm2) {
+				return accomm1.getCheckIn().compareTo(accomm2.getCheckIn());
+			}	
+		});
 		return accommodations;
 	}
 
@@ -186,6 +202,13 @@ public class Trip {
 	}
 
 	public List<Itinerary> getItineraries() {
+		Collections.sort(itineraries, new Comparator<Itinerary>() {
+
+			@Override
+			public int compare(Itinerary itin1, Itinerary itin2) {
+				return itin1.getDate().compareTo(itin2.getDate());
+			}	
+		});
 		return itineraries;
 	}
 
