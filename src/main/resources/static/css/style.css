@@ -98,3 +98,7 @@
 #user_sett {
    font-size: 50px;
 }
+
+.errortext {
+  color: red;
+}
