@@ -33,6 +33,10 @@
                 
             </div>
             <div class="row center">
+            	<h6 "" class="header col s4 light"></h6>
+            	<h6 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')}" class="header col s2 dark"></h6>
+            	<h6 th:text="${#dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s2 dark"></h6>
+     
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
                  <h6 th:if="${!#strings.isEmpty(trip.destinations)}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
                 <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="'Notes: ' + ${trip.notes}" class="header col s12 light"></p>
