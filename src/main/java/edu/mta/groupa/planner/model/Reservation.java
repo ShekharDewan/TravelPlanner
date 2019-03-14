@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * The Reservation object is an entity that generically maps to a database via
  * JPA. It has a many to one relationship with the Trip entity.
@@ -54,6 +56,7 @@ public class Reservation {
 	 */
 	@ManyToOne(optional=true, cascade = {CascadeType.ALL}) 
     @JoinColumn(name="TRIP_ID")
+	@JsonBackReference
     private Trip trip;
 
 	
@@ -168,6 +171,10 @@ public class Reservation {
 	public long getId() {
 		return id;
 	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getReserveTime() {
 		return reserveTime;
@@ -177,5 +184,11 @@ public class Reservation {
 		this.reserveTime = reserveTime;
 	}
 	
+	public Trip getTrip() {
+		return trip;
+	}
 	
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
 }
