@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * The Itinerary object is an entity that generically maps to a database via
  * JPA. It has a many to one relationship with the Trip entity.
@@ -45,6 +47,7 @@ public class Itinerary {
 	 */
 	@ManyToOne(optional=true, cascade = {CascadeType.ALL}) 
     @JoinColumn(name="TRIP_ID")
+	@JsonBackReference
     private Trip trip;
 	
 	
@@ -81,5 +84,16 @@ public class Itinerary {
 	public long getId() {
 		return id;
 	}
-
+	
+	public void setID(long id) {
+		this.id = id;
+	}
+	
+	public Trip getTrip() {
+		return trip;
+	}
+	
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
 }

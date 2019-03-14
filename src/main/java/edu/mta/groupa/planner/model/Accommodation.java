@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * The Accommodation object is an entity that generically maps to a database via
  * JPA. It has a many to one relationship with the Trip entity.
@@ -51,6 +53,7 @@ public class Accommodation {
 	 */
 	@ManyToOne(optional = true, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "TRIP_ID")
+	@JsonBackReference
 	private Trip trip;
 
 	/**
@@ -154,6 +157,7 @@ public class Accommodation {
 		this.price = price;
 	}
 	
-	
-	
+	public Trip getTrip() {
+		return trip;
+	}
 }
