@@ -1,10 +1,8 @@
 package edu.mta.groupa.planner.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 
-import edu.mta.groupa.planner.model.Trip;
+import edu.mta.groupa.planner.model.Itinerary;
 
 /**
  * The Itinerary Repository extends the spring Crud Repository object,
@@ -14,6 +12,6 @@ import edu.mta.groupa.planner.model.Trip;
  * @author Maryse
  *
  */
-public interface ItineraryRepository extends CrudRepository<Trip, Long> {
-	List<Trip> findByTitle(String title);
+public interface ItineraryRepository extends CrudRepository<Itinerary, Long> {
+
 }

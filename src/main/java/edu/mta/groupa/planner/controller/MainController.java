@@ -28,8 +28,12 @@ import edu.mta.groupa.planner.model.Itinerary;
 import edu.mta.groupa.planner.model.Reservation;
 import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.model.User;
+import edu.mta.groupa.planner.repository.ItineraryRepository;
 import edu.mta.groupa.planner.repository.TripRepository;
 import edu.mta.groupa.planner.repository.UserRepository;
+import edu.mta.groupa.planner.validator.AccommodationValidator;
+import edu.mta.groupa.planner.validator.ItineraryValidator;
+import edu.mta.groupa.planner.validator.ReservationValidator;
 import edu.mta.groupa.planner.validator.TripValidator;
 
 
@@ -45,12 +49,24 @@ public class MainController {
     
     @Autowired
     private UserRepository userRepository;
+   
+    @Autowired
+    private ItineraryRepository itineraryRepository;
     
     @PersistenceContext
     private EntityManager eManager;
     
     @Autowired
     private TripValidator tripValidator;
+    
+    @Autowired
+    private ItineraryValidator itineraryValidator;
+    
+    @Autowired
+    private ReservationValidator reservationValidator;
+    
+    @Autowired
+    private AccommodationValidator accommodationValidator;
     
     @GetMapping("/")
     public String welcomePage(Model model) {
@@ -99,6 +115,7 @@ public class MainController {
         
         tripRepository.save(oldTrip);
         model.addAttribute("trip", tripRepository.findById(id).get()); 
+        
         return "trip";
     }
     
@@ -115,39 +132,22 @@ public class MainController {
     
     @PostMapping("/trip/{id}/accommodation/add")
     public String addAccomodation(Model model, @PathVariable("id") long id, @Valid Accommodation accommodation, BindingResult result) {
-    	if (result.hasErrors()) {
+
+    	Trip trip = tripRepository.findById(id).get(); 	
+    	accommodation.setTrip(trip);
+    	
+		accommodationValidator.validate(accommodation, result);
+		
+		if (result.hasErrors()) {
     		model.addAttribute("accommodation", accommodation);
-    		model.addAttribute("trip", tripRepository.findById(id));
+    		model.addAttribute("trip", trip);
             return "add-accommodation";
         }
-    	
-    	Trip trip = tripRepository.findById(id).get();
-    	model.addAttribute("trip", trip );
-    	
-    	
-		if(accommodation.getCheckOut().after(trip.getEnd())) {
-			result.rejectValue("checkOut", "message.tripEnd");
-			return "add-accommodation";
-		}
-		if(accommodation.getCheckIn().before(trip.getStart())) {
-			result.rejectValue("checkIn", "message.tripStart");
-			return "add-accommodation";
-		}
-		if(accommodation.getCheckIn().after(trip.getEnd())) {
-			result.rejectValue("checkIn", "message.tripEnd");
-			return "add-accommodation";
-		}
-		if(accommodation.getCheckOut().before(trip.getStart())) {
-			result.rejectValue("checkOut", "message.tripStart");
-			return "add-accommodation";
-		}
-		if(accommodation.getCheckIn().after(accommodation.getCheckOut())){
-			result.rejectValue("checkOut", "message.checkIn");
-			return "add-accommodation";
-		}
 
 		trip.getAccommodations().add(accommodation);
     	tripRepository.save(trip);
+    	
+    	model.addAttribute("trip", trip);
     	      
         return "trip"; //view
     }
@@ -166,27 +166,20 @@ public class MainController {
     @PostMapping("/trip/{id}/reservation/add")
     public String addReservation(Model model, @PathVariable("id") long id, @Valid Reservation reservation, BindingResult result) {
     	
-    	if (result.hasErrors()) {
+    	Trip trip = tripRepository.findById(id).get();
+    	reservation.setTrip(trip);
+    	
+		reservationValidator.validate(reservation, result);
+		
+		if (result.hasErrors()) {
     		model.addAttribute("reservation", reservation);
-    		model.addAttribute("trip", tripRepository.findById(id));
+    		model.addAttribute("trip", trip);
             return "add-reservation";
         }
     	
-    	Trip trip = tripRepository.findById(id).get();
-    	model.addAttribute("trip", trip );
-    	
-		if(reservation.getDate().after(trip.getEnd())) {
-			result.rejectValue("date", "message.tripEnd");
-			return "add-reservation";
-		}
-		if(reservation.getDate().before(trip.getStart())) {
-			result.rejectValue("date", "message.tripStart");
-			return "add-reservation";
-		}
-    	
 		trip.getReservations().add(reservation);
     	tripRepository.save(trip);
-    	
+    	model.addAttribute("trip", trip );
                 
         return "trip"; //view
     }
@@ -203,17 +196,32 @@ public class MainController {
     
     @PostMapping("/trip/{id}/itinerary/add")
     public String addItinerary(Model model, @PathVariable("id") long id, @Valid Itinerary itinerary, BindingResult result) {
-    	if (result.hasErrors()) {
+
+    	Trip trip = tripRepository.findById(id).get();
+    	itinerary.setTrip(trip);
+    	
+    	// loop through existing itineraries and see if there is already a match for the date
+//    	for(Itinerary i : trip.getItineraries()){
+//    		if(itinerary.getDate().equals(i.getDate())
+//    				&& !trip.getItineraries().contains(itinerary)) {
+//    			result.rejectValue("date", "itinerary date already exists");
+//    			return "add-itinerary";
+//    		}
+//    	}
+    	
+    	itineraryValidator.validate(itinerary, result);
+		
+		if (result.hasErrors()) {
     		model.addAttribute("itinerary", itinerary);
-    		model.addAttribute("trip", tripRepository.findById(id));
+    		model.addAttribute("trip", trip);
             return "add-itinerary";
         }
-    	
-    	Trip trip = tripRepository.findById(id).get();
-    	
+    
+
     	trip.getItineraries().add(itinerary);
 		tripRepository.save(trip);
     	model.addAttribute("trip", trip );
+
     	
 
 		if(itinerary.getDate().after(trip.getEnd())) {
@@ -226,13 +234,14 @@ public class MainController {
 		}
 	
                 
+
         return "trip"; //view
     }
     
     @GetMapping("/delete/{id}")
     public String deleteTrip(@PathVariable("id") long id) {
     	tripRepository.deleteById(id);
-    	// redirect back to root url
+
         return "redirect:/";
     }
     
@@ -312,12 +321,18 @@ public class MainController {
     public String updateItinerary(@PathVariable("id") long id, 
     		@PathVariable("itineraryID") long itineraryID, @Valid Itinerary itinerary, 
       BindingResult result, Model model) {
+    	
+    	Trip trip = tripRepository.findById(id).get();
+    	itinerary.setID(itineraryID);
+    	itinerary.setTrip(trip);
+    	itineraryValidator.validate(itinerary, result);
+    	
         if (result.hasErrors()) {
         	model.addAttribute("itinerary", itinerary);
-    		model.addAttribute("trip", tripRepository.findById(id));
+    		model.addAttribute("trip", trip);
             return "edit-itinerary";
         }
-        Trip trip = tripRepository.findById(id).get();
+
         Itinerary oldItinerary = eManager.find(Itinerary.class, itineraryID); 
         oldItinerary.setNotes(itinerary.getNotes());
         oldItinerary.setDate(itinerary.getDate());
@@ -341,14 +356,20 @@ public class MainController {
     public String updateReservation(@PathVariable("id") long id, 
     		@PathVariable("reservationID") long reservationID, @Valid Reservation reservation, 
       BindingResult result, Model model) {
+    	
+    	Trip trip = tripRepository.findById(id).get();
+    	reservation.setId(reservationID);
+    	reservation.setTrip(trip);
+    	reservationValidator.validate(reservation, result);
+    	
         if (result.hasErrors()) {
         	model.addAttribute("reservation", reservation);
-    		model.addAttribute("trip", tripRepository.findById(id));
+    		model.addAttribute("trip", trip);
             return "edit-reservation";
         }
-        Trip trip = tripRepository.findById(id).get();
+
         Reservation oldReservation = eManager.find(Reservation.class, reservationID); 
-        
+
         oldReservation.setTitle(reservation.getTitle());
         oldReservation.setAddress(reservation.getAddress());
         oldReservation.setPrice(reservation.getPrice());
@@ -358,15 +379,6 @@ public class MainController {
         
         tripRepository.save(trip);
         model.addAttribute("trip", tripRepository.findById(id).get()); 
-        
-        if(reservation.getDate().after(trip.getEnd())) {
-			result.rejectValue("date", "message.tripEnd");
-			return "edit-reservation";
-		}
-		if(reservation.getDate().before(trip.getStart())) {
-			result.rejectValue("date", "message.tripStart");
-			return "edit-reservation";
-		}
         
         return "trip";
     }
@@ -385,12 +397,17 @@ public class MainController {
     public String updateAccommodation(@PathVariable("id") long id,
     		@PathVariable("accommodationID") long accommodationID, @Valid Accommodation accommodation, 
     		BindingResult result, Model model) {
+    	
+    	Trip trip = tripRepository.findById(id).get();
+    	accommodation.setId(accommodationID);
+    	accommodation.setTrip(trip);
+    	accommodationValidator.validate(accommodation, result);
+    	
     	if (result.hasErrors()) {
     		model.addAttribute("accommodation", accommodation);
-    		model.addAttribute("trip", tripRepository.findById(id));
+    		model.addAttribute("trip", trip);
     		return "edit-accommodation";
     	}
-    	Trip trip = tripRepository.findById(id).get();
         Accommodation oldAccommodation = eManager.find(Accommodation.class, accommodationID); 
         
         oldAccommodation.setNotes(accommodation.getNotes());
