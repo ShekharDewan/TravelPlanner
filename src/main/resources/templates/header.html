@@ -5,12 +5,19 @@
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Bourgeois Travels</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/">Trips</a></li>
+      
+        <li><a class='dropdown-trigger' href='#' data-target='trip-dropdown' data-beloworigin="true">Trips</a></li>
+ 
+          <ul id='trip-dropdown' class='dropdown-content'>
+            <li th:each="trip : ${allTrips}">
+              <a th:href="@{/trip/} + ${trip.id}" th:text="${trip.title}"></a>
+            </li>
+          </ul>
+          
         <li><a href="/h2" target="_blank">Database</a></li>
         <li><a class='dropdown-trigger' href='#' data-target='dropdown1' data-beloworigin="true">
           <i id="user_sett" class="material-icons">account_circle</i></a></li>
         <ul id='dropdown1' class='dropdown-content'>
-        
           <li><a th:href="@{/account}">Account</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>

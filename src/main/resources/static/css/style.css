@@ -95,8 +95,18 @@
   font-size: 35px;
 }
 
+.dropdown-content {
+    max-height: 350px;
+    max-width: 325px;
+    overflow-x: hidden;
+}
+
 #user_sett {
    font-size: 50px;
+}
+
+#addicon {
+
 }
 
 .errortext {

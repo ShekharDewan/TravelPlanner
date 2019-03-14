@@ -7,7 +7,8 @@
     $('.collapsible').collapsible();
     // initialize the floating action button
     $('.fixed-action-btn').floatingActionButton();
-    $('.dropdown-trigger').dropdown({coverTrigger: false});
+    $('.dropdown-trigger').dropdown({coverTrigger: false, isScrollable: true, 
+    hover: true, constrainWidth: false});
     
     $('.datepicker').datepicker({format: 'dd/mm/yyyy',
     minDate: new Date() }); 
