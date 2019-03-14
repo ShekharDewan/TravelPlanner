@@ -31,6 +31,11 @@
 			      <a th:href="@{/trip/} + ${trip.id}"> 
 			      <span th:text="${trip.title}"></span>
 			      <p class="" th:text="${trip.description}"/>
+			      
+			      <h6 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')} +' - '+  ${#dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s6 dark"></h6></h6>
+			      
+			     
+			      
 			      <br>
 			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content" method="delete"><i class="small material-icons">delete</i></a>
 			      </a>
