@@ -210,8 +210,9 @@ public class MainController {
         }
     	
     	Trip trip = tripRepository.findById(id).get();
+    	
     	trip.getItineraries().add(itinerary);
-    	tripRepository.save(trip);
+		tripRepository.save(trip);
     	model.addAttribute("trip", trip );
     	
 
@@ -223,6 +224,7 @@ public class MainController {
 			result.rejectValue("date", "message.tripStart");
 			return "add-itinerary";
 		}
+	
                 
         return "trip"; //view
     }

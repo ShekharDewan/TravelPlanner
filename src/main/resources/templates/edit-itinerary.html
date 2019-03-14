@@ -21,7 +21,7 @@
                     <div class="row">
                         
                         <div class="input-field col s6">
-                            <input id="date" type="text" class="validate datepicker" th:field="*{date}">
+                            <input id="date" th:required="required" type="text" class="validate datepicker" th:field="*{date}">
                             <label for="date">Date</label>
                             <span class="errortext" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
                         </div>
