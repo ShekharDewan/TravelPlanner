@@ -33,7 +33,7 @@
                 
             </div>
             <div class="row center">
-            	<h6 "" class="header col s4 light"></h6>
+            	<h6 "" class="header col s12 m6 l6 light"></h6>
             	<h6 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')+ ' - ' + #dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s4 dark"></h6>
      
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
@@ -44,7 +44,7 @@
 
             <div class="row">
 
-                <div class="col s4">
+                <div class="col s12 m6 l6">
                     <h4 class="header">
                         <span data-target="modal1" class="btn-floating red"><i class="material-icons">perm_contact_calendar</i></span>
                         Itineraries
@@ -57,11 +57,11 @@
                             <div class="collapsible-header">
                                 <i class="material-icons">perm_contact_calendar</i>
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
-                                <span class="icons"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
-                                method="delete"><i class="small material-icons">delete</i></a></span>
+                                <span class="badge" th:text="day_num">4</span>
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
+                                method="delete"><i class="small material-icons">delete</i></a>
                                 <span class="editicon">
-                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content">
-                                <i class="small material-icons">create</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
                                 </span></span>
                             </div>
                             <div class="collapsible-body">
@@ -71,16 +71,12 @@
                     </ul>
                 </div>
 
-                <div class="col s8">
+                <div class="col s12 m6 l6">
                     <h4 class="header">
                         <span data-target="modal1" class="btn-floating green"><i class="material-icons">hotel</i></span>
                         Accommodations
                         <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Accommodation" th:href="@{'/trip/' + ${trip.id} + '/accommodation/add' }"><i
                                 class="material-icons">add</i></a>
-                                
-                                               
-                                
-                                
                     </h4>
                     <br>
                     <ul class="collapsible">
