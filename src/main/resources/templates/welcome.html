@@ -32,10 +32,8 @@
 			      <span th:text="${trip.title}"></span>
 			      <p class="" th:text="${trip.description}"/>
 			      <p th:text="${#dates.format(trip.start, 'MMM dd, yyyy')} +' - '+  ${#dates.format(trip.end, 'MMM dd, yyyy')}"/>
-			      
-			     
-			      
-			      <br>
+			   
+			  
 			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content" method="delete"><i class="small material-icons">delete</i></a>
 			      </a>
 			    </li>
