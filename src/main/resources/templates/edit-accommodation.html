@@ -12,6 +12,7 @@
 
             <div class="title">
                 <h1 class="header center orange-text"  th:text="${trip.title}"></h1>
+                <h6 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')+ ' - ' + #dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s4 dark"></h6>
                 <h3>Edit Accommodation</h3>
             </div>
 
