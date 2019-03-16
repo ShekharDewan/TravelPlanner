@@ -12,13 +12,15 @@
     <td>
     <span th:text="'Check-In: ' + ${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}"></span><br/>
     <span th:text="'Check-Out: ' + ${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}"></span><br/>
-    <span th:text="'Price: $' + ${accommodation.price}"></span><br/>
+    <span th:if="${accommodation.price != null}" th:text="'Price: $' + ${accommodation.price}"></span><br/>
     <span th:text="'Notes: ' + ${accommodation.notes}"></span><br/>
     <br>
      <address>
+                                    <div > 
                                     <span th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
-                                    <span th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.province}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
-                                    <span th:text="${accommodation.address.code}" /><br>
+                                    <span th:text="${accommodation.address.city}" />&nbsp;<span th:text="${accommodation.address.province}" />&nbsp;<span th:text="${accommodation.address.country}" /><br>
+                                    <span th:text="${accommodation.address.code}" /></div><br>
+                                    
                                     <div th:if="${accommodation.address.latitude!=null && accommodation.address.longitude!=null}">
 	                                    coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
 	                                        th:text="${accommodation.address.longitude}" /><br>
@@ -46,13 +48,14 @@
     <td>
     <span th:text="'Date: ' + ${#dates.format(reservation.date, 'MMM dd, yyyy')}"></span><br/>
     <span th:text="'Confirmation: ' + ${reservation.confirmation}"></span><br/>
-    <h6 th:text="@{'Price: $' +  ${reservation.price}}"></h6><br/>
+    <h6 th:if="${reservation.price != null}" th:text="@{'Price: $' +  ${reservation.price}}"></h6><br/>
     <span th:text="'Notes: ' + ${reservation.notes}"></span><br/>
     <br>
      <address>
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
-                                    <span th:text="${reservation.address.city}" />,&nbsp;<span th:text="${reservation.address.province}" />,&nbsp;<span th:text="${reservation.address.country}" /><br>
+                                    <span th:text="${reservation.address.city}" />&nbsp;<span th:text="${reservation.address.province}" />&nbsp;<span th:text="${reservation.address.country}" /><br>
                                     <span th:text="${reservation.address.code}" /><br>
+                                    <div th:if="${reservation.address.latitude!=null && reservation.address.longitude!=null}">
                                     coordinates:&nbsp;<span th:text="${reservation.address.latitude}" />,&nbsp;<span
                                         th:text="${reservation.address.longitude}" /><br>
                                     <div style="width:400px;height:300px;" th:id="@{'map-' + ${reservation.id}}"></div>
@@ -68,6 +71,7 @@
                                         initMap[[${ reservation.id }]]();
 							            /*]]>*/
                                     </script>
+                                    </div>
                                 </address>
     </td>
 </table>
