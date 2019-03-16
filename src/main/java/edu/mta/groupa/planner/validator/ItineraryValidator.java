@@ -31,7 +31,7 @@ public class ItineraryValidator implements Validator {
 		
 		for(Itinerary i : trip.getItineraries()){
     			if(itinerary.getDate().equals(i.getDate())
-    				&& !trip.getItineraries().contains(itinerary)) {
+    				&& i.getId() != itinerary.getId()) {
     				errors.rejectValue("date", "message.itinDupl");
     			}
     		}
