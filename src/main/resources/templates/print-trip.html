@@ -19,21 +19,23 @@
                                     <span th:text="${accommodation.address.civicNumber}" />&nbsp;<span th:text="${accommodation.address.street}" /><br>
                                     <span th:text="${accommodation.address.city}" />,&nbsp;<span th:text="${accommodation.address.province}" />,&nbsp;<span th:text="${accommodation.address.country}" /><br>
                                     <span th:text="${accommodation.address.code}" /><br>
-                                    coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
-                                        th:text="${accommodation.address.longitude}" /><br>
-                                    <div style="width:400px;height:300px;" th:id="@{'accommodation-map-' + ${accommodation.id}}"></div>
-                                    <script th:inline="javascript">
-                                        /*<![CDATA[*/
-                                        var map;
-                                        function initAccomMap[[${ accommodation.id }]]() {
-                                            map = new google.maps.Map(document.getElementById('accommodation-map-[[${accommodation.id}]]'), {
-                                                center: { lat: [[${ accommodation.address.latitude }]], lng: [[${ accommodation.address.longitude }]] },
-                                                zoom: 18
-                                            });
-                                        }
-                                        initAccomMap[[${ accommodation.id }]]();
-						                /*]]>*/
-                                    </script>
+                                    <div th:if="${accommodation.address.latitude!=null && accommodation.address.longitude!=null}">
+	                                    coordinates:&nbsp;<span th:text="${accommodation.address.latitude}" />,&nbsp;<span
+	                                        th:text="${accommodation.address.longitude}" /><br>
+	                                    <div style="width:400px;height:300px;" th:id="@{'accommodation-map-' + ${accommodation.id}}"></div>
+	                                    <script th:inline="javascript">
+	                                        /*<![CDATA[*/
+	                                        var map;
+	                                        function initAccomMap[[${ accommodation.id }]]() {
+	                                            map = new google.maps.Map(document.getElementById('accommodation-map-[[${accommodation.id}]]'), {
+	                                                center: { lat: [[${ accommodation.address.latitude }]], lng: [[${ accommodation.address.longitude }]] },
+	                                                zoom: 18
+	                                            });
+	                                        }
+	                                        initAccomMap[[${ accommodation.id }]]();
+							                /*]]>*/
+	                                    </script>
+                                    </div>
                                 </address>
     </td>
 </table>
