@@ -24,13 +24,26 @@ public class TripsControllerAdvice {
 
 	@ModelAttribute("allTrips")
     public List<Trip> getTrips() {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		User currentUser = userRepository.findByEmail(email);
-		
+		User currentUser = getCurrentUser();
 		if (currentUser == null) return null;
 
 		return tripRepository.findAllByUserIDOrderByStartAsc(currentUser.getId());
     }
+	
+	@ModelAttribute("userFirstName")
+	 public String getUserFirstName() {
+		 User currentUser = getCurrentUser();
+		 if (currentUser == null) return null;
+		 
+		 return currentUser.getFirstName();
+	 }
+	
+	private User getCurrentUser() {
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 String email =  auth.getName();
+		 User currentUser = userRepository.findByEmail(email);
+		 
+		 return currentUser;
+	}
 
 }
