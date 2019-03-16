@@ -13,7 +13,7 @@
     <span th:text="'Check-In: ' + ${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}"></span><br/>
     <span th:text="'Check-Out: ' + ${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}"></span><br/>
     <span th:if="${accommodation.price != null}" th:text="'Price: $' + ${accommodation.price}"></span><br/>
-    <span th:text="'Notes: ' + ${accommodation.notes}"></span><br/>
+    <span th:if="${!accommodation.notes.isEmpty()}" th:text="'Notes: ' + ${accommodation.notes}"></span><br/>
     <br>
      <address>
                                     <div > 
@@ -49,7 +49,7 @@
     <span th:text="'Date: ' + ${#dates.format(reservation.date, 'MMM dd, yyyy')}"></span><br/>
     <span th:text="'Confirmation: ' + ${reservation.confirmation}"></span><br/>
     <h6 th:if="${reservation.price != null}" th:text="@{'Price: $' +  ${reservation.price}}"></h6><br/>
-    <span th:text="'Notes: ' + ${reservation.notes}"></span><br/>
+    <span th:if="${!reservation.notes.isEmpty()}" th:text="'Notes: ' + ${reservation.notes}"></span><br/>
     <br>
      <address>
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
