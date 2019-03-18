@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.UserRepository;
-import edu.mta.groupa.planner.EmailExistsException;
 import edu.mta.groupa.planner.UserDTO;
 
 import edu.mta.groupa.planner.service.UserService;
+import edu.mta.groupa.planner.validator.UserValidator;
 
 
 @Controller
@@ -31,6 +30,9 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private UserValidator userValidator;
+	
 	@GetMapping("/signup")
 	public String showSignupForm(WebRequest request, Model model) {
 		model.addAttribute("user", new UserDTO());
@@ -39,33 +41,21 @@ public class UserController {
 	
 	
 	@PostMapping("/signup")
-	  public String signup(@ModelAttribute("user") @Valid UserDTO userDto, BindingResult result, Model model, Errors errors) {
-		User newUser = new User();
-		if (!result.hasErrors()) {
-			newUser = createNewUser(userDto, result);
-		}    	
-	  	if (newUser == null) {
-	  		result.rejectValue("email", "message.regError");
-	  	}
+	  public String signup(@ModelAttribute("user") @Valid UserDTO userDto, 
+			  BindingResult result, Model model) {
+		User newUser = new User(userDto.getFirstName(), userDto.getLastName(), 
+				userDto.getPassword(), userDto.getEmail());
+		
+		userValidator.validate(newUser, result);
+		
 	  	if (result.hasErrors()) {
 	  		model.addAttribute("user", userDto);
 	  		return "signup";
 	  	}
-	  	else {
-	  		model.addAttribute("user", newUser);
-	  		model.addAttribute("message", "Registered successfully.");
-	  		return "redirect:/";
-	  	}
-	  }
-	  
-	  private User createNewUser(UserDTO dto, BindingResult result) {
-		  User newUser = null;
-		  try {
-			  newUser = service.registerNewUserAccount(dto);
-		  } catch (EmailExistsException e) {
-			  return null;
-		  }
-		  return newUser;
+	  	newUser = service.registerNewUserAccount(userDto);
+	  	model.addAttribute("message", "Registered successfully.");
+	  	
+	  	return "login";
 	  }
 	
 	 @GetMapping("/login")
@@ -91,22 +81,15 @@ public class UserController {
 	    @PostMapping("/account/{id}/update-success")
 	    public String updateAccount(@PathVariable("id") long id, @Valid User user,
 	      BindingResult result, Model model) {
-	    	User updatedUser = null;
-	        if (!result.hasErrors()) {
-	        	updatedUser = service.updateUserAccount(user);
-	        }
-	        if (updatedUser == null) {
-		  		result.rejectValue("email", "message.regError");
-		  	}
+    	
+	    	userValidator.validate(user, result);
+
 	        if (result.hasErrors()) {
 	        	model.addAttribute("user", user); 
 	            return "edit-account";
-	        }
-
-	        model.addAttribute("user", updatedUser); 
+	        }        
+	        service.updateUserAccount(user);
 
 	        return "redirect:/";
-	    }
-	 
-	 
+	    }	 
 }
