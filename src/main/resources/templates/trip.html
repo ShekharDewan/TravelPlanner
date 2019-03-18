@@ -151,7 +151,7 @@
                             </div>
                             <div class="collapsible-body">
                                 <p th:text="${reservation.notes}"></p>
-                                Confirmation: <span th:text="${reservation.confirmation}"></span>
+                                <span th:if="${!reservation.confirmation.isEmpty()}" th:text="'Confirmation: '+${reservation.confirmation}"></span>
                                	<h6 th:text=" ${reservation.reserveTime}"></h6>
                                 <h6 th:if="${reservation.price != null}" th:text="@{'$' +  ${reservation.price}}"></h6>
                                 <address th:if="${reservation.address != null}">

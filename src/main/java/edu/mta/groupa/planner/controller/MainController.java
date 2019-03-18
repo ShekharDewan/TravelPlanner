@@ -38,7 +38,7 @@ import edu.mta.groupa.planner.validator.TripValidator;
 
 
 
-@Controller
+//@Controller
 public class MainController {
 
     @Value("${welcome.message}")
@@ -199,15 +199,6 @@ public class MainController {
 
     	Trip trip = tripRepository.findById(id).get();
     	itinerary.setTrip(trip);
-    	
-    	// loop through existing itineraries and see if there is already a match for the date
-//    	for(Itinerary i : trip.getItineraries()){
-//    		if(itinerary.getDate().equals(i.getDate())
-//    				&& !trip.getItineraries().contains(itinerary)) {
-//    			result.rejectValue("date", "itinerary date already exists");
-//    			return "add-itinerary";
-//    		}
-//    	}
     	
     	itineraryValidator.validate(itinerary, result);
 		
