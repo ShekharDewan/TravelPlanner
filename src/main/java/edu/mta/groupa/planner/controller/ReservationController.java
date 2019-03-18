@@ -22,6 +22,7 @@ import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Reservation;
 import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.repository.TripRepository;
+import edu.mta.groupa.planner.service.ReservationService;
 import edu.mta.groupa.planner.validator.ReservationValidator;
 
 @Controller
@@ -35,6 +36,9 @@ public class ReservationController {
 	
 	@Autowired
     private ReservationValidator reservationValidator;
+	
+	@Autowired
+	private ReservationService service;
 	
 	@GetMapping("/trip/{id}/reservation/add")
     public String showReservationForm(@PathVariable("id") long id, Model model) {
@@ -60,20 +64,16 @@ public class ReservationController {
     		model.addAttribute("trip", trip);
             return "add-reservation";
         }
-    	
-		trip.getReservations().add(reservation);
-    	tripRepository.save(trip);
-                
+    	service.add(trip, reservation);
+        
         return "redirect:/trip/" + id; //view
     }
     
     @GetMapping("/trip/{id}/reservation/delete/{reservationID}")
     public String deleteReservation(@PathVariable("id") long id, 
     		@PathVariable("reservationID") long reservationID, Model model) {
-    	Trip trip = tripRepository.findById(id).get();
-    	Reservation reservation = eManager.find(Reservation.class, reservationID); 
-    	trip.getReservations().remove(reservation);
-    	tripRepository.save(trip);
+
+    	service.delete(id, reservationID);
     
         return "redirect:/trip/" + id;
     }
@@ -103,17 +103,7 @@ public class ReservationController {
     		model.addAttribute("trip", trip);
             return "edit-reservation";
         }
-
-        Reservation oldReservation = eManager.find(Reservation.class, reservationID); 
-
-        oldReservation.setTitle(reservation.getTitle());
-        oldReservation.setAddress(reservation.getAddress());
-        oldReservation.setPrice(reservation.getPrice());
-        oldReservation.setConfirmation(reservation.getConfirmation());
-        oldReservation.setNotes(reservation.getNotes());
-        oldReservation.setDate(reservation.getDate());
-        
-        tripRepository.save(trip);
+        service.update(trip, reservationID, reservation);
 
         return "redirect:/trip/" + id;
     }

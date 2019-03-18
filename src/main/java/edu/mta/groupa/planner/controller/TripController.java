@@ -7,8 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.TripRepository;
-import edu.mta.groupa.planner.repository.UserRepository;
+import edu.mta.groupa.planner.service.TripService;
 import edu.mta.groupa.planner.validator.TripValidator;
 
 @Controller
@@ -32,7 +30,7 @@ public class TripController {
     private TripRepository tripRepository;
     
     @Autowired
-    private UserRepository userRepository;
+    private TripService service;
     
     @Autowired
     private TripValidator tripValidator;
@@ -60,24 +58,15 @@ public class TripController {
         if (result.hasErrors()) {
         	model.addAttribute(trip);
             return "edit-trip";
-        }
-        Trip oldTrip = tripRepository.findById(id).get();
-
-        oldTrip.setNotes(trip.getNotes());
-        oldTrip.setStart(trip.getStart());
-        oldTrip.setEnd(trip.getEnd());
-        oldTrip.setTitle(trip.getTitle());
-        oldTrip.setDescription(trip.getDescription());
-        oldTrip.setDestinations(trip.getDestinations());
-        
-        tripRepository.save(oldTrip);
+        }   
+        service.update(trip);
 
         return "redirect:/trip/" + id;
     }
     
     @GetMapping("/delete/{id}")
     public String deleteTrip(@PathVariable("id") long id) {
-    	tripRepository.deleteById(id);
+    	service.delete(id);
 
         return "redirect:/";
     }
@@ -101,12 +90,7 @@ public class TripController {
             model.addAttribute("trip", trip);
             return "add-trip";
         }
-    	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		User currentUser = userRepository.findByEmail(email);
-    	trip.setUserID(currentUser.getId());
-    	tripRepository.save(trip);
+    	service.add(trip);
 
         return "redirect:/";
     }

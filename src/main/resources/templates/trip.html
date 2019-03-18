@@ -98,7 +98,7 @@
                                 <p th:text="${accommodation.notes}"></p>
                                 check-in: <span th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}" />&nbsp;
                                 <br>check-out: <span th:text="${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}" /><br>
-                                <h6>$ <span th:if="${accommodation.price != null}" th:text="${#numbers.formatDecimal(accommodation.price, 0, 'COMMA', 2, 'POINT')}">10.00</span></h6>
+                                <h6><span th:if="${accommodation.price != null}" th:text="'$' + ${#numbers.formatDecimal(accommodation.price, 0, 'COMMA', 2, 'POINT')}">10.00</span></h6>
                                 
                                 
                                 <br>
@@ -155,7 +155,7 @@
                                 <p th:text="${reservation.notes}"></p>
                                 <span th:if="${!reservation.confirmation.isEmpty()}" th:text="'Confirmation: '+${reservation.confirmation}"></span>
                                	<h6 th:text=" ${reservation.reserveTime}"></h6>
-                                <h6 th:if="${reservation.price != null}" th:text="@{'$' +  ${reservation.price}}"></h6>
+                                <h6 th:if="${reservation.price != null}" th:text="'$' +  ${#numbers.formatDecimal(reservation.price, 0, 'COMMA', 2, 'POINT')}"></h6>
                                 <address th:if="${reservation.address != null}">
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>
                                     <span th:text="${reservation.address.city}"/>&nbsp;<span th:text="${reservation.address.province}" />&nbsp;<span th:text="${reservation.address.country}" /><br>

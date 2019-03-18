@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import edu.mta.groupa.planner.model.Itinerary;
 import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.repository.TripRepository;
+import edu.mta.groupa.planner.service.ItineraryService;
 import edu.mta.groupa.planner.validator.ItineraryValidator;
 
 @Controller
@@ -34,6 +35,9 @@ public class ItineraryController {
 	
 	@Autowired
     private ItineraryValidator itineraryValidator;
+	
+	@Autowired 
+	private ItineraryService service;
 	
 	@GetMapping("/trip/{id}/itinerary/add")
     public String showItineraryForm(@PathVariable("id") long id, Model model) {
@@ -57,23 +61,17 @@ public class ItineraryController {
     		model.addAttribute("itinerary", itinerary);
     		model.addAttribute("trip", trip);
             return "add-itinerary";
-        }
-    
-
-    	trip.getItineraries().add(itinerary);
-		tripRepository.save(trip);
-    //	model.addAttribute("trip", trip );            
-
+        }          
+		service.add(trip, itinerary);
+		
         return "redirect:/trip/" + id; //view
     }
 	
 	 @GetMapping("/trip/{id}/itinerary/delete/{itineraryID}")
 	    public String deleteItinerary(@PathVariable("id") long id, 
 	    		@PathVariable("itineraryID") long itineraryID, Model model) {
-	    	Trip trip = tripRepository.findById(id).get();
-	    	Itinerary itinerary = eManager.find(Itinerary.class, itineraryID); 
-	    	trip.getItineraries().remove(itinerary);
-	    	tripRepository.save(trip);
+
+		 	service.delete(id, itineraryID);
 
 	        return "redirect:/trip/" + id;
 	    }
@@ -103,12 +101,7 @@ public class ItineraryController {
 	    		model.addAttribute("trip", trip);
 	            return "edit-itinerary";
 	        }
-
-	        Itinerary oldItinerary = eManager.find(Itinerary.class, itineraryID); 
-	        oldItinerary.setNotes(itinerary.getNotes());
-	        oldItinerary.setDate(itinerary.getDate());
-	        
-	        tripRepository.save(trip);
+	        service.update(trip, itineraryID, itinerary);
 	   
 	        return "redirect:/trip/" + id;
 	    }

@@ -22,6 +22,7 @@ import edu.mta.groupa.planner.model.Accommodation;
 import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Trip;
 import edu.mta.groupa.planner.repository.TripRepository;
+import edu.mta.groupa.planner.service.AccommodationService;
 import edu.mta.groupa.planner.validator.AccommodationValidator;
 
 @Controller
@@ -35,6 +36,9 @@ public class AccommodationController {
 	
 	@Autowired
     private AccommodationValidator accommodationValidator;
+	
+	@Autowired
+	private AccommodationService service;
 	
 	@GetMapping("/trip/{id}/accommodation/add")
     public String showAccomodationForm(@PathVariable("id") long id, Model model) {
@@ -60,20 +64,16 @@ public class AccommodationController {
     		model.addAttribute("trip", trip);
             return "add-accommodation";
         }
-
-		trip.getAccommodations().add(accommodation);
-    	tripRepository.save(trip);
-    	      
+		service.add(trip, accommodation);
+	      
         return "redirect:/trip/" + id; //view
     }
     
     @GetMapping("/trip/{id}/accommodation/delete/{accommodationID}")
     public String deleteAccommodation(@PathVariable("id") long id, 
     		@PathVariable("accommodationID") long accommodationID, Model model) {
-    	Trip trip = tripRepository.findById(id).get();
-    	Accommodation accommodation = eManager.find(Accommodation.class, accommodationID); 
-    	trip.getAccommodations().remove(accommodation);
-    	tripRepository.save(trip);
+
+    	service.delete(id, accommodationID);
     
         return "redirect:/trip/" + id;
     }
@@ -103,17 +103,8 @@ public class AccommodationController {
     		model.addAttribute("trip", trip);
     		return "edit-accommodation";
     	}
-        Accommodation oldAccommodation = eManager.find(Accommodation.class, accommodationID); 
-        
-        oldAccommodation.setNotes(accommodation.getNotes());
-        oldAccommodation.setAddress(accommodation.getAddress());
-        oldAccommodation.setCheckIn(accommodation.getCheckIn());
-        oldAccommodation.setCheckOut(accommodation.getCheckOut());
-        oldAccommodation.setPrice(accommodation.getPrice());
-        oldAccommodation.setTitle(accommodation.getTitle());
-        
-        tripRepository.save(trip);
- 
+    	service.update(trip, accommodationID, accommodation);
+
     	return "redirect:/trip/" + id;
     }
     

@@ -52,7 +52,7 @@ public class UserController {
 	  		model.addAttribute("user", userDto);
 	  		return "signup";
 	  	}
-	  	newUser = service.registerNewUserAccount(userDto);
+	  	service.registerNewUserAccount(userDto);
 	  	model.addAttribute("message", "Registered successfully.");
 	  	
 	  	return "login";
