@@ -105,8 +105,8 @@
    font-size: 50px;
 }
 
-#addicon {
-
+#addbutton {
+  float: right;
 }
 
 .errortext {
