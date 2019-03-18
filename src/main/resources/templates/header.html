@@ -9,7 +9,7 @@
         <li><a class='dropdown-trigger' href='#' data-target='trip-dropdown' data-beloworigin="true">Trips</a></li>
  
           <ul id='trip-dropdown' class='dropdown-content'>
-            <li th:each="trip : ${allTrips}">
+            <li th:each="trip : ${trips}">
               <a th:href="@{/trip/} + ${trip.id}" th:text="${trip.title}"></a>
             </li>
           </ul>

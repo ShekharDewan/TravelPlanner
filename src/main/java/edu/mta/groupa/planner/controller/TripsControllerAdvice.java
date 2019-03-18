@@ -22,7 +22,7 @@ public class TripsControllerAdvice {
 	 @Autowired
 	 private UserRepository userRepository;
 
-	@ModelAttribute("allTrips")
+	@ModelAttribute("trips")
     public List<Trip> getTrips() {
 		User currentUser = getCurrentUser();
 		if (currentUser == null) return null;
