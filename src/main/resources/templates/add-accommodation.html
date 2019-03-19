@@ -17,7 +17,7 @@
 
             <br><br>
             <div class="row">
-                <form class="col s12 m6 l6" action="#" th:action="@{/trip/} + ${trip.id} + @{/accommodation/add}" th:object="${accommodation}"
+                <form class="col s12 m12 l12" action="#" th:action="@{/trip/} + ${trip.id} + @{/accommodation/add}" th:object="${accommodation}"
                     method="post">
                     <div class="row">
                         <div class="input-field col s12 m12 l12">
@@ -28,19 +28,19 @@
                         
                     </div>
                     <div class="row">
-                    <div class="input-field col s12 m6 l4">
+                    	<div class="input-field col s6 m4 l4">
                             <input id="checkIn" th:required="required" type="text" class="validate datepicker" th:field="*{checkIn}">
                             <label for="checkIn">Check-in Date</label>
                             <span class="errortext" th:if="${#fields.hasErrors('checkIn')}" th:errors="*{checkIn}"></span>
                         </div>
                         
-                        <div class="input-field col s12 m6 l4">
+                        <div class="input-field col s6 m4 l4">
                             <input id="checkOut" th:required="required" type="text" class="validate datepicker" th:field="*{checkOut}">
                             <label for="checkOut">Check-out Date</label>
                             <span class="errortext" th:if="${#fields.hasErrors('checkOut')}" th:errors="*{checkOut}"></span>
                         </div>
-                        
-                        <div class="input-field col s12 m6 l4">
+                   
+                        <div class="input-field col s12 m4 l4">
                             <input id="price" type="number" step="0.01" min="0" accommodation.price=parseFloat(accommodation.price).toFixed(2) class="validate" th:field="*{price}">
                             <label for="price">Price</label>
                             <span class="errortext" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
