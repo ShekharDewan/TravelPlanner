@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="import :: head">...</head>
+
+<body>
+    <header th:replace="header :: header">...</header>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <div class="title">
+      <h1 class="header center orange-text">Add Trip</h1>
+      </div>
+     
+      <br><br>
+      <div class="row">
+      <form class="col s12 m12 l12" action="#" th:action="@{/add/} + ${trip.id}" th:object="${trip}" method="post">
+      <div class="row">
+        <div class="input-field col s12 m6 l6">
+          <input placeholder="Title" id="title" type="text" th:required="required" class="validate" th:field="*{title}">
+          <label for="title">Title</label>
+          <span class="errortext" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>  
+        </div>
+        
+         <div class="input-field col s12 m6 l6">
+          <input placeholder="Destinations" id="destinations" th:required="required" type="text" class="validate" th:field="*{destinations}">
+          <label for="destinations">Destinations</label>
+          <span class="errortext" th:if="${#fields.hasErrors('destinations')}" th:errors="*{destinations}"></span>  
+        </div>     
+      </div>
+      <div class="row">
+      <div class="input-field col s6 m6 l6">
+          <input placeholder="Start Date" id="start" type="text" th:required="required" class="validate datepicker" th:field="*{start}">
+          <label for="start">Start date</label>
+          <span class="errortext" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></span>  
+        </div>
+        <div class="input-field col s6 m6 l6">
+          <input placeholder="End Date" id="end" type="text" th:required="required" class="validate datepicker" th:field="*{end}">
+          <label for="end">End date</label>
+          <span class="errortext" th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></span>  
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m12 l12">
+          <input id="description" type="text" class="validate" th:field="*{description}">
+          <label for="description">Description</label>
+          <span class="errortext" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span> 
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m12 l12">
+          <textarea th:field="*{notes}" id="notes" class="materialize-textarea" placeholder="Notes"></textarea>
+          <label for="notes">Notes</label>
+          <span class="errortext" th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
+      </div>
+      <input id="userID" type="hidden" class="validate" th:field="*{userID}" th:value="${user.id}">
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <div class="input-field inline">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Trip
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  </div>
+  </div>
+
+
+<div th:replace="footer :: footer">...</div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+
+  </body>
+</html>
