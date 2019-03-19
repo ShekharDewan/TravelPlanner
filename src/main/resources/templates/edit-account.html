@@ -11,7 +11,7 @@
       <h1 class="header center orange-text">Edit Account Information</h1>
       </div>
  <div class="row">
-    <form class="col s12" action="#" th:action="@{/account/} + ${user.id} + @{/update-success}" th:object="${user}" method="post">
+    <form class="col s12" onsubmit="return confirm('Password will be set. Are you sure?') ? true : false;" action="#" th:action="@{/account/} + ${user.id} + @{/update-success}" th:object="${user}" method="post">
       <div class="row">
         <div class="input-field col s6">
           <input placeholder="First Name" id="firstName" type="text" class="validate" th:required="required" th:field="*{firstName}">
