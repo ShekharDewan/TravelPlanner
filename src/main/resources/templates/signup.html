@@ -14,33 +14,25 @@
     <form class="col s12" action="#" th:action="@{/signup}" th:object="${user}" method="post">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="First Name" id="firstName" type="text" class="validate" th:field="*{firstName}">
+          <input placeholder="First Name" id="firstName" type="text" class="validate" th:required="required" th:field="*{firstName}">
           <label for="firstName">First Name</label>
           <span class="errortext" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>  
         </div>
         <div class="input-field col s6">
-          <input input placeholder="Last Name" id="lastName" type="text" class="validate" th:field="*{lastName}">
+          <input input placeholder="Last Name" id="lastName" type="text" class="validate" th:required="required" th:field="*{lastName}">
           <label for="lastName">Last Name</label>
           <span class="errortext" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>  
         </div>
       </div>
-      <!-- <div class="row">
-         <div class="input-field col s12">
-           <i class="material-icons prefix">phone</i>
-           
-            <input input placeholder="Phone Number" id="phoneNumber" type="tel" class="validate">
-            <label for="icon_telephone">Phone</label>
-        </div>
-      </div> -->
       <div class="row">
         <div class="input-field col s6">
-          <input input placeholder="Email" id="email" type="email" class="validate" th:field="*{email}">
+          <input input placeholder="Email" id="email" type="email" class="validate" th:required="required" th:field="*{email}">
           <label for="email">Email</label>
           <span class="errortext" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>  
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input input placeholder="Password" id="password" type="password" class="validate" th:field="*{password}">
+          <input input placeholder="Password" id="password" type="password" class="validate" th:required="required" th:field="*{password}">
           <label for="password">Password</label>
           <span class="errortext" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>  
         </div>

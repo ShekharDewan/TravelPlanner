@@ -26,6 +26,11 @@ public class TripValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Trip trip = (Trip) target;
 		
+		ValidationUtils.rejectIfEmpty(errors, "start", "message.noStart");
+		ValidationUtils.rejectIfEmpty(errors, "end", "message.noEnd");
+		ValidationUtils.rejectIfEmpty(errors, "title", "message.noTitle");
+		ValidationUtils.rejectIfEmpty(errors, "destinations", "message.destEmpty");
+		
 		if (trip.getEnd().before(trip.getStart())) {
             errors.rejectValue("end", "message.badEnd");
         }
@@ -40,8 +45,6 @@ public class TripValidator implements Validator {
 		if (trip.getTitle().length() > 25) {
 			errors.rejectValue("title", "message.titleLong");
 		}
-		
-		ValidationUtils.rejectIfEmpty(errors, "destinations", "message.destEmpty");
 	}
 	
 	

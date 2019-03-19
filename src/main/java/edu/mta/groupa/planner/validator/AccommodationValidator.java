@@ -2,6 +2,7 @@ package edu.mta.groupa.planner.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import edu.mta.groupa.planner.model.Accommodation;
@@ -22,6 +23,10 @@ public class AccommodationValidator implements Validator {
 		Accommodation accommodation = (Accommodation) target;
 		
 		Trip trip = accommodation.getTrip();
+		
+		ValidationUtils.rejectIfEmpty(errors, "checkOut", "message.noCheckOut");
+		ValidationUtils.rejectIfEmpty(errors, "checkIn", "message.noCheckIn");
+		ValidationUtils.rejectIfEmpty(errors, "title", "message.noTitle");
 		
 		if(accommodation.getCheckOut().after(trip.getEnd())) {
 			errors.rejectValue("checkOut", "message.tripEnd");

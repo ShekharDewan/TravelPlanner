@@ -16,13 +16,13 @@
       <form class="col s12" action="#" th:action="@{/trip/} + ${trip.id} + @{/update}" th:object="${trip}" method="post">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Title" id="title" type="text" class="validate" th:field="*{title}">
+          <input placeholder="Title" id="title" type="text" class="validate" th:required="required" th:field="*{title}">
           <label for="title">Title</label>
           <span class="errortext" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>  
         </div>
         
         <div class="input-field col s12">
-          <input placeholder="Destinations" id="destinations" type="text" class="validate" th:field="*{destinations}">
+          <input placeholder="Destinations" id="destinations" type="text" th:required="required" class="validate" th:field="*{destinations}">
           <label for="destinations">Destinations</label>
           <span class="errortext" th:if="${#fields.hasErrors('destinations')}" th:errors="*{destinations}"></span>  
         </div>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="input-field col s6">
-          <input placeholder="End Date" id="end" type="text" class="validate datepicker" th:field="*{end}">
+          <input placeholder="End Date" id="end" type="text" th:required="required" class="validate datepicker" th:field="*{end}">
           <label for="end">End date</label>
           <span class="errortext" th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></span>  
         </div>

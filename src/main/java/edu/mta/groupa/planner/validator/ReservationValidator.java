@@ -2,6 +2,7 @@ package edu.mta.groupa.planner.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import edu.mta.groupa.planner.model.Itinerary;
@@ -21,6 +22,9 @@ public class ReservationValidator implements Validator {
 		Reservation reservation = (Reservation) target;
 
 		Trip trip = reservation.getTrip();
+		
+		ValidationUtils.rejectIfEmpty(errors, "date", "message.noDate");
+		ValidationUtils.rejectIfEmpty(errors, "title", "message.noTitle");
 		
 		if(reservation.getDate().after(trip.getEnd())) {
 			errors.rejectValue("date", "message.tripEnd");

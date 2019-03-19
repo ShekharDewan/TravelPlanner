@@ -24,7 +24,7 @@
       <div class="row">
         
          <div class="input-field col s12">
-          <input placeholder="Destinations" id="destinations" type="text" class="validate" th:field="*{destinations}">
+          <input placeholder="Destinations" id="destinations" th:required="required" type="text" class="validate" th:field="*{destinations}">
           <label for="destinations">Destinations</label>
           <span class="errortext" th:if="${#fields.hasErrors('destinations')}" th:errors="*{destinations}"></span>  
         </div>     
