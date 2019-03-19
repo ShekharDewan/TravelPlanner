@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="import :: head">...</head>
+
+<body>
+    <header th:replace="headerLogin :: header">...</header>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <div class="title">
+      <h1 class="header center orange-text">Sign Up</h1>
+      </div>
+ <div class="row">
+    <form class="col s12" action="#" th:action="@{/signup}" th:object="${user}" method="post">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="First Name" id="firstName" type="text" class="validate" th:required="required" th:field="*{firstName}">
+          <label for="firstName">First Name</label>
+          <span class="errortext" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>  
+        </div>
+        <div class="input-field col s6">
+          <input input placeholder="Last Name" id="lastName" type="text" class="validate" th:required="required" th:field="*{lastName}">
+          <label for="lastName">Last Name</label>
+          <span class="errortext" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>  
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input input placeholder="Email" id="email" type="email" class="validate" th:required="required" th:field="*{email}">
+          <label for="email">Email</label>
+          <span class="errortext" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>  
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input input placeholder="Password" id="password" type="password" class="validate" th:required="required" th:field="*{password}">
+          <label for="password">Password</label>
+          <span class="errortext" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="input-field inline">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Sign Up
+              <i class="material-icons right">send</i>
+            </button>
+            <div style="color: red" th:text="${error}"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+    </div>
+  </div>
+  
+<div th:replace="footer :: footer">...</div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+
+  </body>
+</html>
