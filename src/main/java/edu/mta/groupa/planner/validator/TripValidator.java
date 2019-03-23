@@ -1,6 +1,7 @@
 package edu.mta.groupa.planner.validator;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,14 +35,15 @@ public class TripValidator implements Validator {
 		if (trip.getEnd().before(trip.getStart())) {
             errors.rejectValue("end", "message.badEnd");
         }
-		
-		Trip origTrip = tripRepository.findById(trip.getId()).get();
-		Trip t = tripRepository.findByUserIDAndTitle(origTrip.getUserID(), trip.getTitle());
 
-		if (t != null && t.getId() != trip.getId()) {
-			errors.rejectValue("title", "message.titleExists");
+		List<Trip> trips = tripRepository.findAllByUserID(trip.getUserID());
+
+		for (Trip t : trips) {
+			if (t.getTitle().equals(trip.getTitle()) && t.getId() != trip.getId()) {
+				errors.rejectValue("title", "message.titleExists");
+			}
 		}
-		
+
 		if (trip.getTitle().length() > 25) {
 			errors.rejectValue("title", "message.titleLong");
 		}

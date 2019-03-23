@@ -16,15 +16,8 @@ public class TripService implements ITripService {
 	@Autowired
 	private TripRepository tripRepository;
 	
-	@Autowired
-	private UserRepository userRepository;
-
 	@Override
 	public Trip add(Trip trip) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		User currentUser = userRepository.findByEmail(email);
-    	trip.setUserID(currentUser.getId());
     	tripRepository.save(trip);
     	
     	return trip;

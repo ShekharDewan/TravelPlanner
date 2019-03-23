@@ -72,21 +72,20 @@ public class TripController {
     }
     
     @GetMapping("/add")
-    public String showTripForm(Model model, @ModelAttribute("user") User user) {
+    public String showTripForm(Model model, @ModelAttribute("currUser") User user) {
     	Trip trip = new Trip();
-    	model.addAttribute("user", user);
+    	trip.setUserID(user.getId());
         model.addAttribute("trip", trip);
         return "add-trip";
     }
     
     @PostMapping("/add/{id}")
     public String addTrip(Model model, @PathVariable("id") long id, @Valid Trip trip, 
-    		BindingResult result, @ModelAttribute("user") User user) {
+    		BindingResult result) {
     	
     	tripValidator.validate(trip, result);
     	
     	if (result.hasErrors()) {
-    		model.addAttribute("user", user);
             model.addAttribute("trip", trip);
             return "add-trip";
         }

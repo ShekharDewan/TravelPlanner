@@ -38,6 +38,14 @@ public class TripsControllerAdvice {
 		 return currentUser.getFirstName();
 	 }
 	
+	@ModelAttribute("currUser")
+	 public User getUser() {
+		 User currentUser = getCurrentUser();
+		 if (currentUser == null) return null;
+		 
+		 return currentUser;
+	 }
+	
 	private User getCurrentUser() {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 String email =  auth.getName();

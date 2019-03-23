@@ -52,6 +52,7 @@
           <label for="notes">Notes</label>
           <span class="errortext" th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
       </div>
+      <input id="userID" type="hidden" class="validate" th:field="*{userID}" th:value="${currUser.id}">
       <div class="row">
         <div class="col s12 m12 l12">
           <div class="input-field inline">
