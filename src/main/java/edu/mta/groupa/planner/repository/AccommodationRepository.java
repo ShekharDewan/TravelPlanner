@@ -15,5 +15,6 @@ import edu.mta.groupa.planner.model.Accommodation;
  *
  */
 public interface AccommodationRepository extends CrudRepository<Accommodation, Long> {
-	List<Accommodation> findByTitle(String title);
+	List<Accommodation> findByTitle(String title);	
 }
+
