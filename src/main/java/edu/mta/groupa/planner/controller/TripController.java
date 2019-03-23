@@ -52,11 +52,11 @@ public class TripController {
     @PostMapping("/trip/{id}/update")
     public String updateTrip(@PathVariable("id") long id, @Valid Trip trip, 
       BindingResult result, Model model) {
-    	
+    	trip.setId(id);
     	tripValidator.validate(trip, result);
     	
         if (result.hasErrors()) {
-        	model.addAttribute(trip);
+        	model.addAttribute("trip", trip);
             return "edit-trip";
         }   
         service.update(trip);

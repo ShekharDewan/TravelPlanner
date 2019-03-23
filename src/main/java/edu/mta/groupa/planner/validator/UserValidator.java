@@ -41,8 +41,9 @@ public class UserValidator implements Validator {
 	private boolean emailExists(User user) {
 		if (userRepository.existsById(user.getId())) {
 			User userById = userRepository.findById(user.getId()).get();
-			
-			return !userById.getEmail().equals(user.getEmail());
+			User userByEmail = userRepository.findByEmail(user.getEmail());
+
+			return (userByEmail != null) && !userByEmail.equals(userById);
 		}
 
         return userRepository.findByEmail(user.getEmail()) != null;

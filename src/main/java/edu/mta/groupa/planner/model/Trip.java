@@ -38,7 +38,7 @@ public class Trip {
 	/**
 	 * The title is the string that the user will give to his trip
 	 */
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String title;
 	
 	/**
