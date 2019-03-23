@@ -35,10 +35,10 @@ public class TripValidator implements Validator {
             errors.rejectValue("end", "message.badEnd");
         }
 		
-		List<Trip> trips = tripRepository.findByUserIDAndTitle(trip.getUserID(), trip.getTitle());
-		
-		if (tripRepository.findByUserIDAndTitle(trip.getUserID(), trip.getTitle()) != null
-				&& trips.size() > 1) {
+		Trip origTrip = tripRepository.findById(trip.getId()).get();
+		Trip t = tripRepository.findByUserIDAndTitle(origTrip.getUserID(), trip.getTitle());
+
+		if (t != null && t.getId() != trip.getId()) {
 			errors.rejectValue("title", "message.titleExists");
 		}
 		
@@ -47,6 +47,4 @@ public class TripValidator implements Validator {
 		}
 	}
 	
-	
-
 }
