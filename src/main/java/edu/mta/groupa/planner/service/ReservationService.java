@@ -37,6 +37,8 @@ public class ReservationService implements IService<Reservation, Trip> {
         oldReservation.setConfirmation(reservation.getConfirmation());
         oldReservation.setNotes(reservation.getNotes());
         oldReservation.setDate(reservation.getDate());
+        oldReservation.setReserveTime(reservation.getReserveTime());
+        oldReservation.setType(reservation.getType());
         
         tripRepository.save(trip);
         

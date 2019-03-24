@@ -17,30 +17,48 @@
 
             <br><br>
             <div class="row">
-                <form class="col s12 m12 l12" action="#" th:action="@{/trip/} + ${trip.id} + @{/reservation/update/} + ${reservation.id}" th:object="${reservation}"
+                <form class="col s12" action="#" th:action="@{/trip/} + ${trip.id} + @{/reservation/update/} + ${reservation.id}" th:object="${reservation}"
                     method="post">
                     <div class="row">
-                        <div class="input-field col s12 m12 l12">
+                        <div class="input-field col s4">
                             <input id="title" type="text" class="validate" th:required="required" th:field="*{title}">
                             <label for="title">Title</label>
                             <span class="errortext" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                         </div>
-                    </div>
-                    <div class="row">
-                    	 <div class="input-field col s6 m4 l4">
+                    	 <div class="input-field col s4">
                             <input id="date" th:required="required" type="text" class="validate datepicker" th:field="*{date}">
                             <label for="date">Date</label>
                             <span class="errortext" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
                         </div>
-                        <div class="input-field col s6 m4 l4">
+                         <div class="input-field col s4">
+                            <label for="time">Time</label>
+                            <input id="reserveTime" type="text" class="timepicker" th:field="*{reserveTime}">
+                            <span class="errortext" th:if="${#fields.hasErrors('reserveTime')}" th:errors="*{reserveTime}"></span>
+                         
+                        </div>
+                        <div class="row">
+                        <div class="input-field col s4">
                             <input id="confirmation" type="text" class="validate" th:field="*{confirmation}">
                             <label for="confirmation">Confirmation</label>
                             <span class="errortext" th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}"></span>
                         </div>
-                        <div class="input-field col s12 m4 l4">
+                        <div class="input-field col s4">
                             <input id="price" type="number" step="0.01" class="validate" th:field="*{price}">
                             <label for="price">Price</label>
                             <span class="errortext" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <select th:field="*{type}" th:selected="${reservation.type}">
+                                <option value="" enabled selected>Choose your option</option>
+                                <option value="Train">Train</option>
+                                <option value="Ferry">Ferry</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Restaurant">Restaurant</option>
+                                <option value="Museum">Museum</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label>Type</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
                         </div>
                     </div>
 
