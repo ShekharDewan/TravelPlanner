@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head th:replace="import :: head">...</head>
+
+<body>
+    <header th:replace="header :: header">...</header>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br><br>
+
+            <div class="title">
+                <h1 class="header center orange-text"  th:text="${trip.title}"></h1>
+                <h6 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')+ ' - ' + #dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s4 dark"></h6>
+                <h3>Add Reservation</h3>
+            </div>
+
+            <br><br>
+            <div class="row">
+                <form class="col s12" action="#" th:action="@{/trip/} + ${trip.id} + @{/reservation/add}" th:object="${reservation}"
+                    method="post">
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input id="title" th:required="required" type="text" class="validate" th:field="*{title}">
+                            <label for="title">Title</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="date" th:required="required" type="text" class="validate datepicker" th:field="*{date}">
+                            <label for="date">Date</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+                        </div>
+                        
+                        <div class="input-field col s4">
+                            <label for="time">Time</label>
+                            <input id="reserveTime" type="text" class="timepicker" th:field="*{reserveTime}">
+                            <span class="errortext" th:if="${#fields.hasErrors('reserveTime')}" th:errors="*{reserveTime}"></span>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input id="confirmation" type="text" class="validate" th:field="*{confirmation}">
+                            <label for="confirmation">Confirmation</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="price" type="number" step="0.01" class="validate" th:field="*{price}">
+                            <label for="price">Price</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                        </div>
+               
+                        <div class="input-field col s4">
+                            <select th:field="*{type}">
+                                <option value="" enabled selected>Choose your option</option>
+                                <option value="Train">Train</option>
+                                <option value="Ferry">Ferry</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Restaurant">Restaurant</option>
+                                <option value="Museum">Museum</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label>Type</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+                        </div>
+
+
+              
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea th:field="*{notes}" id="notes" class="materialize-textarea"></textarea>
+                            <label for="notes">Notes</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
+                        </div>
+                    </div>
+
+
+                    
+                    <!-- Address -->
+                    <h4>Address</h4>
+                    <div class="row">
+                        <div class="input-field col s2">
+                            <input id="civicNumber" type="number" min='0' class="validate" th:field="*{address.civicNumber}">
+                            <label for="civicNumber">Civic Number</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.civicNumber')}" th:errors="*{address.civicNumber}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="street" type="text" class="validate" th:field="*{address.street}">
+                            <label for="street">Street</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="city" type="text" class="validate" th:field="*{address.city}">
+                            <label for="city">City</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
+                        </div>
+                        <div class="input-field col s2">
+                            <input id="province" type="text" class="validate" th:field="*{address.province}">
+                            <label for="province">Province</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.province')}" th:errors="*{address.province}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input id="country" type="text" class="validate" th:field="*{address.country}">
+                            <label for="country">Country</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="code" type="text" class="validate" th:field="*{address.code}">
+                            <label for="code">Postal Code</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.code')}" th:errors="*{address.code}"></span>
+                        </div>
+                        <div class="input-field col s2">
+                            <input id="latitude" type="number" step="0.000001" class="validate" th:field="*{address.latitude}">
+                            <label for="latitude">Latitude</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.latitude')}" th:errors="*{address.latitude}"></span>
+                        </div>
+                        <div class="input-field col s2">
+                            <input id="longitude" type="number" step="0.000001" class="validate" th:field="*{address.longitude}">
+                            <label for="longitude">Longitude</label>
+                            <span class="errortext" th:if="${#fields.hasErrors('address.longitude')}" th:errors="*{address.longitude}"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field inline">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                    Add Reservation
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+<div th:replace="footer :: footer">...</div>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/js/materialize.js"></script>
+    <script src="/js/init.js"></script>
+    
+
+</body>
+
+</html>
