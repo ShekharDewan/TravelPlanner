@@ -24,20 +24,22 @@ public class ItineraryValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmpty(errors, "date", "message.noDate");
 		
-		if(itinerary.getDate().after(trip.getEnd())) {
-			errors.rejectValue("date", "message.tripEnd");
-		}
-		
-		if(itinerary.getDate().before(trip.getStart())) {
-			errors.rejectValue("date", "message.tripStart");
-		}
-		
-		for(Itinerary i : trip.getItineraries()){
+		if (itinerary.getDate() != null) {
+			if(itinerary.getDate().after(trip.getEnd())) {
+				errors.rejectValue("date", "message.tripEnd");
+			}
+			
+			if(itinerary.getDate().before(trip.getStart())) {
+				errors.rejectValue("date", "message.tripStart");
+			}
+			
+			for(Itinerary i : trip.getItineraries()){
     			if(itinerary.getDate().equals(i.getDate())
     				&& i.getId() != itinerary.getId()) {
     				errors.rejectValue("date", "message.itinDupl");
     			}
     		}
+		}
    	}
 
 }

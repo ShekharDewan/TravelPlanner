@@ -28,22 +28,22 @@ public class AccommodationValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "checkIn", "message.noCheckIn");
 		ValidationUtils.rejectIfEmpty(errors, "title", "message.noTitle");
 		
-		if(accommodation.getCheckOut().after(trip.getEnd())) {
-			errors.rejectValue("checkOut", "message.tripEnd");
+		if (accommodation.getCheckIn() != null && accommodation.getCheckOut() != null) {
+			if(accommodation.getCheckOut().after(trip.getEnd())) {
+				errors.rejectValue("checkOut", "message.tripEnd");
+			}
+			if(accommodation.getCheckIn().before(trip.getStart())) {
+				errors.rejectValue("checkIn", "message.tripStart");
+			}
+			if(accommodation.getCheckIn().after(trip.getEnd())) {
+				errors.rejectValue("checkIn", "message.tripEnd");
+			}
+			if(accommodation.getCheckOut().before(trip.getStart())) {
+				errors.rejectValue("checkOut", "message.tripStart");
+			}
+			if(accommodation.getCheckIn().after(accommodation.getCheckOut())){
+				errors.rejectValue("checkOut", "message.checkIn");
+			}
 		}
-		if(accommodation.getCheckIn().before(trip.getStart())) {
-			errors.rejectValue("checkIn", "message.tripStart");
-		}
-		if(accommodation.getCheckIn().after(trip.getEnd())) {
-			errors.rejectValue("checkIn", "message.tripEnd");
-		}
-		if(accommodation.getCheckOut().before(trip.getStart())) {
-			errors.rejectValue("checkOut", "message.tripStart");
-		}
-		if(accommodation.getCheckIn().after(accommodation.getCheckOut())){
-			errors.rejectValue("checkOut", "message.checkIn");
-		}
-
 	}
-
 }

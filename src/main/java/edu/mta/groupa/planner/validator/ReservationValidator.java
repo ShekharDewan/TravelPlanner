@@ -26,12 +26,13 @@ public class ReservationValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "date", "message.noDate");
 		ValidationUtils.rejectIfEmpty(errors, "title", "message.noTitle");
 		
-		if(reservation.getDate().after(trip.getEnd())) {
-			errors.rejectValue("date", "message.tripEnd");
-		}
-		if(reservation.getDate().before(trip.getStart())) {
-			errors.rejectValue("date", "message.tripStart");
+		if (reservation.getDate() != null) {
+			if(reservation.getDate().after(trip.getEnd())) {
+				errors.rejectValue("date", "message.tripEnd");
+			}
+			if(reservation.getDate().before(trip.getStart())) {
+				errors.rejectValue("date", "message.tripStart");
+			}
 		}
 	}
-
 }

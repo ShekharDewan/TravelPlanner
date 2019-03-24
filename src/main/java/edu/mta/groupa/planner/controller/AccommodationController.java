@@ -7,11 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
+import org.springframework.beans.PropertyAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.DefaultBindingErrorProcessor;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -114,6 +117,23 @@ public class AccommodationController {
     	dateFormat.setLenient(false);
     	binder.registerCustomEditor(Date.class, "checkIn", new CustomDateEditor(dateFormat, true));
     	binder.registerCustomEditor(Date.class, "checkOut", new CustomDateEditor(dateFormat, true));
+    	
+    	binder.setBindingErrorProcessor(new DefaultBindingErrorProcessor() {
+    		@Override
+    	    public void processPropertyAccessException(PropertyAccessException ex, 
+    	    		  BindingResult bindingResult) {
+    			 if (ex.getPropertyName().equals("checkIn") || ex.getPropertyName().equals("checkOut")) {
+    		          FieldError fieldError = new FieldError(
+    		            bindingResult.getObjectName(),
+    		            ex.getPropertyName(),
+    		            "Invalid date format");
+
+    		          bindingResult.addError(fieldError);
+    		        } else {
+    		          super.processPropertyAccessException(ex, bindingResult);
+    		        } 
+    		}
+    	});
     }
     
 }
