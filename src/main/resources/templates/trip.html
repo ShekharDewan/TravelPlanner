@@ -29,7 +29,7 @@
                   <script type="text/javascript" th:src="@{/jsp/triplength.js}"></script>
                   </span>
                 </span>
-                <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="btn-floating blue tooltipped" data-position="bottom" data-tooltip="Edit Trip"><i class="material-icons">edit</i></a>
+                <a th:href="@{/trip/} + ${trip.id} + @{/edit}" class="btn-floating  blue darken-1 tooltipped" data-position="bottom" data-tooltip="Edit Trip"><i class="material-icons">edit</i></a>
                 
             </div>
             <div class="row center">
@@ -47,7 +47,7 @@
                 <div class="col s12 m6 l6 xl6">
                     <h4 class="header">
                     
-                        <span data-target="modal1" class="btn-floating red"><i class="material-icons">perm_contact_calendar</i></span>
+                        <span data-target="modal1" class="btn-floating red"><i class="material-icons">event_note</i></span>
                         Itineraries &nbsp
                       <span id="addbutton">
                         <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Itinerary" th:href="@{'/trip/' + ${trip.id} + '/itinerary/add' }"><i
@@ -57,7 +57,7 @@
                     <ul class="collapsible">
                         <li th:each="itinerary : ${trip.itineraries}">
                             <div class="collapsible-header">
-                                <i class="material-icons">perm_contact_calendar</i>
+                                <i class="material-icons">event_note</i>
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
                                 <span class="badge" th:text="day_num">4</span>
                                 <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
@@ -133,7 +133,7 @@
                     <br>
 
                     <h4 class="header">
-                        <span data-target="modal1" class="btn-floating blue"><i class="material-icons">whatshot</i></span>
+                        <span data-target="modal1" class="btn-floating blue"><i class="material-icons">local_dining</i></span>
                         Reservations &nbsp
                         <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Reservation" th:href="@{'/trip/' + ${trip.id} + '/reservation/add' }"><i
                                 class="material-icons">add</i></a>
@@ -142,7 +142,7 @@
                     <ul class="collapsible">
                         <li th:each="reservation : ${trip.reservations}">
                             <div class="collapsible-header">
-                                <i class="material-icons">whatshot</i><span th:text="${reservation.title}"></span>
+                                <i class="material-icons">local_dining</i><span th:text="${reservation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
                                 <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content"
                                 method="delete"><i class="small material-icons">delete</i></a>
