@@ -6,7 +6,7 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Bourgeois Travels</a>
       <ul class="right hide-on-med-and-down">
       
-        <li><a class='dropdown-trigger' href='#' data-target='trip-dropdown' data-beloworigin="true">Trips</a></li>
+        <li><a class='dropdown-trigger' href='#' data-target='trip-dropdown' data-beloworigin="true">Trips<i class="material-icons right">arrow_drop_down</i></a></li>
  
           <ul id='trip-dropdown' class='dropdown-content'>
             <li th:each="trip : ${trips}">
@@ -22,6 +22,7 @@
           <li><a href="/logout">Logout</a></li>
         </ul>
       </ul>
+ 
 <!--
       <ul id="nav-mobile" class="sidenav">
       <li><span sec:authentication="firstName"></span></li>
