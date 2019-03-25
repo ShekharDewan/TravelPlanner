@@ -28,7 +28,8 @@
         <div class="input-field col s12 m6 l6">
           <input input placeholder="Email" id="email" type="email" class="validate" th:required="required" th:field="*{email}">
           <label for="email">Email</label>
-          <span class="errortext" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>  
+          <span><label class="errortext" for="email">*Changing email will require login</label></span>
+          <div><span class="errortext" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></div>  
       </div>
       <div class="row">
         <div class="input-field col s12 m6 l6">

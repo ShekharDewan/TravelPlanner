@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The Trip object is an entity that generically maps to a database via
@@ -22,6 +23,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
+@Table(name = "trip")
 public class Trip {
 
 	
@@ -32,13 +34,13 @@ public class Trip {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(nullable = true) //change to false once user login is fully implemented
+	@Column(nullable = true)
 	private long userID;
 	
 	/**
 	 * The title is the string that the user will give to his trip
 	 */
-	@Column(nullable = false)
+	@Column(nullable = false, length = 25)
 	private String title;
 	
 	/**
@@ -63,7 +65,7 @@ public class Trip {
 	 * notes are strings that the user can add to a trip if he needs
 	 * to add notes.
 	 */
-	@Column
+	@Column(length=2048)
 	private String notes;
 	
 	/**

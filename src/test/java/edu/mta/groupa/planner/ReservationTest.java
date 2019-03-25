@@ -1,5 +1,7 @@
 package edu.mta.groupa.planner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Assert;
@@ -92,7 +94,15 @@ public class ReservationTest {
 		// given
 		Reservation target = new Reservation();
 		target.setDate(new Date());
-		target.setReserveTime("5:00pm");
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+		Date time = new Date();
+		try {
+			time = sdf.parse("5:05 PM");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		target.setReserveTime(time);
 		entityManager.persist(target);
 		entityManager.flush();
 

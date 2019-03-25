@@ -114,18 +114,21 @@ public class ReservationController {
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
     	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+    	timeFormat.setLenient(false);
     	dateFormat.setLenient(false);
+    	binder.registerCustomEditor(Date.class, "reserveTime", new CustomDateEditor(timeFormat, true));
     	binder.registerCustomEditor(Date.class, "date", new CustomDateEditor(dateFormat, true));
     	
     	binder.setBindingErrorProcessor(new DefaultBindingErrorProcessor() {
     		@Override
     	    public void processPropertyAccessException(PropertyAccessException ex, 
     	    		  BindingResult bindingResult) {
-    			 if (ex.getPropertyName().equals("date")) {
-    		          FieldError fieldError = new FieldError(
+    			 if (ex.getPropertyName().equals("date") || ex.getPropertyName().equals("reserveTime")) {
+    				 FieldError fieldError = new FieldError(
     		            bindingResult.getObjectName(),
     		            ex.getPropertyName(),
-    		            "Invalid date format");
+    		            "Invalid format");
 
     		          bindingResult.addError(fieldError);
     		        } else {

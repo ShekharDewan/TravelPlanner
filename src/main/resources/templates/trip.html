@@ -153,8 +153,9 @@
                             </div>
                             <div align="left" class="collapsible-body">
                                 <p th:text="${reservation.notes}"></p>
+                                <h6 th:if="${!reservation.type.isEmpty()}" th:text="'Type: '+${reservation.type}"></h6>
                                 <span th:if="${!reservation.confirmation.isEmpty()}" th:text="'Confirmation: '+${reservation.confirmation}"></span>
-                               	<h6 th:text=" ${reservation.reserveTime}"></h6>
+                               	<h6 th:text=" ${#dates.format(reservation.reserveTime, 'h:mm a')}"></h6>
                                 <h6 th:if="${reservation.price != null}" th:text="'$' +  ${#numbers.formatDecimal(reservation.price, 0, 'COMMA', 2, 'POINT')}"></h6>
                                 <address th:if="${reservation.address != null}">
                                     <span th:text="${reservation.address.civicNumber}" />&nbsp;<span th:text="${reservation.address.street}" /><br>

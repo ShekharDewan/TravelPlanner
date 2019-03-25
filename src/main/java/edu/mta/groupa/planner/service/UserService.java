@@ -1,7 +1,11 @@
 package edu.mta.groupa.planner.service;
 
 import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +23,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
-	
+
 	@Transactional
 	@Override
 	public User registerNewUserAccount(UserDTO dto) {
@@ -35,12 +39,19 @@ public class UserService implements IUserService {
 	
 	public User updateUserAccount(User user) {
 		User oldUser = userRepository.findById(user.getId()).get();
-
+		String oldEmail = oldUser.getEmail();
+		
         oldUser.setEmail(user.getEmail());
         oldUser.setFirstName(user.getFirstName());
         oldUser.setLastName(user.getLastName());
         oldUser.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(oldUser);
+        
+        if (!oldEmail.equals(oldUser.getEmail())) {  	
+        	SecurityContext sc = SecurityContextHolder.getContext();
+        	Authentication auth = sc.getAuthentication();
+        	auth.setAuthenticated(false);
+        }
         
         return oldUser;
 	}
