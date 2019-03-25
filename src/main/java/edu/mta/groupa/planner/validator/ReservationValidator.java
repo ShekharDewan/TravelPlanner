@@ -5,7 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import edu.mta.groupa.planner.model.Itinerary;
+import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Reservation;
 import edu.mta.groupa.planner.model.Trip;
 
@@ -32,6 +32,31 @@ public class ReservationValidator implements Validator {
 			}
 			if(reservation.getDate().before(trip.getStart())) {
 				errors.rejectValue("date", "message.tripStart");
+			}
+		}
+		
+		if (reservation.getAddress() != null) {
+			Address address = reservation.getAddress();
+			Double longitude = address.getLongitude();
+			Double latitude = address.getLatitude();
+			
+			if (longitude != null && latitude != null) {
+				if ((longitude.doubleValue() > 180.0) 
+						|| (longitude.doubleValue() < -180.0)) {
+					errors.rejectValue("address.longitude", "message.badLong");
+				}
+				
+				if ((latitude.doubleValue() > 90.0) 
+						|| (latitude.doubleValue() < -90.0)) {
+					errors.rejectValue("address.latitude", "message.badLat");
+				}
+			}
+			
+			if (longitude != null && latitude == null) {
+				errors.rejectValue("address.latitude", "message.noLat");
+			}
+			if (longitude == null && latitude != null) {
+				errors.rejectValue("address.longitude", "message.noLong");
 			}
 		}
 	}

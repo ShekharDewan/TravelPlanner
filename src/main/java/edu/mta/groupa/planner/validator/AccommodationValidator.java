@@ -6,9 +6,8 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import edu.mta.groupa.planner.model.Accommodation;
-import edu.mta.groupa.planner.model.Itinerary;
+import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Trip;
-import edu.mta.groupa.planner.repository.TripRepository;
 
 @Component
 public class AccommodationValidator implements Validator {
@@ -43,6 +42,31 @@ public class AccommodationValidator implements Validator {
 			}
 			if(accommodation.getCheckIn().after(accommodation.getCheckOut())){
 				errors.rejectValue("checkOut", "message.checkIn");
+			}
+		}
+		
+		if (accommodation.getAddress() != null) {
+			Address address = accommodation.getAddress();
+			Double longitude = address.getLongitude();
+			Double latitude = address.getLatitude();
+			
+			if (longitude != null && latitude != null) {
+				if ((longitude.doubleValue() > 180.0) 
+						|| (longitude.doubleValue() < -180.0)) {
+					errors.rejectValue("address.longitude", "message.badLong");
+				}
+				
+				if ((latitude.doubleValue() > 90.0) 
+						|| (latitude.doubleValue() < -90.0)) {
+					errors.rejectValue("address.latitude", "message.badLat");
+				}
+			}
+			
+			if (longitude != null && latitude == null) {
+				errors.rejectValue("address.latitude", "message.noLat");
+			}
+			if (longitude == null && latitude != null) {
+				errors.rejectValue("address.longitude", "message.noLong");
 			}
 		}
 	}

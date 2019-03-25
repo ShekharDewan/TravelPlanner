@@ -1,14 +1,10 @@
 package edu.mta.groupa.planner.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import edu.mta.groupa.planner.model.Trip;
-import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.TripRepository;
-import edu.mta.groupa.planner.repository.UserRepository;
 
 @Service
 public class TripService implements ITripService {
