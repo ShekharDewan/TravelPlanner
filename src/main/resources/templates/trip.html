@@ -66,7 +66,7 @@
                                 <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
                                 </span></span>
                             </div>
-                            <div class="collapsible-body">
+                            <div align="left" class="collapsible-body">
                                 <p th:text="${itinerary.notes}"></p>
                             </div>
                         </li>
@@ -93,7 +93,7 @@
                                 <a th:href="@{/trip/} + ${trip.id} + @{/accommodation/edit/} + ${accommodation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
                                 </span></span>
                             </div>
-                            <div class="collapsible-body">
+                            <div align="left" class="collapsible-body">
 
                                 <p th:text="${accommodation.notes}"></p>
                                 check-in: <span th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}" />&nbsp;
@@ -151,7 +151,7 @@
                                 </span></span>
 
                             </div>
-                            <div class="collapsible-body">
+                            <div align="left" class="collapsible-body">
                                 <p th:text="${reservation.notes}"></p>
                                 <span th:if="${!reservation.confirmation.isEmpty()}" th:text="'Confirmation: '+${reservation.confirmation}"></span>
                                	<h6 th:text=" ${reservation.reserveTime}"></h6>
