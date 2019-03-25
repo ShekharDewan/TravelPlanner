@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.UserRepository;
 import edu.mta.groupa.planner.UserDTO;
@@ -42,7 +44,7 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	  public String signup(@ModelAttribute("user") @Valid UserDTO userDto, 
-			  BindingResult result, Model model) {
+			  BindingResult result, Model model, RedirectAttributes redir) {
 		User newUser = new User(userDto.getFirstName(), userDto.getLastName(), 
 				userDto.getPassword(), userDto.getEmail());
 		
@@ -53,19 +55,24 @@ public class UserController {
 	  		return "signup";
 	  	}
 	  	service.registerNewUserAccount(userDto);
-	  	model.addAttribute("message", "Registered successfully.");
+	 
+	  	redir.addFlashAttribute("signup", "signup");
 	  	
-	  	return "login";
+	  	return "redirect:/login";
 	  }
 	
 	 @GetMapping("/login")
-	 public String login(Model model, String error, String logout) {
+	 public String login(Model model, String error, String logout,
+			 @ModelAttribute("signup") String signup) {
 
 	     if (error != null)
 	         model.addAttribute("error", "Invalid credentials.");
 
 	     if (logout != null)
 	         model.addAttribute("message", "Logged out successfully.");
+	     
+	     if (signup != null)
+	         model.addAttribute("message", "Registered successfully.");
 
 	     return "login";
      }
