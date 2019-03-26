@@ -21,20 +21,20 @@
 	 <div class="row">
         <div class="col s10 offset-s1">   
 		 <h3 id="trips-header" class="header">Trips 
-		 <a th:href="@{/add}" class="btn-floating red"><i class="material-icons">add</i></a></h3>
+		 <a th:href="@{/add}" class="btn-floating red tooltipped" data-position="bottom" data-tooltip="Add Trip"> <i class="material-icons">add</i></a></h3>
 		 <div class="section">
 		 	
 		    <ul class="collection">
 		        	        
 		        <li class="collection-item avatar" th:each="trip : ${trips}" id="triplist">
-			      <i class="material-icons circle green">flight_takeoff</i>
+			      <i class="material-icons circle green">flight_takeoff</i> 	
 			      <a th:href="@{/trip/} + ${trip.id}"> 
 			      <span th:text="${trip.title}"></span>
 			      <p class="" th:text="${trip.description}"/>
 			      <p th:text="${#dates.format(trip.start, 'MMM dd, yyyy')} +' - '+  ${#dates.format(trip.end, 'MMM dd, yyyy')}"/>
 			   
 			  
-			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content" method="delete"><i class="small material-icons">delete</i></a>
+			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete" method="delete"><i class="small material-icons">delete</i></a>
 			      </a>
 			    </li>
 		    </ul>

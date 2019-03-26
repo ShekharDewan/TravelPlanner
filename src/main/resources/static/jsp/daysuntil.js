@@ -17,11 +17,12 @@ var diff = date2.getTime() - current.getTime();
 var timeDiff = Math.abs(diff);
 var difference = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 
-if (diff < 0) {
+if (diff <= 0) {
+	difference++;
   var message = "Day " + difference + ". ";
 }
 else{
-var message = "In " + difference + " days. ";
+	var message = "In " + difference + " days. ";
 }
 var ele = document.getElementsByClassName("remain");
 var len = ele.length;

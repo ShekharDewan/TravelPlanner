@@ -9,7 +9,7 @@
         <div class="container">
         	<br>
             <div class="title">
-                <h1 class="header center orange-text" th:text="${trip.title}"></h1>
+                <h1 class="header center orange-text " th:text="${trip.title}"></h1>
                 <span id="titlecontainer">
                 <span class="remain">
                   <script th:inline="javascript">
@@ -56,10 +56,10 @@
                                 <i class="material-icons">hotel</i>
                                 <span  th:text="${accommodation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}">4</span>
-                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content"
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Accomodation"
                                 method="delete"><i class="small material-icons">delete</i></a>
                                 <span class="editicon">
-                                <a th:href="@{/trip/} + ${trip.id} + @{/accommodation/edit/} + ${accommodation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/accommodation/edit/} + ${accommodation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Accomodation"><i class="small material-icons">create</i></a>
                                 </span></span>
                             </div>
                             <div align="left" class="collapsible-body">
@@ -112,10 +112,10 @@
                             <div class="collapsible-header">
                                 <i class="material-icons">local_dining</i><span th:text="${reservation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
-                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content"
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Reservation"
                                 method="delete"><i class="small material-icons">delete</i></a>
                                 <span class="editicon">
-                                <a th:href="@{/trip/} + ${trip.id} + @{/reservation/edit/} + ${reservation.id}" class="secondary-content"><i class="small material-icons">create</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/reservation/edit/} + ${reservation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Reservation"><i class="small material-icons">create</i></a>
                                 </span></span>
 
                             </div>
@@ -165,10 +165,10 @@
                                 <i class="material-icons">event_note</i>
                                 <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
                                 <span class="badge" th:text="day_num">4</span>
-                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Itinerary"
                                 method="delete"><i class="small material-icons">delete</i></a>
                                 <span class="editicon">
-                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
+                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Itinerary"><i class="small material-icons">create</i></a>
                                 </span></span>
                             </div>
                             <div align="left" class="collapsible-body">
@@ -189,7 +189,7 @@
         </div>
     </div>
     
-    <a th:href="@{/trip/} + ${trip.id} + '/print'" id="stickylink"><i class="material-icons">print</i></a>
+    <a th:href="@{/trip/} + ${trip.id} + '/print'" id="stickylink"><i class="material-icons tooltipped" data-position="left" data-tooltip="Print">print</i></a>
 
 <div th:replace="footer :: footer">...</div>
 
