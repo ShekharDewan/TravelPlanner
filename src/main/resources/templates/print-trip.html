@@ -4,11 +4,14 @@
 <head th:replace="import :: head">...</head>
 
 <body>
-<h4 th:text="${trip.title}">  </h4>
 
-<h5>Accommodations</h5>
+<b><h4 th:text="${trip.title}"></b></h4> 
+<h5 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')+ ' - ' + #dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s4 dark"></h5>
+
+
+<h5><u>Accommodations</u></h5>
 <table border="0" th:each="accommodation : ${trip.accommodations}">
-    <h6 th:text="${accommodation.title}"></h6>
+    <h5 th:text="${accommodation.title}"></h5>
     <td>
     <span th:text="'Check-In: ' + ${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}"></span><br/>
     <span th:text="'Check-Out: ' + ${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}"></span><br/>
@@ -42,9 +45,9 @@
     </td>
 </table>
 
-<h5>Reservations</h5>
+<h5><u>Reservations</u></h5>
 <table border="0" th:each="reservation : ${trip.reservations}">
-    <h6 th:text="${reservation.title}"></h6>
+    <h5 th:text="${reservation.title}"></h5>
     <td>
     <span th:text="'Date: ' + ${#dates.format(reservation.date, 'MMM dd, yyyy')}"></span><br/>
     <span th:if="${!reservation.confirmation.isEmpty()}" th:text="'Confirmation: ' + ${reservation.confirmation}"></span><br/>
@@ -77,9 +80,9 @@
     </td>
 </table>
 
-<h5>Itineraries</h5>
+<h5><u>Itineraries</u></h5>
 <table border="0" th:each="itinerary : ${trip.itineraries}">
-    <h6 th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></h6>
+    <h5 th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></h5>
     <td>
     <span th:text="${itinerary.notes}"></span><br/>
     <br>
