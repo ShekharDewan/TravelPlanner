@@ -7,7 +7,7 @@
     <header th:replace="header :: header">...</header>
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
-            <br><br>
+        	<br>
             <div class="title">
                 <h1 class="header center orange-text" th:text="${trip.title}"></h1>
                 <span id="titlecontainer">
@@ -38,44 +38,13 @@
      
                 <h6 th:text="${trip.description}" class="header col s12 light"></h6>
                  <h6 th:if="${!#strings.isEmpty(trip.destinations)}" th:text= "'Destinations: '+${trip.destinations}" class="header col s12 light"></h6>
-                <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="'Notes: ' + ${trip.notes}" class="header col s12 light"></p>
 
             <!-- Page Layout here -->
 
             <div class="row">
-
-                <div class="col s12 m6 l6 xl6">
+            
+            	<div class="col s12 m6 l6 xl6">
                     <h4 class="header">
-                    
-                        <span data-target="modal1" class="btn-floating red"><i class="material-icons">event_note</i></span>
-                        Itineraries &nbsp
-                      <span id="addbutton">
-                        <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Itinerary" th:href="@{'/trip/' + ${trip.id} + '/itinerary/add' }"><i
-                                class="material-icons">add</i></a> </span>
-                    </h4>
-                    <br>
-                    <ul class="collapsible">
-                        <li th:each="itinerary : ${trip.itineraries}">
-                            <div class="collapsible-header">
-                                <i class="material-icons">event_note</i>
-                                <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
-                                <span class="badge" th:text="day_num">4</span>
-                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
-                                method="delete"><i class="small material-icons">delete</i></a>
-                                <span class="editicon">
-                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
-                                </span></span>
-                            </div>
-                            <div align="left" class="collapsible-body">
-                                <p th:text="${itinerary.notes}"></p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col s12 m6 l6 xl6">
-                    <h4 class="header">
-                        <span data-target="modal1" class="btn-floating green"><i class="material-icons">hotel</i></span>
                         Accommodations &nbsp
                         <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Accommodation" th:href="@{'/trip/' + ${trip.id} + '/accommodation/add' }"><i
                                 class="material-icons">add</i></a>
@@ -133,7 +102,6 @@
                     <br>
 
                     <h4 class="header">
-                        <span data-target="modal1" class="btn-floating blue"><i class="material-icons">local_dining</i></span>
                         Reservations &nbsp
                         <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Reservation" th:href="@{'/trip/' + ${trip.id} + '/reservation/add' }"><i
                                 class="material-icons">add</i></a>
@@ -182,7 +150,41 @@
                     </ul> 
                 </div>
 
+                <div class="col s12 m6 l6 xl6">
+                    <h4 class="header">
+                    
+                        Itineraries &nbsp
+                      <span id="addbutton">
+                        <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Itinerary" th:href="@{'/trip/' + ${trip.id} + '/itinerary/add' }"><i
+                                class="material-icons">add</i></a> </span>
+                    </h4>
+                    <br>
+                    <ul class="collapsible">
+                        <li th:each="itinerary : ${trip.itineraries}">
+                            <div class="collapsible-header">
+                                <i class="material-icons">event_note</i>
+                                <span th:text="${#dates.format(itinerary.date, 'MMM dd, yyyy')}"></span>
+                                <span class="badge" th:text="day_num">4</span>
+                                <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content"
+                                method="delete"><i class="small material-icons">delete</i></a>
+                                <span class="editicon">
+                                <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content"><i class="small material-icons">create</i></a>
+                                </span></span>
+                            </div>
+                            <div align="left" class="collapsible-body">
+                                <p th:text="${itinerary.notes}"></p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                     <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="'Notes: ' + ${trip.notes}" class="header col s12 light"></p>
+                    
+                </div>
+
+                
+
             </div>
+            
             <br><br>
         </div>
     </div>
