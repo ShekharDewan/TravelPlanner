@@ -34,7 +34,9 @@
 			      <p th:text="${#dates.format(trip.start, 'MMM dd, yyyy')} +' - '+  ${#dates.format(trip.end, 'MMM dd, yyyy')}"/>
 			   
 			  
-			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete" method="delete"><i class="small material-icons">delete</i></a>
+			      <a th:href="@{/delete/} + ${trip.id}" class="secondary-content tooltipped" data-position="bottom" 
+			      data-tooltip="Delete" method="delete" onclick="return confirm('Delete trip?') ? true : false;">
+			      <i class="small material-icons">delete</i></a>
 			      </a>
 			    </li>
 		    </ul>
