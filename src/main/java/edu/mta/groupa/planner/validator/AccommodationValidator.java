@@ -69,5 +69,9 @@ public class AccommodationValidator implements Validator {
 				errors.rejectValue("address.longitude", "message.noLong");
 			}
 		}
+		
+		if (accommodation.getTitle().length() > 25) {
+			errors.rejectValue("title", "message.titleLong");
+		}
 	}
 }

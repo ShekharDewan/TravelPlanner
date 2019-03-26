@@ -103,6 +103,10 @@
     overflow-x: hidden;
 }
 
+.collapsible-body, .collapsible-header {
+  word-break: break-word;
+}
+
 #user_sett {
    font-size: 50px;
 }

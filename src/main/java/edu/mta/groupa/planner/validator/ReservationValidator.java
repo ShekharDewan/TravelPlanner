@@ -59,5 +59,9 @@ public class ReservationValidator implements Validator {
 				errors.rejectValue("address.longitude", "message.noLong");
 			}
 		}
+		
+		if (reservation.getTitle().length() > 25) {
+			errors.rejectValue("title", "message.titleLong");
+		}
 	}
 }

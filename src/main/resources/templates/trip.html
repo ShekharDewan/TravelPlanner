@@ -185,19 +185,31 @@
                             </div>
                         </li>
                     </ul>
-                    
-                     <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="'Notes: ' + ${trip.notes}" class="header col s12 light"></p>
-                    
-                </div>
+                    <br>
 
-                
+                    <h4 class="header">                  
+                        Notes &nbsp  
+                    </h4>
+                    <br>
 
-            </div>
+                    <ul class="collapsible">
+                    <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">event_note</i>
+                                <span th:text="${trip.title}"></span>                    
+                            </div>
             
+                            <div align="left" class="collapsible-body">
+                              <p th:if="${!#strings.isEmpty(trip.notes)}" th:text="${trip.notes}"></p>
+                            </div>
+                     </li>
+                    </ul>           
+                </div>
+            </div>
             <br><br>
         </div>
     </div>
-    </div>
+
     <a th:href="@{/trip/} + ${trip.id} + '/print'" id="stickylink"><i class="material-icons tooltipped" data-position="left" data-tooltip="Print">print</i></a>
 
 <div th:replace="footer :: footer">...</div>
