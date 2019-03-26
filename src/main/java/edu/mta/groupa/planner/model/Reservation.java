@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -89,7 +90,8 @@ public class Reservation {
 	/**
 	 * The notes is a String that contains the notes about the reservation
 	 */
-	@Column(length=2048)
+	@Lob
+	@Column
 	private String notes;
 	
 	/**

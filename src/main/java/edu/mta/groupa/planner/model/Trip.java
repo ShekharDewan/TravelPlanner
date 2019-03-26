@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -65,7 +66,8 @@ public class Trip {
 	 * notes are strings that the user can add to a trip if he needs
 	 * to add notes.
 	 */
-	@Column(length=2048)
+	@Lob
+	@Column
 	private String notes;
 	
 	/**
