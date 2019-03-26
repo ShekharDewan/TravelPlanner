@@ -37,6 +37,7 @@
   width: 100px;
   height: 100px;
   position: relative;
+  left: 20px;
 }
 
 #triplist:hover {
@@ -76,6 +77,7 @@
 .remain {
   z-index: 20;
   top: -50px;
+  white-space: nowrap;
 }
 
 .duration {

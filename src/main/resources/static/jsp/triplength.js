@@ -30,6 +30,7 @@ if (diff < 0) {
   var message = "memento trip";
 }
 else{
+	difference++;
 	var message = "Duration of " + difference + " days.";
 }
 var ele = document.getElementsByClassName("duration");
