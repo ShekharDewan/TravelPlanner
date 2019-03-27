@@ -17,7 +17,7 @@
     <td>
     <span th:text="'Check-In: ' + ${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}"></span><br/>
     <span th:text="'Check-Out: ' + ${#dates.format(accommodation.checkOut, 'MMM dd, yyyy')}"></span><br/>
-    <span <span th:if="${accommodation.price != null}" th:text="'$'+${#numbers.formatDecimal(accommodation.price, 0, 'COMMA', 2, 'POINT')}"></span><br/>
+    <span <span th:if="${accommodation.price != null}" th:text="'Price: $'+${#numbers.formatDecimal(accommodation.price, 0, 'COMMA', 2, 'POINT')}"></span><br/>
     <span th:if="${!accommodation.notes.isEmpty()}" th:text="'Notes: ' + ${accommodation.notes}"></span><br/>
     <br>
      <address>
@@ -51,9 +51,11 @@
 <table border="0" th:each="reservation : ${trip.reservations}">
     <h5 th:text="${reservation.title}"></h5>
     <td>
+    <span th:if="${!reservation.type.isEmpty()}" th:text="'Type: ' + ${reservation.type}"></span><br/>
     <span th:text="'Date: ' + ${#dates.format(reservation.date, 'MMM dd, yyyy')}"></span><br/>
+    <span th:if="${reservation.reserveTime != null}" th:text="'Time: ' + ${#dates.format(reservation.reserveTime, 'h:mm a')}"></span><br/>
     <span th:if="${!reservation.confirmation.isEmpty()}" th:text="'Confirmation: ' + ${reservation.confirmation}"></span><br/>
-    <span th:if="${reservation.price != null}" th:text="${#numbers.formatDecimal(reservation.price, 0, 'COMMA', 2, 'POINT')}">10.00</span></br>
+    <span th:if="${reservation.price != null}" th:text="'Price: $'+${#numbers.formatDecimal(reservation.price, 0, 'COMMA', 2, 'POINT')}">10.00</span></br>
     <span th:if="${!reservation.notes.isEmpty()}" th:text="'Notes: ' + ${reservation.notes}"><br/></span>
    
     <br>
