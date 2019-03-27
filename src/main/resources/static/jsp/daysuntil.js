@@ -24,7 +24,7 @@ if (diff <= 0) {
 }
 else{
 var message = "";
-	(difference == 1) ? message = "In 1 day." : message = "In " + difference + " days. ";
+	(difference == 1) ? message = "Starts tomorrow." : message = "In " + difference + " days. ";
 }
 var ele = document.getElementsByClassName("remain");
 var len = ele.length;

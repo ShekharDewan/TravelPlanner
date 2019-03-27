@@ -4,6 +4,7 @@
 <head th:replace="import :: head">...</head>
 
 <body>
+<header th:replace="header :: header">...</header>
 
 <b><h4 th:text="${trip.title}"></b></h4> 
 <h5 th:text="${#dates.format(trip.start, 'MMM dd, yyyy')+ ' - ' + #dates.format(trip.end, 'MMM dd, yyyy')}" class="header col s4 dark"></h5>
