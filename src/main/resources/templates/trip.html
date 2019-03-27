@@ -57,7 +57,8 @@
                                 <span  th:text="${accommodation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(accommodation.checkIn, 'MMM dd, yyyy')}">4</span>
                                 <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/accommodation/delete/} + ${accommodation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Accomodation"
-                                method="delete"><i class="small material-icons">delete</i></a>
+                                method="delete" onclick="return confirm('Delete accommodation?') ? true : false;">
+                                <i class="small material-icons">delete</i></a>
                                 <span class="editicon">
                                 <a th:href="@{/trip/} + ${trip.id} + @{/accommodation/edit/} + ${accommodation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Accomodation"><i class="small material-icons">create</i></a>
                                 </span></span>
@@ -113,7 +114,8 @@
                                 <i class="material-icons">local_dining</i><span th:text="${reservation.title}"></span>
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
                                 <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Reservation"
-                                method="delete"><i class="small material-icons">delete</i></a>
+                                method="delete" onclick="return confirm('Delete reservation?') ? true : false;">
+                                <i class="small material-icons">delete</i></a>
                                 <span class="editicon">
                                 <a th:href="@{/trip/} + ${trip.id} + @{/reservation/edit/} + ${reservation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Reservation"><i class="small material-icons">create</i></a>
                                 </span></span>
@@ -175,7 +177,8 @@
                 				<script type="text/javascript" th:src="@{/jsp/itineraryday.js}"></script>
                                 </span></span>
                                 <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/itinerary/delete/} + ${itinerary.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Itinerary"
-                                method="delete"><i class="small material-icons">delete</i></a>
+                                method="delete" onclick="return confirm('Delete itinerary?') ? true : false;">
+                                <i class="small material-icons">delete</i></a>
                                 <span class="editicon">
                                 <a th:href="@{/trip/} + ${trip.id} + @{/itinerary/edit/} + ${itinerary.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Itinerary"><i class="small material-icons">create</i></a>
                                 </span></span>
