@@ -1,0 +1,6 @@
+@Media print {
+  .noprint {
+    display: none !important;
+    height: 0;
+  }
+}
