@@ -27,7 +27,7 @@
 		    <ul class="collection">
 		        	        
 		        <li class="collection-item avatar" th:each="trip : ${trips}" id="triplist">
-			      <i class="material-icons circle green">flight_takeoff</i> 	
+			      <i class="material-icons circle green">work</i> 	
 			      <a th:href="@{/trip/} + ${trip.id}"> 
 			      <span th:text="${trip.title}"></span>
 			      <p class="" th:text="${trip.description}"/>
