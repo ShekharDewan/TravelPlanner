@@ -156,7 +156,8 @@
                     <h4 class="header">
                     
                         Itineraries &nbsp
-                      <span id="addbutton">
+                        
+                      <span class="addbutton">
                         <a class="btn-floating btn-medium waves-effect waves-light red right tooltipped" data-position="bottom" data-tooltip="Add Itinerary" th:href="@{'/trip/' + ${trip.id} + '/itinerary/add' }"><i
                                 class="material-icons">add</i></a> </span>
                     </h4>
@@ -197,9 +198,13 @@
 
                     <ul class="collapsible">
                     <li>
-                            <div class="collapsible-header">
+                            <div class="collapsible-header" >
                                 <i class="material-icons">description</i>
-                                <span th:text="${trip.title}"></span>                    
+                                <span th:text="${trip.title}"></span>  
+                                <span class="notesicon">
+                                <span class="editicon">
+                                <a th:href="@{/trip/} + ${trip.id} + @{/edit/}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Edit Trip"><i class="small material-icons">create</i></a>
+                                </span></span>                  
                             </div>
             
                             <div align="left" class="collapsible-body">

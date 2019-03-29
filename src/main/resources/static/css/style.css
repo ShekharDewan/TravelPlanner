@@ -64,6 +64,11 @@
   right: 30px;
 }
 
+.notesicon {
+  margin-right: 0;
+  margin-left: auto;
+}
+
 #editbutton, .remain, .duration {
   position: absolute;
   top: 0px;
@@ -111,7 +116,7 @@
    font-size: 50px;
 }
 
-#addbutton {
+.addbutton {
   float: right;
 }
 

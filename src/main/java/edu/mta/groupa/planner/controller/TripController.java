@@ -93,7 +93,7 @@ public class TripController {
         }
     	service.add(trip);
 
-        return "redirect:/";
+        return "redirect:/trip/" + trip.getId();
     }
     
     @GetMapping("/trip/{id}/print")
