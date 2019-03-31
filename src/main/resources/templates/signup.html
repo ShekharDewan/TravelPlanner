@@ -32,7 +32,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12 m6 l6">
-          <input input placeholder="Password" id="password" type="password" class="validate" th:required="required" th:field="*{password}">
+          <input input placeholder="Password - must be 8 characters" id="password" type="password" class="validate" th:required="required" th:field="*{password}">
           <label for="password">Password</label>
           <span class="errortext" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>  
         </div>
