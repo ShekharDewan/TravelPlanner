@@ -111,7 +111,14 @@
                     <ul class="collapsible">
                         <li th:each="reservation : ${trip.reservations}">
                             <div class="collapsible-header">
-                                <i class="material-icons">local_dining</i><span th:text="${reservation.title}"></span>
+                            	<div th:if="${reservation.type == 'Plane'}"><i class="material-icons">flight</i><span th:text="${reservation.title}"></span></div>
+                                <div th:if="${reservation.type == 'Train'}"><i class="material-icons">train</i><span th:text="${reservation.title}"></span></div>
+                                <div th:if="${reservation.type == 'Ferry'}"><i class="material-icons">directions_boat</i><span th:text="${reservation.title}"></span></div>
+                                <div th:if="${reservation.type == 'Bus'}"><i class="material-icons">directions_bus</i><span th:text="${reservation.title}"></span></div>
+                                <div th:if="${reservation.type == 'Restaurant'}"><i class="material-icons">local_dining</i><span th:text="${reservation.title}"></span></div>
+                                <div th:if="${reservation.type == 'Museum'}"><i class="material-icons">account_balance</i><span th:text="${reservation.title}"></span></div>
+                                <div th:if="${reservation.type == 'Other'}"><i class="material-icons">insert_invitation</i><span th:text="${reservation.title}"></span></div>                             
+                                
                                 <span class="badge" th:text="${#dates.format(reservation.date, 'MMM dd, yyyy')}">4</span>
                                 <span class="iconsright"><a th:href="@{/trip/} + ${trip.id} + @{/reservation/delete/} + ${reservation.id}" class="secondary-content tooltipped" data-position="bottom" data-tooltip="Delete Reservation"
                                 method="delete" onclick="return confirm('Delete reservation?') ? true : false;">
