@@ -111,7 +111,7 @@
                     <ul class="collapsible">
                         <li th:each="reservation : ${trip.reservations}">
                             <div class="collapsible-header">
-                            	<div th:if="${reservation.type == 'Plane'}"><i class="material-icons">flight</i><span th:text="${reservation.title}"></span></div>
+                            	<div th:if="${reservation.type == 'Flight'}"><i class="material-icons">flight</i><span th:text="${reservation.title}"></span></div>
                                 <div th:if="${reservation.type == 'Train'}"><i class="material-icons">train</i><span th:text="${reservation.title}"></span></div>
                                 <div th:if="${reservation.type == 'Ferry'}"><i class="material-icons">directions_boat</i><span th:text="${reservation.title}"></span></div>
                                 <div th:if="${reservation.type == 'Bus'}"><i class="material-icons">directions_bus</i><span th:text="${reservation.title}"></span></div>
