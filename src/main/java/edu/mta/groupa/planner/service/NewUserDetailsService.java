@@ -16,13 +16,31 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.mta.groupa.planner.model.Role;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.UserRepository;
-
+/**
+ * This class overrides Spring's UserDetailsService in order to
+ * inject a custom User object into Spring's security system.
+ * Data from a User is used to create Spring User objects (UserDetails).
+ * Spring UserDetails are used to authenticate and de-authenticate 
+ * Users when logging in and out. 
+ * 
+ * @author Jennifer
+ *
+ */
 @Service
 public class NewUserDetailsService implements UserDetailsService {
-
+	/**
+	 * The User repository which holds all Users.
+	 */
 	@Autowired
 	private UserRepository userRepository;
-
+	/**
+	 * Loads a User from the User Repository using its email.
+	 * Creates a native Spring security User object (UserDetails), 
+	 * which will be authenticated upon login.
+	 * 
+	 * @param email	the email by which to load the User.
+	 * @return 		the UserDetails created from the User.
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -36,11 +54,16 @@ public class NewUserDetailsService implements UserDetailsService {
 	     boolean accountNonLocked = true;
 	     return  new org.springframework.security.core.userdetails.User
 	          (user.getEmail(), 
-	          user.getPassword(), enabled, accountNonExpired, //get pass to lowercase removed
+	          user.getPassword(), enabled, accountNonExpired,
 	          credentialsNonExpired, accountNonLocked, 
 	          getAuthorities(user.getRoles()));
 	    }
-	
+	/**
+	 * Creates a list of granted authorities given a set of roles.
+	 * 
+	 * @param set	the set of roles.
+	 * @return		the list of granted authorities.
+	 */
 	private static List<GrantedAuthority> getAuthorities (Set<Role> set) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : set) {
@@ -48,5 +71,4 @@ public class NewUserDetailsService implements UserDetailsService {
         }
         return authorities;
     }
-
 }

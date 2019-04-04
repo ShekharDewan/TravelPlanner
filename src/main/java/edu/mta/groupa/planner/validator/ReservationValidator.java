@@ -8,15 +8,39 @@ import org.springframework.validation.Validator;
 import edu.mta.groupa.planner.model.Address;
 import edu.mta.groupa.planner.model.Reservation;
 import edu.mta.groupa.planner.model.Trip;
-
+/**
+ * This component Validator class is used to validate Reservation 
+ * objects.
+ * Invalid data is flagged as rejected, and error messages
+ * are provided for the user.
+ * 
+ * @author Jennifer
+ *
+ */
 @Component
 public class ReservationValidator implements Validator {
-
+	/**
+	 * Determines whether a class is supported by this
+	 * Validator. Must be a Reservation class.
+	 * 
+	 * @param clazz		the class being tested.
+	 * @return 			true if supported class; 
+	 * 					false otherwise.
+	 */
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Reservation.class.equals(clazz);
 	}
-
+	/**
+	 * Validates a Reservation object.
+	 * Title and date cannot be missing, and date must be within
+	 * the Trip's start and end date.
+	 * Title must be less than 26 characters. 
+	 * Address latitude and longitude must be valid or both empty.
+	 * 
+	 * @param target	the object being validated. 
+	 * @param errors	the errors with the given object.
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		Reservation reservation = (Reservation) target;

@@ -14,16 +14,33 @@ import edu.mta.groupa.planner.model.Role;
 import edu.mta.groupa.planner.model.User;
 import edu.mta.groupa.planner.repository.UserRepository;
 import edu.mta.groupa.planner.UserDTO;
-
+/**
+ * A Service class which handles operations for Users.
+ * Current operations include creation/registration 
+ * and deletion.
+ * 
+ * @author Jennifer
+ *
+ */
 @Service
 public class UserService implements IUserService {
-
+	/**
+	 * The User repository which holds all Users.
+	 */
 	@Autowired
 	private UserRepository userRepository;
-
+	/**
+	 * The registered password encoder.
+	 */
 	@Autowired
 	private BCryptPasswordEncoder encoder;
-
+	/**
+	 * Creates a new User object with the given validated information.
+	 * Currently all users are given a regular "USER" role.
+	 * 
+	 * @param dto	the data transfer object holding the new User data.
+	 * @return		the new User object.
+	 */
 	@Transactional
 	@Override
 	public User registerNewUserAccount(UserDTO dto) {
@@ -36,7 +53,14 @@ public class UserService implements IUserService {
 
 		return newUser;
 	}
-	
+	/**
+	 * Updates a User's information given an updated and validated
+	 * object.
+	 * If email is changed, forcibly logs out the User.
+	 * 
+	 * @param user	the User object holding the updated information.
+	 * @return		the updated User.
+	 */
 	public User updateUserAccount(User user) {
 		User oldUser = userRepository.findById(user.getId()).get();
 		String oldEmail = oldUser.getEmail();
