@@ -1,8 +1,8 @@
 ## Introduction
-Bourgois travels is an intuitive travel planner that can help you plan your trips, keep track of various activities throughout the day, and even print your entire trip. It will transform the way you travel, and simplify the hassle of organizing and tracking all your daily activities, and serve as a repository of all your past travels. And best of all, it's free! Join us, and partake in the Bourgeois travel experience.
+Bourgois travels is an intuitive travel planner that can help you plan your trips, keep track of various activities throughout the day, and even print your entire trip. It will transform the way you travel, and simplify the hassle of organizing and tracking all your daily activities, and serve as a repository of all your past travels. And best of all, it's free! Join us, and partake in the "Bourgeois Travel" experience.
 
 ## Installation
-Installation consists of a few steps. The best way to ensure you have the most up to date information and product is to go to our github page. Installation steps are as follows:
+Installation consists of a few steps. The best way to ensure you have the most up to date information and product is to go to our GitHub page. Installation steps are as follows:
 
 1. First, download eclipse enterprise edition (includes Spring framework and ability to natively edit html, css, and js)
 2. Next, download our project from the github page. 
