@@ -20,3 +20,7 @@ Installation consists of a few steps. The best way to ensure you have the most u
 * We would also recommend looking at issues on github to check if someone has already encountered the same error. If not, you can post the issue on github. 
 * If all else fails, email one of the team members.  
 
+## Screenshots
+
+![Login Page](/images/login.png)
+Format: ![Alt Text](url)
