@@ -20,5 +20,3 @@ If you’re having trouble with the installation, updating all your software, an
  We would also recommend looking at issues on github to check if someone has already encountered the same error. If not, you can post the issue on github. 
 If all else fails, email one of the team members.  
 
-Screenshots:
-
