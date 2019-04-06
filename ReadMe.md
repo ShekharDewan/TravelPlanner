@@ -1,39 +1,24 @@
-## Setup
+## Introduction
+Bourgois travels is an intuitive travel planner that can help you plan your trips, keep track of various activities throughout the day, and even print your entire trip. It will transform the way you travel, and simplify the hassle of organizing and tracking all your daily activities, and serve as a repository of all your past travels. And best of all, it's free! Join us, and partake in the Bourgeois travel experience.
 
-1. Use eclipse enterprise edition to run the project (includes Spring framework and ability to natively edit html, css, and js)
-2. Start up the application using 'edu.mta.groupa.planner.TravelPlannerApplication'
-3. Go to http://localhost:8080/, where you will see the homepage in the browser, with automatically generated example trips. 
+## Installation
+Installation consists of a few steps. The best way to ensure you have the most up to date information and product is to go to our github page. Installation steps are as follows:
 
+1. First, download eclipse enterprise edition (includes Spring framework and ability to natively edit html, css, and js)
+2. Next, download our project from the github page. 
+3. Unzip and open the project using eclipse (You need to import it as an existing maven project) 
 
-# RoadMap:
+## Running
 
-## Week 1 (done):
-- get database setup and running (H2) 
-- Start Model
-- Investigate CSS for gui
+1. Run the project in eclipse by running the TravelPlannerApplication class (double click on it and then click the run button on top)
+2. Go to http://localhost:8080/ to access Bourgeois Travels
 
-## Week 2 (done):
-- Finish Model
-- UI mockups
-- Controller Sketch
+## Troubleshooting
+If the project starts running into errors, the first thing to try is to delete the project and redownload it from github.
+If you’re trouble with the data, you might want to delete the database created in your user folder. Please note this may be different on mac, and you may want to instead search for travel.db.
+If you’re having trouble with the installation, updating all your software, and making liberal use of a search engine would be good options.
+ We would also recommend looking at issues on github to check if someone has already encountered the same error. If not, you can post the issue on github. 
+If all else fails, email one of the team members.  
 
-## Week 3 (done):
-- Test and refine model
-- UI build protoype
-- Build Controller
+Screenshots:
 
-## Week 4 (done):
-- Finish Features
-- Begin Testing
-
-## Week 5 (in progress):
-- Client Feedback
-- Test and refine (refactor)
-
-## Week 6:
-- Security and login (in progress)
-- Further testing and refinement
-
-## Week 7:
-- Additional Features
-- Documentation
