@@ -14,9 +14,9 @@ Installation consists of a few steps. The best way to ensure you have the most u
 2. Go to http://localhost:8080/ to access Bourgeois Travels
 
 ## Troubleshooting
-If the project starts running into errors, the first thing to try is to delete the project and redownload it from github.
-If you’re trouble with the data, you might want to delete the database created in your user folder. Please note this may be different on mac, and you may want to instead search for travel.db.
-If you’re having trouble with the installation, updating all your software, and making liberal use of a search engine would be good options.
- We would also recommend looking at issues on github to check if someone has already encountered the same error. If not, you can post the issue on github. 
-If all else fails, email one of the team members.  
+* If the project starts running into errors, the first thing to try is to delete the project and redownload it from github.
+* If you’re trouble with the data, you might want to delete the database created in your user folder. Please note this may be different on mac, and you may want to instead search for travel.db.
+* If you’re having trouble with the installation, updating all your software, and making liberal use of a search engine would be good options.
+* We would also recommend looking at issues on github to check if someone has already encountered the same error. If not, you can post the issue on github. 
+* If all else fails, email one of the team members.  
 
