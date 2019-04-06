@@ -27,3 +27,5 @@ Installation consists of a few steps. The best way to ensure you have the most u
 ![Main Page](/images/welcome.png)
 
 ![Trip Page](/images/tripPage.png)
+
+![Trip Page Expanded](/images/tripPageExpanded.png)
