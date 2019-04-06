@@ -23,4 +23,7 @@ Installation consists of a few steps. The best way to ensure you have the most u
 ## Screenshots
 
 ![Login Page](/images/login.png)
-Format: ![Alt Text](url)
+
+![Main Page](/images/welcome.png)
+
+![Trip Page](/images/tripPage.png)
