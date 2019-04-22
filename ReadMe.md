@@ -1,3 +1,7 @@
+## Description
+
+Travel Planner is a full fledged intuitive travel planner that uses modern tools to provide a pleasing experience.
+
 ## Introduction
 Bourgois travels is an intuitive travel planner that can help you plan your trips, keep track of various activities throughout the day, and even print your entire trip. It will transform the way you travel, and simplify the hassle of organizing and tracking all your daily activities, and serve as a repository of all your past travels. And best of all, it's free! Join us, and partake in the "Bourgeois Travels" experience.
 
