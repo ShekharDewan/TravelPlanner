@@ -1,5 +1,3 @@
-## Description
-
 Travel Planner is a full fledged intuitive travel planner that uses modern tools to provide a pleasing experience.
 
 ## Introduction
